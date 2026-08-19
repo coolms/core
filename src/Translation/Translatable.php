@@ -30,7 +30,7 @@ use Attribute;
  * **ORM-agnostic by construction.** No ORM listener, no entity
  * lifecycle hook, no metadata driver. The attribute is read by the
  * Application-layer resolver via PHP reflection; persistence stays
- * untouched by the translation seam. Mirrors the M2.j
+ * untouched by the translation seam. Mirrors the
  * `#[ServiceTaskHandler]` shape: pure metadata, behaviour wired in
  * Application + Infrastructure.
  *
