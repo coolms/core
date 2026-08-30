@@ -14,6 +14,32 @@ same commit as the change it describes.
 
 Rides the next Tuesday release train. Nothing here has shipped yet.
 
+### The module-settings contract, so any module can declare one
+
+`CoolMS\Core\Settings` -- `ModuleSettingsContributorInterface`,
+`ModuleSettingsDefinition`, `ModuleSettingsReaderInterface` and
+`EnvironmentInterface`. A module declares the settings blocks it owns by
+implementing the contributor; the platform composes what a module ships, what an
+operator saved, and what one site overrode, with environment variables beating
+all three.
+
+These interfaces lived in the application's own Settings module until now, and
+that placement quietly decided who could use them. Module boundaries there bar a
+module from importing a *sibling's* domain types, and Settings sits at the
+foundation level -- so every module beside it (realtime transport, VFS,
+identity, i18n, forms, sections, taxonomy) could **read** a setting, because an
+interface is allowed across that line, but could not **declare** one, because
+the definition is a concrete type. The result was a platform whose upper layers
+were configurable and whose foundation was not, and nothing surfaced it until a
+module at that level tried.
+
+Core is the one place every module may depend on, so the contract belongs here.
+
+**Upgrading: nothing to do unless you implemented these yourself.** They were
+not part of any published Core release, so no published constraint can break.
+An application that declared its own copies should point its imports at
+`CoolMS\Core\Settings\` and delete them; the shapes are unchanged.
+
 ### The v2 generation -- a version number, and nothing else
 
 This release moves `coolms/core` to `2.0.0` **without a single change to its
