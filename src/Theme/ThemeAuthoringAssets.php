@@ -17,11 +17,17 @@ namespace CoolMS\Core\Theme;
 final readonly class ThemeAuthoringAssets
 {
     /**
-     * Entry shape mirrors `ThemeAssets` deliberately — `{url}` rather than a
-     * bare string. The SSR context passes the same records to the theme's
-     * `{loop:site.theme.css}`, so an entry that later grows `media` or
-     * `integrity` reaches the authoring surface too instead of being flattened
-     * away at this boundary.
+     * Shares the `{url}` entry shape with {@see ThemeAssets}, and diverges from
+     * it in exactly two ways -- which is why both types exist rather than one.
+     * This one carries the resolved `$themeSlug`, and its lists are already
+     * merged across the theme inheritance chain, parent-first. ThemeAssets is a
+     * single theme's own assets, as that theme's provider returned them.
+     *
+     * The shared half is pinned by ThemeAssetsShapeTest, not by this comment: an
+     * entry that later grows `media` or `integrity` has to grow in both, or the
+     * SSR context and the authoring surface stop agreeing on what a stylesheet
+     * record is. A docblock asking a human to keep two types in sync is the kind
+     * of guarantee that goes unenforced.
      *
      * @param list<array{url: string}> $css parent-first, so a child theme's rules win
      * @param list<array{url: string}> $js
