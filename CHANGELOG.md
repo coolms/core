@@ -23,7 +23,12 @@ Composer will not install it under default stability. Set
 "prefer-stable": true
 ```
 
-in your root `composer.json`, then `composer require coolms/core:^2.0`.
+in your root `composer.json`, then:
+
+```
+composer require coolms/core:^2.0
+```
+
 `prefer-stable` keeps every other dependency of yours on its newest stable
 release, so this loosening applies to what actually needs it and nothing else.
 
@@ -32,9 +37,8 @@ also works. ⚠️ That shortcut does **not** carry to the packages built on it:
 stability flag applies to the package it names and not to what that package
 requires in turn.
 
-A bare `composer require coolms/core` takes the newest **stable** release
-instead -- which is the previous generation -- and reports success while doing
-it.
+A bare `composer require coolms/core` resolves **successfully** to v1.0.0 --
+the previous generation -- and reports success while doing it.
 
 Releases are suspended while development is moving fast and there are no
 external consumers of these packages. This tag establishes the baseline the
