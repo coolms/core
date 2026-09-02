@@ -17,11 +17,15 @@ interface ModuleInstallerInterface
     public function install(): void;
 
     /**
-     * Runs after all install() calls have completed.
+     * Runs after every install() has completed.
      *
-     * Override to perform work that depends on other installers having finished
-     * (e.g. syncing derived data, setting ownership on nodes created by a peer installer).
-     * Default implementation is a no-op.
+     * For work that depends on other installers having finished -- syncing
+     * derived data, taking ownership of nodes a peer installer created.
+     *
+     * This is a REQUIRED method: an interface carries no body, so there is no
+     * default to inherit and nothing to override. An installer with no
+     * post-install work declares that by using {@see PostInstallNoop} rather
+     * than by writing an empty body.
      */
     public function postInstall(): void;
 }
