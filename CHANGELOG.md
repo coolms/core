@@ -10,6 +10,27 @@ major number means here.
 history when this file was created. Every entry after that is written in the
 same commit as the change it describes.
 
+## 2.0.0-alpha2 - 2026-09-03
+
+### Added
+
+The contracts module removal needs, which have been on `develop` since
+2026-09-02 and were not in a tag:
+
+- `Install\ModuleUninstallerInterface` -- what a module undoes when it is
+  removed, and the name it is known by.
+- `Install\ModuleNavigationRemoverInterface` -- the seam through which a
+  navigation module withdraws the nodes an installation seeded. Whoever
+  manages navigation implements it; nothing in this package does.
+- `Install\PostInstallNoop` -- the no-op `postInstall()` the
+  `ModuleInstallerInterface` docblock had been promising without providing.
+
+⚠️ **Release this whenever you release `coolms/core-bundle`.**
+`ModuleArtifactRemover` in core-bundle 2.0.0-alpha2 requires
+`ModuleNavigationRemoverInterface` by type. Pairing core-bundle 2.0.0-alpha2
+with core 2.0.0-alpha1 gives a container that does not compile, and Composer
+reports no conflict because `^2.0` admits both. That combination existed on
+Packagist for roughly twenty minutes on 2026-09-03; this release ends it.
 ## 2.0.0-alpha1 - 2026-09-01
 
 **A pre-release. It carries no compatibility promise**, which is the honest
