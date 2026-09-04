@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Block;
 
 /**
- * One field of a landing-page {@see BlockType} (ADR-130, W5.b/W5.e).
+ * One field of a landing-page {@see BlockType}.
  *
  * Kinds:
  *  - `text`     — a single author string.
@@ -16,12 +16,17 @@ namespace CoolMS\Core\Block;
  *  - `group`    — a repeated list of sub-objects (e.g. `features.items`,
  *                 `pricing.items`), each carrying its own {@see $itemFields}.
  *
- * Group sub-fields are themselves {@see BlockField}s (W5.e) — so a sub-field can
- * be a `url` and get the same scheme-validation a top-level `url` field does
- * (e.g. a gallery image `src`, a pricing plan `ctaUrl`). Sub-fields are never
- * groups (no nesting). Both the read-time normalizer
- * ({@see \App\Content\Application\Service\LandingBlocksReader}) and the catalog
- * endpoint (the block editor's palette) read this shape.
+ * Group sub-fields are themselves {@see BlockField}s — so a sub-field can be a
+ * `url` and get the same scheme-validation a top-level `url` field does (e.g. a
+ * gallery image `src`, a pricing plan `ctaUrl`). Sub-fields are never groups (no
+ * nesting).
+ *
+ * Two consumers read this shape: the application's read-time normalizer, which
+ * whitelists stored author data against it, and the catalog endpoint that
+ * serializes it as the block editor's palette. Both live in the application
+ * that installs this package, so they are named by ROLE here -- a package that
+ * documents itself in terms of its consumer points at classes an installer
+ * cannot resolve, in an IDE or anywhere else.
  */
 final readonly class BlockField
 {
@@ -39,7 +44,7 @@ final readonly class BlockField
      * @param 'text'|'textarea'|'url'|'embed'|'group' $kind       the field's widget/validation kind. `embed` is a
      *                                                            single video URL the reader resolves to a safe
      *                                                            allow-listed embed src (YouTube / Vimeo), dropping
-     *                                                            anything else (W5.h)
+     *                                                            anything else
      * @param list<BlockField>                        $itemFields sub-fields when `kind = group`; empty otherwise
      * @param string|null                             $editor     an OPTIONAL editing-control hint for the admin
      *

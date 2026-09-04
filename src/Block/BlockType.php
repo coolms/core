@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace CoolMS\Core\Block;
 
 /**
- * A landing-page section block type (ADR-130, W5.b) — its stable `id` (the
- * `block.type` discriminator the theme dispatches on), a human `label`, and the
- * ordered {@see BlockField} schema that declares which fields the block carries.
+ * A landing-page section block type: its stable `id` (the `block.type`
+ * discriminator a theme dispatches on), a human `label`, and the ordered
+ * {@see BlockField} schema declaring which fields the block carries.
  *
- * The {@see \App\Content\Application\Service\BlockTypeRegistry} owns the built-in
- * set; the read-time normalizer validates author data against it, and the
- * `/content/landing-blocks` catalog endpoint serializes it as the block-editor's
- * palette.
+ * ⚠️ The `id` is what stored content REFERENCES, so renaming one orphans every
+ * block already using it. Add a type rather than rename one.
+ *
+ * The application aggregates these from every registered provider, validates
+ * stored author data against the schema, and serializes the set as the block
+ * editor's palette. Named by role rather than by class: those live in the
+ * application that installs this package, and a `{@see}` pointing out of the
+ * archive resolves to nothing for whoever installed it.
  */
 final readonly class BlockType
 {
