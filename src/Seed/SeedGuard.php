@@ -4,12 +4,21 @@ declare(strict_types=1);
 
 namespace CoolMS\Core\Seed;
 
+use function array_key_exists;
 use function array_keys;
+use function array_values;
 use function hash;
 use function implode;
 use function is_array;
 use function is_string;
+use function json_encode;
+use function ksort;
+use function sort;
 use function sprintf;
+
+use const JSON_THROW_ON_ERROR;
+use const JSON_UNESCAPED_SLASHES;
+use const JSON_UNESCAPED_UNICODE;
 
 /**
  * Seed content without ever clobbering somebody's edit.
@@ -75,12 +84,20 @@ final readonly class SeedGuard
      * way, because the difference decides whether a free path or somebody's page
      * is about to be written into.
      *
-     * @param array<string, mixed>|null $extras       the artefact's stored extras, or null if the PATH is free
-     * @param string|null               $liveBody     what is stored now in this locale, or null if there is none
-     * @param string                    $incomingBody what this run would write
+     * @param array<string, mixed>|null $extras         the artefact's stored extras, or null if the PATH is free
+     * @param string|null               $liveBody       what is stored now in this locale, or null if there is none
+     * @param string                    $incomingBody   what this run would write
+     * @param array<string, mixed>      $incomingExtras the extras this run would merge -- a landing page's
+     *                                                  sections live here, so a run that changes only these
+     *                                                  is a real change
      */
-    public function decide(?array $extras, ?string $liveBody, string $incomingBody, bool $force = false): SeedDecision
-    {
+    public function decide(
+        ?array $extras,
+        ?string $liveBody,
+        string $incomingBody,
+        bool $force = false,
+        array $incomingExtras = [],
+    ): SeedDecision {
         if (null === $liveBody) {
             // Nothing at the path at all, or a node this seeder owns whose body
             // in ANOTHER locale it is now adding. Both are its own to write.
@@ -93,15 +110,22 @@ final readonly class SeedGuard
             return $force ? SeedDecision::ForcedOverwrite : SeedDecision::RefuseOccupied;
         }
 
-        $recorded = $this->recordedHash($extras);
-        $live = hash('sha256', $liveBody);
-
         // Edited, or unprovable. Both are the operator's call, not ours.
-        if (null === $recorded || $recorded !== $live) {
+        if ($this->isEdited($extras, $liveBody)) {
             return $force ? SeedDecision::ForcedOverwrite : SeedDecision::RefuseEdited;
         }
 
-        return $live === hash('sha256', $incomingBody)
+        $sameBody = hash('sha256', $liveBody) === hash('sha256', $incomingBody);
+
+        // ⚠️ Compared over the INCOMING keys, which is the right set here: the
+        // question is "would this run change anything?", and a key this run does
+        // not write is not this run's business. That differs from the edit check
+        // above, which must use the RECORDED keys -- see {@see isEdited()}.
+        $incomingKeys = $this->sortedKeys($incomingExtras);
+        $sameExtras = $this->fingerprint($incomingExtras, $incomingKeys)
+            === $this->fingerprint($extras ?? [], $incomingKeys);
+
+        return $sameBody && $sameExtras
             ? SeedDecision::SkipUnchanged
             : SeedDecision::Overwrite;
     }
@@ -118,6 +142,19 @@ final readonly class SeedGuard
      * ⚠️ Returns true when there is no marker, for the reason given on the class:
      * absent proof is not proof of absence.
      *
+     * ⚠️ **A page's content is not always its body.** A landing page keeps its
+     * sections in `extras['blocks']`, so a guard that watched only the body
+     * called such a page unedited however much an author had rearranged it --
+     * and the next body change then rewrote the extras and discarded that work.
+     * So the marker records the extras keys it wrote, and this compares a
+     * fingerprint of the live values over exactly those keys.
+     *
+     * ⚠️ The RECORDED keys, never the current run's. Fingerprinting the live
+     * side over the current keys was tried first and cannot work: the recorded
+     * hash covers what the PREVIOUS run wrote, so a run whose key set changed
+     * can never match and reports every page as edited. `VfsSeedTargetTest`
+     * caught exactly that.
+     *
      * @param array<string, mixed>|null $extras
      */
     public function isEdited(?array $extras, ?string $liveBody): bool
@@ -126,9 +163,27 @@ final readonly class SeedGuard
             return false;
         }
 
-        $recorded = $this->recordedHash($extras);
+        $marker = $this->recordedMarker($extras);
+        if (null === $marker || !is_string($marker['hash'] ?? null)) {
+            return true;
+        }
 
-        return null === $recorded || $recorded !== hash('sha256', $liveBody);
+        if ($marker['hash'] !== hash('sha256', $liveBody)) {
+            return true;
+        }
+
+        $keys = $this->recordedKeys($marker);
+
+        // ⚠️ A marker written before the keys were recorded cannot answer for
+        // the extras, and refusing every page seeded by an earlier version would
+        // be safe, correct, and would make this change look broken. Same
+        // precedent as the flat `importedHash` read below: fall back to the body
+        // alone, and record the keys on the next write.
+        if (null === $keys) {
+            return false;
+        }
+
+        return ($marker['extras'] ?? null) !== $this->fingerprint($extras ?? [], $keys);
     }
 
     /**
@@ -197,14 +252,29 @@ final readonly class SeedGuard
      * state that a failed write never reached, and the next run would take that
      * claim as proof the artefact was untouched.
      *
-     * @param array<string, mixed>|null $extras existing extras, so other seeders' markers survive
+     * ⚠️ It records WHICH EXTRAS KEYS it wrote, not just the body hash. Those
+     * keys are what {@see isEdited()} fingerprints the live values over, so a
+     * landing page whose sections an author rearranged is recognised as edited
+     * instead of being quietly rewritten on the next body change.
+     *
+     * The marker key itself is never among them: it is provenance, not content,
+     * and including it would make the fingerprint depend on itself.
+     *
+     * @param array<string, mixed>|null $extras        existing extras, so other seeders' markers survive
+     * @param array<string, mixed>      $writtenExtras the extras being written with this body
      *
      * @return array<string, mixed> the value for `extras['seed']`
      */
-    public function marker(string $writtenBody, ?array $extras = null): array
+    public function marker(string $writtenBody, ?array $extras = null, array $writtenExtras = []): array
     {
         $all = is_array($extras[self::EXTRAS_KEY] ?? null) ? $extras[self::EXTRAS_KEY] : [];
-        $all[$this->seederId] = ['hash' => hash('sha256', $writtenBody)];
+
+        $keys = $this->sortedKeys($writtenExtras);
+        $all[$this->seederId] = [
+            'hash' => hash('sha256', $writtenBody),
+            'keys' => $keys,
+            'extras' => $this->fingerprint($writtenExtras, $keys),
+        ];
 
         return $all;
     }
@@ -246,6 +316,20 @@ final readonly class SeedGuard
      */
     private function recordedHash(?array $extras): ?string
     {
+        $marker = $this->recordedMarker($extras);
+
+        return is_string($marker['hash'] ?? null) ? $marker['hash'] : null;
+    }
+
+    /**
+     * This seeder's marker on the artefact, normalised.
+     *
+     * @param array<string, mixed>|null $extras
+     *
+     * @return array<string, mixed>|null
+     */
+    private function recordedMarker(?array $extras): ?array
+    {
         if (null === $extras) {
             return null;
         }
@@ -254,13 +338,93 @@ final readonly class SeedGuard
         if (is_array($bag)) {
             $mine = $bag[$this->seederId] ?? null;
             if (is_array($mine) && is_string($mine['hash'] ?? null)) {
-                return $mine['hash'];
+                return $mine;
             }
         }
 
         // ⚠️ The docs importer's existing flat marker. Read so that adopting
         // this guard does not refuse all twelve pages on its first run -- which
-        // would be safe, correct, and would make the change look broken.
-        return is_string($extras['importedHash'] ?? null) ? $extras['importedHash'] : null;
+        // would be safe, correct, and would make the change look broken. It
+        // carries no key list, which {@see isEdited()} treats as "cannot answer
+        // for the extras" rather than as "edited".
+        return is_string($extras['importedHash'] ?? null)
+            ? ['hash' => $extras['importedHash']]
+            : null;
+    }
+
+    /**
+     * The extras keys a marker recorded, or null when it recorded none.
+     *
+     * @param array<string, mixed> $marker
+     *
+     * @return list<string>|null
+     */
+    private function recordedKeys(array $marker): ?array
+    {
+        $keys = $marker['keys'] ?? null;
+        if (!is_array($keys)) {
+            return null;
+        }
+
+        $clean = [];
+        foreach ($keys as $key) {
+            if (is_string($key)) {
+                $clean[] = $key;
+            }
+        }
+
+        return $clean;
+    }
+
+    /**
+     * @param array<string, mixed> $source
+     *
+     * @return list<string>
+     */
+    private function sortedKeys(array $source): array
+    {
+        $keys = [];
+        foreach (array_keys($source) as $key) {
+            // The marker is provenance, not content. It is written INTO the same
+            // bag, so leaving it in would make the fingerprint cover itself.
+            if (self::EXTRAS_KEY !== $key) {
+                $keys[] = (string) $key;
+            }
+        }
+        sort($keys);
+
+        return $keys;
+    }
+
+    /**
+     * A stable hash of `$source` restricted to `$keys`.
+     *
+     * ⚠️ Only the SELECTED keys are sorted, and nested values are left in the
+     * order they were stored. A landing page's `blocks` is a list whose order is
+     * the order of the sections on the page -- sorting it would make a rearranged
+     * page fingerprint identical to the original, which is the exact edit this
+     * exists to notice.
+     *
+     * ⚠️ A key that was recorded and is now MISSING changes the fingerprint,
+     * because it is absent from the subset. That is correct: deleting a key is
+     * an edit.
+     *
+     * @param array<string, mixed> $source
+     * @param list<string>         $keys
+     */
+    private function fingerprint(array $source, array $keys): string
+    {
+        $subset = [];
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $source)) {
+                $subset[$key] = $source[$key];
+            }
+        }
+        ksort($subset);
+
+        return hash(
+            'sha256',
+            json_encode($subset, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+        );
     }
 }

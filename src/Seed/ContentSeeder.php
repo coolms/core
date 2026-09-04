@@ -34,26 +34,18 @@ final readonly class ContentSeeder
             $extras = $this->target->readExtras($page->path);
             $live = $this->target->readBody($page->path, $page->locale);
 
-            // ⚠️ KNOWN GAP: this decides on the BODY only, and a page's content
-            // is not always its body -- a landing page keeps its sections in
-            // `extras.blocks`. Two consequences, and the second is the serious
-            // one:
+            // ⚠️ The EXTRAS are part of the comparison, not just the body. A
+            // page's content is not always its body: a landing page keeps its
+            // sections in `extras.blocks`, and a guard watching only the body
+            // both missed manifest changes (reporting `unchanged` while new
+            // sections never arrived) and, worse, called such a page unedited
+            // -- so the next body change rewrote the extras and discarded blocks
+            // an editor had arranged in the admin.
             //
-            //   - a manifest whose blocks changed reports `unchanged`, so the
-            //     new sections never arrive;
-            //   - if the body still matches the recorded hash the guard calls
-            //     the page UNEDITED, so a later body change rewrites the extras
-            //     and discards blocks an editor arranged in the admin.
-            //
-            // Fingerprinting body + extras was tried and is NOT sufficient: the
-            // recorded hash covers the keys the PREVIOUS run wrote, while the
-            // live side can only be built from the CURRENT run's key set, so a
-            // run whose keys changed can never match and reports every page as
-            // edited. `VfsSeedTargetTest` caught exactly that. The fix needs the
-            // marker to record WHICH keys it wrote, which changes
-            // `SeedGuard::marker()` and is a deliberate change rather than a
-            // patch smuggled in here.
-            $decision = $this->guard->decide($extras, $live, $page->body, $force);
+            // The marker records which keys it wrote, so the two sides are
+            // compared over the same key set. See `SeedGuard::isEdited()` for
+            // why it has to be the RECORDED keys rather than this run's.
+            $decision = $this->guard->decide($extras, $live, $page->body, $force, $page->extras);
             $run->record($page->path, $decision, $this->guard->reasonFor($decision, $extras, $live));
 
             if (!$decision->writes()) {
@@ -69,7 +61,7 @@ final readonly class ContentSeeder
                 $page->path,
                 $page->locale,
                 $page->body,
-                $page->extras + [SeedGuard::EXTRAS_KEY => $this->guard->marker($page->body, $extras)],
+                $page->extras + [SeedGuard::EXTRAS_KEY => $this->guard->marker($page->body, $extras, $page->extras)],
             );
         }
 
