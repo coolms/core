@@ -6,7 +6,6 @@ namespace CoolMS\Core\Seed;
 
 use function array_key_exists;
 use function array_keys;
-use function array_values;
 use function hash;
 use function implode;
 use function is_array;
