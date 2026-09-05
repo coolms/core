@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Event;
 
 /**
- * A generic "please start this workflow" integration event (W6.b.2).
+ * A generic "please start this workflow" integration event.
  *
  * This is the decoupling seam between any module that wants to kick off a BPMN
  * process and the Workflow engine. The *requesting* module (e.g. Content, when a
