@@ -6,7 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Versioning is described in `CONTRIBUTING.md` -- read it before assuming what a
 major number means here.
 
-⚠️ Entries dated before 2026-09-01 were **reconstructed** from tags and commit
+!! Entries dated before 2026-09-01 were **reconstructed** from tags and commit
 history when this file was created. Every entry after that is written in the
 same commit as the change it describes.
 
@@ -25,7 +25,7 @@ The contracts module removal needs, which have been on `develop` since
 - `Install\PostInstallNoop` -- the no-op `postInstall()` the
   `ModuleInstallerInterface` docblock had been promising without providing.
 
-⚠️ **Release this whenever you release `coolms/core-bundle`.**
+!! **Release this whenever you release `coolms/core-bundle`.**
 `ModuleArtifactRemover` in core-bundle 2.0.0-alpha2 requires
 `ModuleNavigationRemoverInterface` by type. Pairing core-bundle 2.0.0-alpha2
 with core 2.0.0-alpha1 gives a container that does not compile, and Composer
@@ -54,7 +54,7 @@ composer require coolms/core:^2.0
 release, so this loosening applies to what actually needs it and nothing else.
 
 This package requires no siblings, so `composer require coolms/core:^2.0@alpha`
-also works. ⚠️ That shortcut does **not** carry to the packages built on it: a
+also works. !! That shortcut does **not** carry to the packages built on it: a
 stability flag applies to the package it names and not to what that package
 requires in turn.
 
