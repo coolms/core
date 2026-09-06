@@ -37,7 +37,7 @@ final readonly class CreatableFileKind
      * @param string               $group       menu grouping, e.g. "Documents"; kinds from one module belong together
      * @param string               $icon        Bootstrap icon class, e.g. `bi-file-earmark-word`
      * @param string               $endpoint    API path the client POSTs to
-     * @param string               $nameField   body field carrying the typed name (`title`, `name`, …)
+     * @param string               $nameField   body field carrying the typed name (`title`, `name`, ...)
      * @param string               $folderField body field carrying the destination folder
      * @param array<string, mixed> $payload     fixed fields merged into the body, e.g. `['format' => 'word']`
      * @param string|null          $extension   shown as a hint; the SERVER still decides the real filename
@@ -66,7 +66,7 @@ final readonly class CreatableFileKind
             'endpoint' => $this->endpoint,
             'nameField' => $this->nameField,
             'folderField' => $this->folderField,
-            // Cast so an EMPTY payload encodes as `{}` and not `[]` —
+            // Cast so an EMPTY payload encodes as `{}` and not `[]` --
             // a client that spreads it into a request body cannot use an array.
             'payload' => (object) $this->payload,
             'extension' => $this->extension,

@@ -28,7 +28,7 @@ use function count;
  * ``Domain`` from ``Domain``, which is a boundary violation in
  * the direction that has no exemption.
  *
- * ⚠️ Mutable on purpose. Building a document is an inherently stateful walk of
+ * !! Mutable on purpose. Building a document is an inherently stateful walk of
  * a DOM tree, and copying the cursor on every recurse would obscure more than
  * it would help.
  */

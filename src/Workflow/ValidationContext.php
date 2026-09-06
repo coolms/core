@@ -12,8 +12,8 @@ use CoolMS\Core\Workflow\ProcessDefinitionAst;
  * Constructed once per `WorkflowDefinitionValidator::validate` in the consuming application
  * call via the {@see for} static factory and threaded through every
  * {@see ValidationRuleInterface::check} invocation. Pre-computes the
- * id sets every reference-integrity rule (Pass 2 — see design doc
- * §5.1) would otherwise rebuild from scratch.
+ * id sets every reference-integrity rule (Pass 2 -- see design doc
+ * section 5.1) would otherwise rebuild from scratch.
  *
  * The class is `readonly` (its slot bindings never change after
  * construction), yet {@see $violations} is intentionally a mutable
@@ -29,7 +29,7 @@ final readonly class ValidationContext
      *                                          AST (also includes boundary
      *                                          event ids -- they share the
      *                                          global id namespace per
-     *                                          design doc §2.2).
+     *                                          design doc section 2.2).
      * @param array<string, true> $flowIdSet    set-shaped lookup of every
      *                                          sequence flow id
      */

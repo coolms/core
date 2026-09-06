@@ -10,14 +10,14 @@ namespace CoolMS\Core\Editor;
  * reusable by any VFS-file editor).
  *
  * Lives in Core (like {@see \CoolMS\Core\Space\Space}) so any module can
- * contribute one without a sibling-module Domain dependency — the
+ * contribute one without a sibling-module Domain dependency -- the
  * contribution contract is shared. The contributor interface
  * (the editor module's panel-contributor contract)
  * stays in the Editor module since it references the VFS node.
  *
- * Modules contribute panels for the node they own a concern over — Scheduler
+ * Modules contribute panels for the node they own a concern over -- Scheduler
  * the "Schedule" panel, VFS/Editor "History", Content "Meta"/"Fields". A panel
- * only appears when its contributing module is installed (no contributor ⇒ no
+ * only appears when its contributing module is installed (no contributor => no
  * panel), so the host editor stops hard-coding knowledge of sibling modules.
  *
  *   id        stable, namespaced key ('schedule', 'history', 'meta', 'fields').

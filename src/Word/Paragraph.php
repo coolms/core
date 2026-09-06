@@ -7,7 +7,7 @@ namespace CoolMS\Core\Word;
  * One paragraph: an optional named style, an optional list membership, and the
  * inline content.
  *
- * ⚠️ `$styleId` names a style that must EXIST in `word/styles.xml`. A package
+ * !! `$styleId` names a style that must EXIST in `word/styles.xml`. A package
  * built from scratch contains only the styles put in it, so a reference to a
  * name Word ships with -- `Quote`, `Heading1` -- is a dangling reference unless
  * the writer defines it, and the paragraph then prints as body text with no
@@ -24,7 +24,7 @@ final class Paragraph implements BlockInterface
 
     /**
      * @param ?ParagraphAlignment $alignment null means UNSTATED, which is not
-     *                                       the same as left — see the enum
+     *                                       the same as left -- see the enum
      */
     public function __construct(
         public readonly ?string $styleId = null,

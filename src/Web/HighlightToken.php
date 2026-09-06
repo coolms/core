@@ -9,7 +9,7 @@ namespace CoolMS\Core\Web;
  * `$scope` is the highlight.js token vocabulary (e.g. `keyword`, `string`,
  * `comment`, `number`, `built_in`, `variable`, `literal`, `meta`, `symbol`) so
  * the server-emitted `<span class="hljs-{scope}">` matches the theme's existing
- * `pre code .hljs-…` palette and the admin editor's colours — authoring and
+ * `pre code .hljs-...` palette and the admin editor's colours -- authoring and
  * published output stay identical. An empty `$scope` is plain, un-coloured text.
  *
  * `$text` is the RAW source slice (never pre-escaped); {@see SyntaxHighlighter}

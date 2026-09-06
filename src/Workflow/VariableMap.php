@@ -15,14 +15,14 @@ use function count;
 use function is_string;
 
 /**
- * Read-only `name → VariableDeclaration` map for `process.variables{}`.
+ * Read-only `name -> VariableDeclaration` map for `process.variables{}`.
  * Implements `ArrayAccess` for ergonomic `$vars['userId']` lookups in
  * validator rules and engine code; mutation methods throw because the
  * AST is immutable post-parse.
  *
  * `offsetGet` returns `null` on miss (cheaper than catching) so callers
  * can chain `?? throw`. Counts and iteration follow underlying array
- * order, which equals JSON source order — the parser does not sort.
+ * order, which equals JSON source order -- the parser does not sort.
  *
  * @implements ArrayAccess<string, VariableDeclaration>
  * @implements IteratorAggregate<string, VariableDeclaration>

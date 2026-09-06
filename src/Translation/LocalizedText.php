@@ -60,7 +60,7 @@ final class LocalizedText
     /**
      * Resolve an OVERRIDE map against a source `$fallback`: returns the non-empty
      * override stored for the EXACT `$locale`, otherwise `$fallback`. Unlike
-     * {@see pick()} it does NOT cross-fall-back to another locale's override — a
+     * {@see pick()} it does NOT cross-fall-back to another locale's override -- a
      * missing translation yields the source, never a different language.
      *
      * This is the per-instance "canonical column + non-default overrides" model:

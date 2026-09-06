@@ -8,11 +8,11 @@ namespace CoolMS\Core\ChangeFeed;
  * Records change-feed rows for writers that BYPASS the UnitOfWork.
  *
  * The persistence adapter's change-capture listener covers
- * the normal path — anything that goes through `persist`/`flush` is captured for free, and
+ * the normal path -- anything that goes through `persist`/`flush` is captured for free, and
  * code should keep relying on that. This port exists for the writes the listener
  * structurally cannot see: bulk DQL and raw DBAL that change synced rows without ever
  * scheduling an entity. Those are invisible to `onFlush`, so without an explicit record
- * they are **silent edge drift** — the exact §3 failure mode the feed exists to prevent.
+ * they are **silent edge drift** -- the exact section 3 failure mode the feed exists to prevent.
  *
  * **Use this ONLY when the write really does bypass the UoW.** Calling it for an ordinary
  * ORM write would double-record the row. Duplicates are harmless to correctness (the
@@ -31,7 +31,7 @@ interface SyncChangeRecorderInterface
      * is empty).
      *
      * **Call it in the SAME transaction as the write it describes**, so the record and the
-     * change commit together or neither does — the atomicity the capture listener gets
+     * change commit together or neither does -- the atomicity the capture listener gets
      * from `onFlush` firing inside the flush's transaction. A `preUpdate` caller already
      * satisfies this (the ORM's commit transaction is open by then).
      *

@@ -12,17 +12,17 @@ use Symfony\Component\Uid\Uuid;
  * {@see DefinitionCatalogProviderInterface}. The unified Definitions
  * admin UI iterates a merged list of these across all registered
  * providers (Workflow, Decision, future Form) without caring which
- * concrete module produced any given row — the `module` discriminator
+ * concrete module produced any given row -- the `module` discriminator
  * lets the FE render module-specific pills + drill-down routes.
  *
  * **Why a single VO, not per-module DTOs**: the catalog page's job is
- * "show me everything deployed across modules in one list" — a single
+ * "show me everything deployed across modules in one list" -- a single
  * shape lets the FE render uniform columns. Per-module concerns
  * (BPMN-Lite vs DMN body display, format-specific validation rules)
  * live in the per-module Designer / viewer pages reached via row
  * click-through.
  *
- * Designed as a thin readonly VO — every field has stable semantics
+ * Designed as a thin readonly VO -- every field has stable semantics
  * across modules. Optional fields stay `?type` rather than defaulting
  * to magic sentinels (NULL is the natural "no value here" carrier).
  */
@@ -30,7 +30,7 @@ final readonly class DefinitionCatalogRow
 {
     public function __construct(
         /**
-         * Module discriminator matching `AbstractDefinition::module()` —
+         * Module discriminator matching `AbstractDefinition::module()` --
          * `'workflow'`, `'decision'`, future `'form'`. Drives the
          * module pill on the FE + the drill-down route choice.
          */
@@ -59,7 +59,7 @@ final readonly class DefinitionCatalogRow
 
         /**
          * The currently-active version number for this Definition.
-         * `null` means "never deployed" — typically a draft-only
+         * `null` means "never deployed" -- typically a draft-only
          * Definition that was created in the Designer but never
          * pushed through deploy.
          */
@@ -68,7 +68,7 @@ final readonly class DefinitionCatalogRow
         /**
          * Source of the latest version row's body bytes per
          * {@see DefinitionSource}. `null` mirrors `latestVersion=null`
-         * — there's no version row to discriminate.
+         * -- there's no version row to discriminate.
          */
         public ?DefinitionSource $latestVersionSource,
 

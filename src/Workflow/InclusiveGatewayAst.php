@@ -9,13 +9,13 @@ use CoolMS\Core\Workflow\GatewayDirection;
 use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
- * BPMN-Lite Inclusive (OR) Gateway — the third gateway kind, completing
+ * BPMN-Lite Inclusive (OR) Gateway -- the third gateway kind, completing
  * the XOR / AND / OR trio.
  *
  * Combines the two shapes of the other gateways:
  *  - Like {@see ExclusiveGatewayAst}, a diverging OR evaluates a
  *    condition on EACH outgoing flow and carries an optional
- *    {@see $defaultFlowId} fallback — but unlike XOR (which picks
+ *    {@see $defaultFlowId} fallback -- but unlike XOR (which picks
  *    exactly ONE), it activates EVERY branch whose condition is true.
  *  - Like {@see ParallelGatewayAst}, the direction is author-declared
  *    (not derived) via {@see $direction}, so cardinality mismatches
@@ -25,7 +25,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  *
  * The converging OR-join synchronises ONLY the branches actually
  * activated at the matching split (not every incoming flow, as the
- * parallel join does) — see
+ * parallel join does) -- see
  * `InclusiveGatewayStrategy` in the consuming application.
  */
 final class InclusiveGatewayAst implements ElementInterface

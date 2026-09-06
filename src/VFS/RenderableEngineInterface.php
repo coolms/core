@@ -36,7 +36,7 @@ interface RenderableEngineInterface
 
     /**
      * Priority used when multiple engines register the same extension.
-     * Higher value wins. Typical range: 0–100.
+     * Higher value wins. Typical range: 0-100.
      */
     public function getPriority(): int;
 

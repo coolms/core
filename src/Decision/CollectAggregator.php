@@ -11,10 +11,10 @@ namespace CoolMS\Core\Decision;
  * the OMG DMN 1.3 spec letter-case.
  *
  * **Semantics summary (full specs in the evaluator):**
- *  - `Sum`   — numeric sum across all matching output rows.
- *  - `Min`   — numeric minimum.
- *  - `Max`   — numeric maximum.
- *  - `Count` — count of matching rows (any type, returns int).
+ *  - `Sum`   -- numeric sum across all matching output rows.
+ *  - `Min`   -- numeric minimum.
+ *  - `Max`   -- numeric maximum.
+ *  - `Count` -- count of matching rows (any type, returns int).
  *
  * A non-COLLECT hit policy with an aggregator attribute trips
  * `DMN.UNKNOWN_AGGREGATOR` at parse time. Unknown aggregator strings

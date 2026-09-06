@@ -8,7 +8,7 @@ namespace CoolMS\Core\Document;
  * `coolms.viewer_provider`. `ViewerManifestService` aggregates them at
  * boot and the result is exposed in the API manifest under `viewers`.
  *
- * Each module owns its viewers — Pdf ships the PDF viewer, Word ships
+ * Each module owns its viewers -- Pdf ships the PDF viewer, Word ships
  * the DOCX viewer. The Document module is the dispatcher infrastructure
  * (this interface + the aggregator), not a viewer implementation.
  */

@@ -21,7 +21,7 @@ use function strtolower;
  * put OOXML's vocabulary in the format, the editor and the FE, to save one
  * method here.
  *
- * ## ⚠️ Absent is not `Left`
+ * ## !! Absent is not `Left`
  *
  * A paragraph with no alignment INHERITS: from its style, and failing that from
  * the document's default, which is left in a left-to-right document and right
@@ -57,7 +57,7 @@ enum ParagraphAlignment: string
     /**
      * The alignment a `w:jc w:val` means, or null for one we do not model.
      *
-     * ⚠️ `start` and `end` are the DIRECTION-RELATIVE values a modern producer
+     * !! `start` and `end` are the DIRECTION-RELATIVE values a modern producer
      * writes, and they are not synonyms for left and right -- they resolve
      * against the paragraph's own direction. Mapping them onto left/right would
      * be correct for most documents and wrong for exactly the ones the

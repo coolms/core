@@ -10,7 +10,7 @@ namespace CoolMS\Core\Event;
  * This is the decoupling seam between any module that wants to kick off a BPMN
  * process and the Workflow engine. The *requesting* module (e.g. Content, when a
  * variant is submitted for review) dispatches this with the definition key and
- * variables it owns — it never imports the engine. The Workflow module's generic
+ * variables it owns -- it never imports the engine. The Workflow module's generic
  * listener (the workflow module's start-on-request listener)
  * fulfils it via `ProcessStarter::start`, knowing nothing about the requester.
  *
@@ -20,7 +20,7 @@ namespace CoolMS\Core\Event;
  *
  * Dispatched synchronously through the Symfony event dispatcher, so the process
  * instance (and its first parked user-task) exists by the time the requesting
- * request returns — modelled on the thin {@see EntityReordered} event.
+ * request returns -- modelled on the thin {@see EntityReordered} event.
  */
 final readonly class StartWorkflowRequested
 {

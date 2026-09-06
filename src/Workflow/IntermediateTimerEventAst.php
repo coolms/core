@@ -9,12 +9,12 @@ use CoolMS\Core\Workflow\TimerDefinition;
 use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
- * BPMN-Lite Intermediate Timer Catch Event — a flow-on-the-wire pause.
+ * BPMN-Lite Intermediate Timer Catch Event -- a flow-on-the-wire pause.
  * The {@see $timer} VO carries exactly one of `duration | date | cycle`
  * (validator-enforced via `WF.TIMER_MULTIPLE_KINDS`).
  *
  * Source JSON uses `type: 'intermediateCatchEvent'` with
- * `subtype: 'timer'` (design §2.3); the parser narrows the subtype to
+ * `subtype: 'timer'` (design section 2.3); the parser narrows the subtype to
  * this concrete AST class so the validator and engine dispatch via
  * type without a runtime branch.
  */

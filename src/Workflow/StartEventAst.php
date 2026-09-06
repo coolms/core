@@ -17,7 +17,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * enforces the message/timer payload presence aligns with
  * {@see $variant}; constructor accepts the slice unaware.
  *
- * Per the design doc §2.3, a start event has zero incoming flows and
+ * Per the design doc section 2.3, a start event has zero incoming flows and
  * exactly one outgoing flow. The validator owns that cardinality
  * check (`WF.START_HAS_INCOMING`).
  */

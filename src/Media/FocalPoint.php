@@ -7,14 +7,14 @@ use InvalidArgumentException;
 
 final class FocalPoint
 {
-    // Virtual hook: no backing store — computed from x/y
+    // Virtual hook: no backing store -- computed from x/y
     public string $cssObjectPosition {
         get => sprintf('%s%% %s%%', round($this->x * 100), round($this->y * 100));
     }
 
     public function __construct(
-        public readonly float $x, // 0.0–1.0
-        public readonly float $y, // 0.0–1.0
+        public readonly float $x, // 0.0-1.0
+        public readonly float $y, // 0.0-1.0
     ) {
         if ($x < 0.0 || $x > 1.0 || $y < 0.0 || $y > 1.0) {
             throw new InvalidArgumentException('FocalPoint coordinates must be between 0 and 1.');

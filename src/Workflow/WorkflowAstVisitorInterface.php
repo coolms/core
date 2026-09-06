@@ -23,18 +23,18 @@ use CoolMS\Core\Workflow\BoundaryEventAst;
 use CoolMS\Core\Workflow\SequenceFlowAst;
 
 /**
- * Whole-tree walker contract for the {@see ProcessDefinitionAst} —
- * the design doc §3.4 visitor, mirroring DTMPL's `AbstractAstNodeVisitor`
+ * Whole-tree walker contract for the {@see ProcessDefinitionAst} --
+ * the design doc section 3.4 visitor, mirroring DTMPL's `AbstractAstNodeVisitor`
  * precedent.
  *
  * Two consumers want this seam:
  *
  *  1. `WorkflowDefinitionValidator` in the consuming application
- *     — every rule walks once via `ast->accept($ruleVisitor)`. Per-rule
+ *     -- every rule walks once via `ast->accept($ruleVisitor)`. Per-rule
  *     `match($element::class)` would have to be kept in sync as the
  *     element catalogue grows; the visitor centralises the dispatch.
  * 2. A future XML round-trip serialiser + the cockpit
- *     diagram renderer — both want a generic "for each element /
+ *     diagram renderer -- both want a generic "for each element /
  *     boundary / flow" walk that does not bake in any one consumer's
  *     element-kind ordering.
  *
@@ -69,7 +69,7 @@ interface WorkflowAstVisitorInterface
     public function visitServiceTask(ServiceTaskAst $t): void;
 
     /**
-     * Embedded subprocess. The visit does NOT descend — the scope's
+     * Embedded subprocess. The visit does NOT descend -- the scope's
      * children are ordinary entries in the same flat element list and
      * get their own visits from
      * {@see ProcessDefinitionAst::accept}. A rule that needs the scope

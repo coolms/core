@@ -11,7 +11,7 @@ use CoolMS\Core\Definition\DefinitionSource;
  * implementations MAY push these into SQL for efficiency; the API
  * provider re-applies them on the merged result for correctness.
  *
- * All fields are optional — `null` means "don't filter on this".
+ * All fields are optional -- `null` means "don't filter on this".
  * The filter is the only input the API provider passes downstream;
  * per-module filter extensions (e.g. workflow-specific section
  * filter) stay on the per-module list endpoints, not this catalog.
@@ -29,13 +29,13 @@ final readonly class DefinitionCatalogFilter
         /**
          * Restrict to one module's rows. `null` = all modules.
          * Implementations MAY exit early when `$filter->module` is
-         * set and doesn't match `$this->getModule()` — the API
+         * set and doesn't match `$this->getModule()` -- the API
          * provider already skips non-matching providers but a defensive
          * check inside provide() prevents accidental cross-talk.
          *
          * Kept single-valued: it is the provider short-circuit hint, and
          * a provider serves exactly one module. To filter on SEVERAL
-         * modules use {@see $modules} — the registry then cannot skip
+         * modules use {@see $modules} -- the registry then cannot skip
          * providers, which is correct, because more than one applies.
          */
         public ?string $module = null,
@@ -55,14 +55,14 @@ final readonly class DefinitionCatalogFilter
 
         /**
          * Free-text search on `definitionKey` + `displayName`.
-         * Implementations MAY ignore — the API provider applies the
+         * Implementations MAY ignore -- the API provider applies the
          * filter on the merged result as a safety net.
          */
         public ?string $search = null,
 
         /**
          * Retirement visibility. **The default is `false`, not `null`**
-         * — unlike every other field here, "don't filter" is NOT the
+         * -- unlike every other field here, "don't filter" is NOT the
          * safe default: a retired definition is one an operator
          * deliberately archived, so leaving it in the default list
          * would make retiring a no-op from the UI's point of view.
@@ -107,14 +107,14 @@ final readonly class DefinitionCatalogFilter
         public ?string $displayName = null,
 
         /**
-         * Column to sort the merged result by — one of `module`,
+         * Column to sort the merged result by -- one of `module`,
          * `displayName`, `definitionKey`, `latestVersion`,
          * `latestVersionSource`, `deployedAt`, `retiredAt`. `null` keeps
          * the stable cross-provider default (`displayName` ASC).
          *
          * Sorting MUST happen here rather than in the browser: the client
          * only holds one page, so a client-side sort silently reorders
-         * that page instead of the result set — the same class of bug as
+         * that page instead of the result set -- the same class of bug as
          * client-side filtering.
          */
         public ?string $sort = null,

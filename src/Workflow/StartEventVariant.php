@@ -9,7 +9,7 @@ namespace CoolMS\Core\Workflow;
  * Closed enumeration of the start-event flavours the engine supports:
  * `none` (plain process start), `message` (correlation-keyed),
  * `timer` (duration / date / cycle), and `signal` (broadcast,
- * — bootstraps a fresh instance for EVERY subscriber when the
+ * -- bootstraps a fresh instance for EVERY subscriber when the
  * named signal is broadcast). The remaining BPMN start-event variants
  * (error, escalation, conditional, ...) stay deferred to a later ship;
  * the parser falls their unknown `variant` string back to `None`.

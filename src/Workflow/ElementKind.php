@@ -5,13 +5,13 @@ namespace CoolMS\Core\Workflow;
 
 /**
  * Discriminator across every concrete BPMN-Lite AST element type per
- * `docs/investigations/m2c-design.md` §3.1.
+ * `docs/investigations/m2c-design.md` section 3.1.
  *
  * The backing string values are kebab/camel-cased to match the JSON
  * `type` field the parser reads on each `elements[]` entry (e.g.
  * `"type": "startEvent"`). Sequence flows and boundary events live in
  * their own value objects under ``Flow`\` and are
- * NOT carried as element kinds — they are dispatched separately by the
+ * NOT carried as element kinds -- they are dispatched separately by the
  * visitor.
  *
  * Constructs outside this closed set (`scriptTask`, `businessRuleTask`,

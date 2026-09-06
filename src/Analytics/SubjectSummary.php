@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Analytics;
 
 /**
- * C.7 — a small, counts-only read projection of a CDP `Subject`
+ * C.7 -- a small, counts-only read projection of a CDP `Subject`
  * profile, published for consumers that hold a soft `userId` and want to
  * cross-link to the analytics profile WITHOUT depending on the Analytics
  * module's `Subject` aggregate.
@@ -19,7 +19,7 @@ namespace CoolMS\Core\Analytics;
 final readonly class SubjectSummary
 {
     /**
-     * @param string       $key        the subject's durable key (`known:<userId>`) — the deep-link handle
+     * @param string       $key        the subject's durable key (`known:<userId>`) -- the deep-link handle
      * @param string       $kind       `known` | `anonymous` (always `known` when resolved by userId)
      * @param int          $eventCount total events attributed to the subject
      * @param string       $lastSeen   ISO-8601 (ATOM) timestamp the subject was last seen

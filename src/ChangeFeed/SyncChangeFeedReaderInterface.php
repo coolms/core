@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\ChangeFeed;
 
 /**
- * Reads the controller→edge change-feed after a cursor — the READ half of
+ * Reads the controller->edge change-feed after a cursor -- the READ half of
  * the CDC spine whose WRITE half is the persistence adapter's
  * change-capture listener. An
  * edge polls "give me the changes after cursor N", replays each (upsert/delete by row
@@ -13,13 +13,13 @@ namespace CoolMS\Core\ChangeFeed;
  * (the sync module) can depend on it without reaching into the persistence
  * adapter; the concrete DBAL projection ships in `coolms/core-doctrine`.
  *
- * **Cursor = the monotonic `seq`** — a DB-level `BIGINT GENERATED ALWAYS AS IDENTITY`,
+ * **Cursor = the monotonic `seq`** -- a DB-level `BIGINT GENERATED ALWAYS AS IDENTITY`,
  * intentionally unmapped on the entity ({@see SyncChange}). Ordering by `seq` gives a
  * stable total order for pagination that the coarse, second-precision `recorded_at`
  * cannot.
  *
  * **Correctness boundary (deliberately closed in the APPLY/ack slice, B.2.4):** the reader
- * returns only COMMITTED rows — an uncommitted insert is invisible under READ COMMITTED —
+ * returns only COMMITTED rows -- an uncommitted insert is invisible under READ COMMITTED --
  * in `seq` order, which is correct for total-order + pagination. It does not by itself
  * defeat the classic CDC commit-ordering race: a transaction assigned a lower `seq` that
  * commits AFTER a higher-`seq` one can be skipped if a consumer naively advances its

@@ -26,13 +26,13 @@ enum SeedDecision: string
     case SkipUnchanged = 'skip-unchanged';
 
     /**
-     * ⚠️ Somebody has edited it since the seeder wrote it -- or there is no
+     * !! Somebody has edited it since the seeder wrote it -- or there is no
      * marker to prove otherwise. Their work wins; this run must not touch it.
      */
     case RefuseEdited = 'refuse-edited';
 
     /**
-     * ⚠️ Something already occupies this path that this seeder did not create.
+     * !! Something already occupies this path that this seeder did not create.
      *
      * A DIFFERENT situation from {@see self::RefuseEdited}, and the operator's
      * next move differs: an edit is theirs to keep, an occupied path means the
@@ -45,7 +45,7 @@ enum SeedDecision: string
 
     /**
      * `--force` was given and the artefact was edited. The write happens, and
-     * ⚠️ THE CALLER MUST NAME IT: discarding somebody's work silently behind a
+     * !! THE CALLER MUST NAME IT: discarding somebody's work silently behind a
      * flag is the failure this whole class exists to prevent.
      */
     case ForcedOverwrite = 'forced-overwrite';

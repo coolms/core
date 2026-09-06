@@ -26,14 +26,14 @@ final readonly class FieldItem
         public ?array $separators = null,
         public ?FieldSecurityPolicy $security = null,
         // HTML autocomplete token (e.g. 'username', 'current-password',
-        // 'new-password', 'given-name') — a password-manager / browser-autofill
+        // 'new-password', 'given-name') -- a password-manager / browser-autofill
         // hint, sourced from the field's `options.attr.autocomplete`.
         public ?string $autocomplete = null,
     ) {
     }
 
     /**
-     * Return a copy with the given presentation keys overridden — the seam a
+     * Return a copy with the given presentation keys overridden -- the seam a
      * {@see FieldItemAdapterInterface} drives. Constructed here (in the VO's own
      * scope) because readonly properties can only be reinitialised from the
      * declaring class. Only `label`, `type`, `autocomplete` are adaptable.

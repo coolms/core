@@ -9,11 +9,11 @@ use CoolMS\Core\Workflow\LoopCharacteristics;
 use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
- * BPMN-Lite **embedded subprocess** — an activity that contains its
+ * BPMN-Lite **embedded subprocess** -- an activity that contains its
  * own start event, elements and end event(s), all running in the same
  * process instance.
  *
- * **This node carries no children.** Per the design's §2.5 rule that
+ * **This node carries no children.** Per the design's section 2.5 rule that
  * "cross-element references are id strings (not nested children)", the
  * elements inside a subprocess stay in the SAME flat `elements[]` list
  * and declare `"parent": "<subProcessId>"`. The root AST indexes that
@@ -33,7 +33,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * event; when the scope goes quiet (no Active or Waiting token left
  * inside it) the parent token resumes through the subprocess's single
  * outgoing flow. Boundary events attach to the subprocess exactly as
- * they do to a task — which is what finally gives escalation a scope
+ * they do to a task -- which is what finally gives escalation a scope
  * to escalate OUT of.
  *
  * `triggeredByEvent` (BPMN event subprocess) is **not** modelled here;

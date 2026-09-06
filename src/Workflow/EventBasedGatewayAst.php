@@ -15,14 +15,14 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * branches are cancelled.
  *
  * Source JSON uses `type: 'eventBasedGateway'`. Unlike the parallel /
- * inclusive gateways it declares NO direction — an event gateway only ever
- * diverges (1 incoming, ≥2 outgoing, each to a catch event). The validator
+ * inclusive gateways it declares NO direction -- an event gateway only ever
+ * diverges (1 incoming, >=2 outgoing, each to a catch event). The validator
  * enforces that shape (`GatewayDegreeRule` in the consuming application)
  * and that every target is a catch event
  * (`EventGatewayTargetsRule` in the consuming application).
  *
  * **Engine mechanics.** `EventBasedGatewayStrategy` in the consuming application
- * returns a plain FORK (identical spawn to the parallel gateway) — the
+ * returns a plain FORK (identical spawn to the parallel gateway) -- the
  * mutual-exclusion is entirely on the resume side: when one branch's catch
  * event resumes (`TokenAdvancer::resumeToken` in the consuming application),
  * the advancer sees the resumed token's parent element is an event gateway

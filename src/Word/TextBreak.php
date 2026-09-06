@@ -6,7 +6,7 @@ namespace CoolMS\Core\Word;
 /**
  * A line or page break.
  *
- * ⚠️ Inline, because `w:br` is inline: it belongs INSIDE a run, and the
+ * !! Inline, because `w:br` is inline: it belongs INSIDE a run, and the
  * library this replaces wrote it as a direct child of `w:p`, which the schema
  * does not allow (`w:br` is run inner content). Word is forgiving about it;
  * a validating reader is not. Modelling it as an inline is what makes writing

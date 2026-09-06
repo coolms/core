@@ -8,7 +8,7 @@ namespace CoolMS\Core\Backup;
  * The set of tables backup treats as synced -- the "synced universe" -- and how
  * to address a row inside it. Two questions, and deliberately no more.
  *
- * ⚠️ This exists so a persistence adapter can ask those questions without
+ * !! This exists so a persistence adapter can ask those questions without
  * importing the thing that answers them. The registry that answers them
  * aggregates every {@see BackupContributorInterface} and therefore lives in the
  * module layer; three adapter classes type-hinted it directly, which made a

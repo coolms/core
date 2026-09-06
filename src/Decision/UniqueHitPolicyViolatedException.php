@@ -11,7 +11,7 @@ use function sprintf;
  * Raised by
  * `UniqueHitPolicyStrategy` in the consuming application
  * when MORE than one rule matches a UNIQUE-policy table. UNIQUE
- * semantics (DMN 1.3 §8.4.6) require exactly one match per
+ * semantics (DMN 1.3 section 8.4.6) require exactly one match per
  * evaluation; multiple matches mean the table's rules overlap on
  * the supplied inputs, which is an authoring bug the validator
  * cannot prove statically (input domains vary by call site).

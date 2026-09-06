@@ -10,7 +10,7 @@ namespace CoolMS\Core\Workflow;
  * **Sequential only, and `parallel` is REJECTED at deploy** rather than
  * quietly run one-at-a-time. Parallel multi-instance needs each
  * concurrent iteration to see a DIFFERENT value under
- * {@see $elementVariable}, which means per-TOKEN variable state — the
+ * {@see $elementVariable}, which means per-TOKEN variable state -- the
  * engine's variables live on the ProcessInstance, shared by every token
  * in it. Running a `parallel` declaration sequentially would produce
  * the right final answer with the wrong semantics (no concurrency, and
@@ -40,7 +40,7 @@ final readonly class LoopCharacteristics
         public string $elementVariable = 'item',
         /**
          * Optional EL re-evaluated after each iteration. When it becomes
-         * true the loop stops EARLY and the token advances — BPMN's
+         * true the loop stops EARLY and the token advances -- BPMN's
          * "good enough, stop asking" (e.g. one approval out of five).
          */
         public ?ConditionExpression $completionCondition = null,

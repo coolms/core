@@ -4,15 +4,15 @@ declare(strict_types=1);
 namespace CoolMS\Core\Workflow;
 
 /**
- * Per-element flow adjacency pair — the cached value type stored in
+ * Per-element flow adjacency pair -- the cached value type stored in
  * {@see \CoolMS\Core\Workflow\ProcessDefinitionAst::$flowsByElement}
- * (element id → FlowSet).
+ * (element id -> FlowSet).
  *
  * Carries the list of sequence-flow ids entering an element
  * ({@see $incomingIds}) and the list leaving it ({@see $outgoingIds}).
- * Both lists hold flow ids (strings), NOT flow objects — consistent
+ * Both lists hold flow ids (strings), NOT flow objects -- consistent
  * with the rest of the AST's id-string cross-reference convention
- * (design doc §2.5).
+ * (design doc section 2.5).
  *
  * Built lazily by {@see \CoolMS\Core\Workflow\ProcessDefinitionAst::indexFlows()}
  * on first access; cached for the lifetime of the (immutable) AST.

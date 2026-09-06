@@ -7,15 +7,15 @@ use CoolMS\Core\Definition\SourceLocation;
 use CoolMS\Core\Workflow\ConditionExpression;
 
 /**
- * Immutable AST node for a BPMN sequence flow — the directed edge
- * connecting two elements (start → task, task → gateway, etc.).
+ * Immutable AST node for a BPMN sequence flow -- the directed edge
+ * connecting two elements (start -> task, task -> gateway, etc.).
  *
- * Cross-element references are id strings (see design doc §2.5). The
- * parser normalises so $sourceId is non-null post-parse — even when
+ * Cross-element references are id strings (see design doc section 2.5). The
+ * parser normalises so $sourceId is non-null post-parse -- even when
  * the source JSON omitted `source` and the link was inferred from the
- * source element's `out` array (see design doc §2.3 sequenceFlow note).
+ * source element's `out` array (see design doc section 2.3 sequenceFlow note).
  *
- * Sequence flows are NOT visited via {@see accept()} — they are walked
+ * Sequence flows are NOT visited via {@see accept()} -- they are walked
  * by the root AST's traversal (`ProcessDefinitionAst::accept()`),
  * which dispatches to {@see \CoolMS\Core\Workflow\WorkflowAstVisitorInterface::visitSequenceFlow()}
  * directly. This mirrors the BPMN XML convention where `<sequenceFlow>`
@@ -24,7 +24,7 @@ use CoolMS\Core\Workflow\ConditionExpression;
  * `$isDefault` is a back-reference set by the parser when this flow's
  * id appears in some `exclusiveGateway.default` slot. Walkers may
  * reach the default flow either via {@see \CoolMS\Core\Workflow\ExclusiveGatewayAst}
- * or via this flag (design doc §3.5 row "Default flow on XOR").
+ * or via this flag (design doc section 3.5 row "Default flow on XOR").
  */
 final readonly class SequenceFlowAst
 {

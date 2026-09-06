@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * The write-side primitive for non-default-locale overrides under
- * `extras.i18n.{field}.{locale}` — shared by VFS Node title/description and
+ * `extras.i18n.{field}.{locale}` -- shared by VFS Node title/description and
  * Media alt/caption. Round-trips with {@see LocalizedText::override()}.
  */
 final class LocalizedExtrasTest extends TestCase

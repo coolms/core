@@ -9,7 +9,7 @@ namespace CoolMS\Core\Document;
  * installed.
  *
  * A marker rather than a method, deliberately: the handlers share no callable
- * surface — each takes its own message type — and the only thing this declares
+ * surface -- each takes its own message type -- and the only thing this declares
  * is "fill my `$pdfAvailable` argument", which
  * `DetectPdfModulePass` in the consuming application
  * does.
@@ -18,7 +18,7 @@ namespace CoolMS\Core\Document;
  *
  * The tag alone does not survive. A module Extension's `addTag()` on an `App\`
  * class is silently dropped when the project's `App\` prototype loader
- * re-registers the same class — the definition that reaches the container is
+ * re-registers the same class -- the definition that reaches the container is
  * the glob's, tagless. That is why the pass this replaces matched
  * `RenderWordInstanceHandler` by class NAME.
  *

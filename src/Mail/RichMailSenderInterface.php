@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Mail;
 
 /**
- * Composes a {@see RichMailMessage} and hands it to the mailer — the one call a
+ * Composes a {@see RichMailMessage} and hands it to the mailer -- the one call a
  * module makes when it just wants the mail to go out.
  *
  * Separate from {@see RichMailComposerInterface} so that composing and sending
@@ -17,7 +17,7 @@ namespace CoolMS\Core\Mail;
  * Messenger handler retries the message per its transport's retry strategy
  * instead of silently dropping a recipient. A caller that must not fail its own
  * request (a public signup sending a confirmation, say) is responsible for
- * catching — that decision belongs to the caller, not to this seam.
+ * catching -- that decision belongs to the caller, not to this seam.
  */
 interface RichMailSenderInterface
 {

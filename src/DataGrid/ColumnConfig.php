@@ -14,28 +14,28 @@ final readonly class ColumnConfig
      * `$type` is one of the FE-side `DataGridColumnType` tokens, passed
      * through verbatim by `DataGridConfigBuilder` in the consuming application:
      *   - `text` (default), `boolean`, `number`, `enum`
-     *   - `date`     — calendar date (YYYY-MM-DD); FE renders
+     *   - `date`     -- calendar date (YYYY-MM-DD); FE renders
      *                  `<app-date-range-picker>` in the filter row.
-     *   - `datetime` — ISO-8601 timestamp; FE renders cells + filter in the
+     *   - `datetime` -- ISO-8601 timestamp; FE renders cells + filter in the
      *                  user's TZ via `UserCalendarPreferencesService.tz()`
-     *   - `time`     — wall-clock HH:MM[:SS]; FE renders
+     *   - `time`     -- wall-clock HH:MM[:SS]; FE renders
      *                  `<app-time-range-picker>` in the filter row.
      *
      * Rich cell types (display-only; configured through `$options`):
-     *   - `badge`    — value rendered as a coloured pill. `options.badgeMap`
+     *   - `badge`    -- value rendered as a coloured pill. `options.badgeMap`
      *                  ({value: variant}) picks the colour
      *                  (success|danger|warning|info|muted); falls back to a
      *                  convention map. `options.badgeLabels` ({value: label})
      *                  or `options.enumOptions` relabels the text.
-     *   - `link`     — value rendered as an `<a>`. `options.hrefPrefix`
+     *   - `link`     -- value rendered as an `<a>`. `options.hrefPrefix`
      *                  (e.g. `mailto:` / `tel:`) is prepended; `options.hrefField`
      *                  / `options.textField` source the URL / text from other row
      *                  fields; `options.external: true` opens in a new tab.
-     *   - `avatar`   — an initials (or `options.imageField` image) avatar beside
+     *   - `avatar`   -- an initials (or `options.imageField` image) avatar beside
      *                  the value; `options.subtitleField` adds a muted second line.
-     *   - `snippet`  — multi-line clamped text; `options.lines` sets the clamp
+     *   - `snippet`  -- multi-line clamped text; `options.lines` sets the clamp
      *                  (default 2).
-     * Anything richer is a registered cell widget — see {@see CellWidgetConfig}.
+     * Anything richer is a registered cell widget -- see {@see CellWidgetConfig}.
      */
     public function __construct(
         public string $field,
@@ -81,7 +81,7 @@ final readonly class ColumnConfig
          * `false` opts any other column out of truncation so its text wraps.
          *
          * Present because the FE has always honoured `truncate` on its column
-         * definition, but this VO had no such property — so a YAML column
+         * definition, but this VO had no such property -- so a YAML column
          * declaring `truncate: false` had it silently DROPPED here and the
          * flag never reached the browser. Every existing
          * declaration happened to sit on a `snippet` or `avatar` column, which

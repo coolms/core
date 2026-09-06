@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Theme;
 
 /**
- * What a surface must load to render content the way a site renders it — the
+ * What a surface must load to render content the way a site renders it -- the
  * theme's own stylesheets and scripts, already merged across its inheritance
  * chain.
  *
@@ -39,7 +39,7 @@ final readonly class ThemeAuthoringAssets
     ) {
     }
 
-    /** No theme resolved — the surface authors unstyled rather than not at all. */
+    /** No theme resolved -- the surface authors unstyled rather than not at all. */
     public static function none(): self
     {
         return new self();

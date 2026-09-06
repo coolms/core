@@ -11,7 +11,7 @@ namespace CoolMS\Core\Editor;
  * `coolms.editor.profile_loader` and being delivered into the resolver
  * via the EditorContributorPass.
  *
- * Loaders return a flat map of name → raw profile descriptor. The
+ * Loaders return a flat map of name -> raw profile descriptor. The
  * resolver applies inheritance and `+`/`-` directives once across the
  * merged set, so multiple loaders compose without each one knowing about
  * the others.

@@ -17,7 +17,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * Boundary events on a user task are M2-restricted to interrupting
  * timers only (per the verification design). Validator
  * enforces; constructor accepts the slice unaware. Boundary events
- * are stored on the root AST, not nested here — UserTaskAst exposes
+ * are stored on the root AST, not nested here -- UserTaskAst exposes
  * convenience getters via the root's index if/when needed.
  *
  * **Output mapping ({@see $outputs}).** The BPMN ioMapping OUTPUT half
@@ -26,11 +26,11 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * When a task completes, the Inbox completion seam
  * (`TaskCompleteService` in the consuming application) EL-evaluates
  * each expression against the submitted form + current process variables
- * and PROJECTS the result into process variables — instead of merging
+ * and PROJECTS the result into process variables -- instead of merging
  * every raw form field verbatim. Keys are lvalues like `'vars.approved'`;
  * only the `vars.*` namespace writes today (mirroring `ServiceTaskInvoker`'s
- * limitation — a `task.*` output sink is a shared follow-up). An EMPTY map
- * means "no ioMapping declared" → the completion seam keeps the raw
+ * limitation -- a `task.*` output sink is a shared follow-up). An EMPTY map
+ * means "no ioMapping declared" -> the completion seam keeps the raw
  * merge, so every existing deployed definition is unaffected.
  */
 final class UserTaskAst implements ElementInterface

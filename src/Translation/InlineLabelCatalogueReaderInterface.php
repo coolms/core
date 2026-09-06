@@ -11,13 +11,13 @@ namespace CoolMS\Core\Translation;
  * The read companion to {@see InlineLabelCatalogueWriterInterface::writeChildren()}.
  * Where {@see LabelResolverInterface::resolveChild()} returns the
  * *effective* value for one locale (override, else source fallback), this
- * returns only the locales that carry an **explicit override** — so an
+ * returns only the locales that carry an **explicit override** -- so an
  * editor can pre-fill exactly what's been authored and leave untranslated
  * locales blank, distinct from "shows the source as if it were a
  * translation".
  *
  * Addresses the same `(domain, key)` coordinates the writer wrote and the
- * resolver reads, via {@see LabelResolverInterface::keyForChild()} — no
+ * resolver reads, via {@see LabelResolverInterface::keyForChild()} -- no
  * skew. The caller supplies the child ids (an inline child has no
  * identifier of its own; the parent knows them, e.g. the option `value`s).
  *

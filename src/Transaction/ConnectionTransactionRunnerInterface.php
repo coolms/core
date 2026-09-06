@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace CoolMS\Core\Transaction;
 
 /**
- * A CONNECTION-level transactional seam — the sibling of
+ * A CONNECTION-level transactional seam -- the sibling of
  * {@see TransactionRunnerInterface}, but bound to the DBAL connection rather than
  * the ORM EntityManager.
  *
  * **Why a separate port?** {@see TransactionRunnerInterface} wraps the work in
  * `EntityManagerInterface::wrapInTransaction`, whose final commit flushes the EM. If
- * the work (or anything it calls) CLOSES the EM — the ORM does exactly this when a
- * unit of work rolls back, as a consistency safeguard — that final flush throws
+ * the work (or anything it calls) CLOSES the EM -- the ORM does exactly this when a
+ * unit of work rolls back, as a consistency safeguard -- that final flush throws
  * `EntityManagerClosed` and the whole transaction aborts.
  *
  * The F7 outbox relay needs a batch transaction that survives a consumer

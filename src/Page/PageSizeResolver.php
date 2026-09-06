@@ -11,8 +11,8 @@ use function is_string;
 /**
  * Reads a page's `extras` (the document-level `pageSize` + optional custom
  * `pageWidth`) and resolves them for each render surface, against the single
- * {@see PageSize} catalog. A pure, stateless value service — no I/O, no DI deps
- * — so the Web SSR contributor and the DOCX renderer (and a unit test) all share
+ * {@see PageSize} catalog. A pure, stateless value service -- no I/O, no DI deps
+ * -- so the Web SSR contributor and the DOCX renderer (and a unit test) all share
  * one resolution path and can never diverge.
  *
  * Every method degrades to "unset" (null) for an absent or unrecognised
@@ -59,7 +59,7 @@ final readonly class PageSizeResolver
         }
 
         // Orientation is applied ON TOP of the size, so A3/Letter/Legal
-        // can be landscape too — `wide` used to be the only landscape option
+        // can be landscape too -- `wide` used to be the only landscape option
         // because it fused the two axes.
         return $this->orientation($extras)?->applyTo($section) ?? $section;
     }
@@ -68,8 +68,8 @@ final readonly class PageSizeResolver
      * The sheet dimensions for a PAGED editor canvas, as CSS lengths, or null
      * when the size maps to no printed page.
      *
-     * Derived from {@see docxSection()} — the very array the DOCX renderer
-     * hands PHPWord — rather than from a parallel millimetre table. That is the
+     * Derived from {@see docxSection()} -- the very array the DOCX renderer
+     * hands PHPWord -- rather than from a parallel millimetre table. That is the
      * whole point: orientation has already been applied there, so the sheet on
      * screen and the paper in the .docx cannot drift, and adding a size to the
      * catalog cannot leave the canvas behind.
@@ -122,7 +122,7 @@ final readonly class PageSizeResolver
     }
 
     /**
-     * The preset list for an admin select: `[{value, label}, …]` in catalog
+     * The preset list for an admin select: `[{value, label}, ...]` in catalog
      * order. The backend owns the option set so the FE control never hardcodes
      * one.
      *
@@ -138,7 +138,7 @@ final readonly class PageSizeResolver
 
     /**
      * The DOCX-meaningful subset of {@see options()}: only presets that map to
-     * a real printed page (a non-null {@see PageSize::docxSection()} — A4 /
+     * a real printed page (a non-null {@see PageSize::docxSection()} -- A4 /
      * Letter / Legal / Wide). The document-builder offers these, since `full`
      * and `custom` are web-display widths that leave the DOCX page at PHPWord's
      * default and so would be no-op choices there. Derived from the catalog
@@ -157,8 +157,8 @@ final readonly class PageSizeResolver
     /**
      * Twips back to a CSS millimetre length, rounded to 0.1mm.
      *
-     * The round-trip through twips loses nothing an author can see — A4's
-     * 11906 twips comes back as 210.0004mm — but printing that verbatim into
+     * The round-trip through twips loses nothing an author can see -- A4's
+     * 11906 twips comes back as 210.0004mm -- but printing that verbatim into
      * CSS is noise, and the trailing `.0` on whole millimetres reads like a
      * measurement precision we do not have.
      */

@@ -11,7 +11,7 @@ use function sprintf;
  * Raised by
  * `AnyHitPolicyStrategy` in the consuming application
  * when an ANY-policy table sees multiple matches but their output
- * rows are NOT identical. ANY semantics (DMN 1.3 §8.4.6) allow
+ * rows are NOT identical. ANY semantics (DMN 1.3 section 8.4.6) allow
  * multiple rules to fire but REQUIRE every match to project the
  * same outputs -- the policy effectively says "any of these rules
  * gives you the same answer, so it doesn't matter which one we

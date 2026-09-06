@@ -7,7 +7,7 @@ namespace CoolMS\Core\Option;
 /**
  * Single row in an {@see OptionSourceProviderInterface} response. The
  * universal shape behind every "where do the options for this select
- * come from?" mechanism on the platform — data-grid filter rows, form
+ * come from?" mechanism on the platform -- data-grid filter rows, form
  * field selects, autocompletes, etc.
  *
  * Wire-stable: a column / form field references an option source by
@@ -21,7 +21,7 @@ final readonly class Option
     public function __construct(
         /**
          * Stable identifier persisted by the consumer. Treat it as
-         * opaque from the picker's perspective — it's whatever the
+         * opaque from the picker's perspective -- it's whatever the
          * source declares (UUID, slug, FQCN, enum value, etc.).
          */
         public string $value,

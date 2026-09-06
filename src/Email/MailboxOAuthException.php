@@ -30,7 +30,7 @@ final class MailboxOAuthException extends RuntimeException
     }
 
     /**
-     * The access token has expired and there is no usable refresh token — the
+     * The access token has expired and there is no usable refresh token -- the
      * user must re-run the OAuth consent flow to reconnect the mailbox.
      */
     public static function reauthRequired(Uuid $mailboxId): self
@@ -67,7 +67,7 @@ final class MailboxOAuthException extends RuntimeException
         return new self('The OAuth connect state is missing, malformed, or has been tampered with.');
     }
 
-    /** The connect state is past its short validity window — the consent round-trip must restart. */
+    /** The connect state is past its short validity window -- the consent round-trip must restart. */
     public static function connectStateExpired(): self
     {
         return new self('The OAuth connect state has expired; restart the connect flow.');

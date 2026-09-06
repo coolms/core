@@ -5,15 +5,15 @@ namespace CoolMS\Core\Link;
 
 /**
  * Outcome of `LinkResolverInterface::resolve()`. Carries the rendered URL
- * plus metadata the dtmpl renderer needs to emit `<a href=…>` markup.
+ * plus metadata the dtmpl renderer needs to emit `<a href=...>` markup.
  *
  *   href      final user-facing URL ('/about', 'https://example.com').
  *             Empty string when the target couldn't be resolved (paired
  *             with `broken: true`); renderers must never serialise an
  *             `<a href="">` for a broken result.
- *   label     default anchor text — page title, asset filename, route
+ *   label     default anchor text -- page title, asset filename, route
  *             label. Null when the resolver can't supply one (e.g. for
- *             literal URLs); the renderer's own `label="…"` widget
+ *             literal URLs); the renderer's own `label="..."` widget
  *             param wins anyway, this is just the fallback for empty
  *             cached labels.
  *   external  true for absolute http(s) URLs. Renderers typically
@@ -53,7 +53,7 @@ final readonly class ResolvedLink
     public static function broken(string $type, string $identifier): self
     {
         // $type and $identifier are intentionally available to the
-        // factory but not stored on the returned VO — the renderer
+        // factory but not stored on the returned VO -- the renderer
         // already has access to the original LinkTarget when it wants
         // to format a "broken: page:UUID" diagnostic. Holding them on
         // ResolvedLink would leak resolver-internal context into a

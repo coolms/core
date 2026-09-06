@@ -7,7 +7,7 @@ namespace CoolMS\Core\Seed;
 /**
  * What one seeding run did, in enough detail to report it honestly.
  *
- * ⚠️ Names, not counts. "3 skipped" tells an operator nothing they can act on;
+ * !! Names, not counts. "3 skipped" tells an operator nothing they can act on;
  * `about-us: edited since the last seed` tells them which page holds work they
  * are about to lose and lets them look at it. The whole point of the refusal is
  * defeated by summarising it.
@@ -27,7 +27,7 @@ final class SeedRun
     public array $refused = [];
 
     /**
-     * ⚠️ Separate from {@see self::$refused} on purpose. A refused edit means
+     * !! Separate from {@see self::$refused} on purpose. A refused edit means
      * somebody's work is safe and the seeder did its job; an occupied path means
      * the seeded page does not exist ANYWHERE and the operator has to choose a
      * different path or move what is there. Counting them together would hide a

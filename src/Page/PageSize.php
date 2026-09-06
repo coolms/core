@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace CoolMS\Core\Page;
 
 /**
- * The per-document page-size presets (Track B — page-size / docx-width control).
+ * The per-document page-size presets (Track B -- page-size / docx-width control).
  *
  * A page (a VFS Package) opts into one of these via `extras.pageSize`; absent
  * means "unset", and every render surface keeps its current default behaviour
  * (responsive `.container` on the web, PHPWord's default page on docx). The
  * single source of truth shared by all surfaces (web SSR, DOCX render, the admin
- * editor's option list) so they never drift — the web max-width, the DOCX paper
+ * editor's option list) so they never drift -- the web max-width, the DOCX paper
  * dimensions, and the FE select all derive from here.
  *
  * `paper` sizes (A4 / Letter / Legal) carry real DOCX dimensions; `wide` is a
@@ -22,7 +22,7 @@ enum PageSize: string
 {
     case A4 = 'a4';
     /**
-     * Added for the Word-look editor. Deliberately a SIZE only —
+     * Added for the Word-look editor. Deliberately a SIZE only --
      * orientation is a separate axis now ({@see PageOrientation}), because
      * `wide` conflated the two and made "A3 landscape" unexpressible.
      */
@@ -34,12 +34,12 @@ enum PageSize: string
     case Custom = 'custom';
 
     /**
-     * Twips per millimetre (1440 twips/inch ÷ 25.4 mm/inch).
+     * Twips per millimetre (1440 twips/inch / 25.4 mm/inch).
      *
      * Public because the paged editor canvas converts BACK from the
      * twips {@see docxSection()} produced, rather than keeping a second table
      * of millimetres. One table means the sheet an author sees cannot disagree
-     * with the paper the renderer sets — and a second table is exactly the kind
+     * with the paper the renderer sets -- and a second table is exactly the kind
      * of thing that stays right until someone adds a size to one of them.
      */
     public const float TWIPS_PER_MM = 56.692_913_385_8;
@@ -75,7 +75,7 @@ enum PageSize: string
 
     /**
      * PHPWord section settings (page dimensions in twips + orientation), or null
-     * to leave the DOCX page at PHPWord's default. `full`/`custom` return null —
+     * to leave the DOCX page at PHPWord's default. `full`/`custom` return null --
      * a web-only width does not change the printed paper.
      *
      * @return array{pageSizeW: int, pageSizeH: int, orientation: string}|null

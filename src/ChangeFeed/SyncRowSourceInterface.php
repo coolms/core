@@ -21,7 +21,7 @@ interface SyncRowSourceInterface
 {
     /**
      * The current rows of `$table` for `$ids` (order unspecified; ids matching no live row
-     * are simply absent), in the same shape backup exports — ready for `restoreRows`.
+     * are simply absent), in the same shape backup exports -- ready for `restoreRows`.
      *
      * @param list<string> $ids
      *

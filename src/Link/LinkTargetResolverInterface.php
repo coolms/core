@@ -23,7 +23,7 @@ use CoolMS\Core\Link\ResolvedLink;
  *   - UrlLinkResolver        -> {widget:link:url:LITERAL}
  *   - RouteLinkResolver      -> {widget:link:route:NAME}
  *
- * Resolvers MUST be side-effect-free — the aggregator may invoke them
+ * Resolvers MUST be side-effect-free -- the aggregator may invoke them
  * speculatively and the dtmpl renderer may resolve every link in a page
  * once per render. No DB writes, no eager fetches beyond what the
  * resolver needs to produce the URL.
@@ -40,7 +40,7 @@ interface LinkTargetResolverInterface
     /**
      * Produce a ResolvedLink for the target. Return null when the
      * resolver claims the type but cannot produce a URL for the given
-     * identifier — the aggregator interprets null as "broken".
+     * identifier -- the aggregator interprets null as "broken".
      *
      * Implementations should also return a ResolvedLink with
      * `broken: true` rather than throwing for soft errors (target

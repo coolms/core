@@ -9,16 +9,16 @@ use CoolMS\Core\Workflow\SignalDefinition;
 use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
- * BPMN-Lite Intermediate Signal THROW Event — the fire-and-continue
+ * BPMN-Lite Intermediate Signal THROW Event -- the fire-and-continue
  * counterpart of {@see IntermediateSignalEventAst} (the catch). When a
  * token reaches it, the engine BROADCASTS {@see $signal} to every parked
  * signal-catch token AND bootstraps every signal-start subscriber (the
  * same fan-out the external `POST /api/v1/workflow/signals` throw does),
  * then advances the token through its single outgoing flow. It does NOT
- * park — a throw waits for nothing.
+ * park -- a throw waits for nothing.
  *
  * Source JSON uses `type: 'intermediateThrowEvent'` with
- * `subtype: 'signal'` — the throw mirror of the catch's
+ * `subtype: 'signal'` -- the throw mirror of the catch's
  * `intermediateCatchEvent` + `subtype: 'signal'`. The `intermediateThrowEvent`
  * spelling leaves room for future message / escalation throw subtypes
  * without reusing the catch type.
@@ -29,7 +29,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * `SignalBroadcasterInterface` in the consuming application. The
  * engine dispatches the broadcast as an async Messenger message (its own
  * committed unit of work, mirroring the timer-fire dispatch) so the
- * broadcast never nests inside — nor rolls back with — the throwing
+ * broadcast never nests inside -- nor rolls back with -- the throwing
  * token's advance transaction.
  */
 final class IntermediateSignalThrowEventAst implements ElementInterface

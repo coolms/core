@@ -9,7 +9,7 @@ namespace CoolMS\Core\Event;
  * {@see SubjectSegmentTransitioned} (Track E Phase 5, activation substrate).
  *
  * `Entered` is the primary activation trigger (a subject just joined an
- * audience → start a journey / fan out / push); `Exited` supports the mirror
+ * audience -> start a journey / fan out / push); `Exited` supports the mirror
  * (stop a journey / retract). The string value doubles as the low-cardinality
  * `direction` dimension on the aggregate `segment.transition` analytics event.
  */

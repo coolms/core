@@ -9,14 +9,14 @@ namespace CoolMS\Core\DataGrid;
  * The cell-widget axis is the display-side parallel of the field-widget registry
  * (``FieldWidgetRegistry``) and the filter-widget axis
  * ({@see FilterWidgetConfig}): a column can opt its cells out of the type-driven
- * renderers (text / badge / link / avatar / snippet / date…) and into a
- * registered Angular component instead — e.g. a sparkline, a progress bar, or a
+ * renderers (text / badge / link / avatar / snippet / date...) and into a
+ * registered Angular component instead -- e.g. a sparkline, a progress bar, or a
  * composite multi-field cell.
  *
  * `$kind` is the stable token the front-end `DataGridCellWidgetRegistry`
  * resolves to a component; `$options` is an opaque per-widget config bag merged
  * on top of the column's `options` on the wire. The widget receives the cell
- * value, the full row, and that merged config — cells are display-only, so
+ * value, the full row, and that merged config -- cells are display-only, so
  * (unlike a field widget) there is no change callback.
  *
  * Most rich cells need no widget at all: the built-in `type` tokens

@@ -10,7 +10,7 @@ use CoolMS\CoreModule\Template\ContextContributorInterface;
  * `DocumentInstance.context` at prepare-time (the JSON-friendly
  * shape persisted on the row and consumed by the async renderer).
  *
- * Mirrors Web's `TemplateContextContributorInterface` —
+ * Mirrors Web's `TemplateContextContributorInterface` --
  * implementations satisfy the neutral parent's contract; the
  * marker exists so the Document module's tagged iterator picks
  * up only contributors that opted in to the Document surface,

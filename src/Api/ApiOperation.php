@@ -29,7 +29,7 @@ use Attribute;
  * marks it. A plain Symfony controller is not a resource, so the generator
  * cannot see it, and without this attribute it appears in NO document.
  *
- * ⚠️ So this attribute does two jobs on two kinds of route, and nothing at the
+ * !! So this attribute does two jobs on two kinds of route, and nothing at the
  * call site says which. On a plain controller it is what makes the route
  * documented at all; on a resource it only adds description. `contract` is a
  * separate question in both cases, asked separately.
@@ -48,11 +48,11 @@ use Attribute;
  * to describe them. That is a seam published at one end only, and this is the
  * end that ships.
  *
- * ⚠️ Deliberately NOT a swagger-php attribute. Those classes live in a
+ * !! Deliberately NOT a swagger-php attribute. Those classes live in a
  * development dependency, so they do not exist in an installed application and
  * nothing can read them where it matters.
  *
- * ⚠️ The properties are `label`, `explains` and `sections` rather than the
+ * !! The properties are `label`, `explains` and `sections` rather than the
  * obvious `summary`, `description` and `tags`. swagger-php walks EVERY
  * attribute on a method, not only its own, and merges any property whose name
  * matches one of its own -- an attribute carrying `summary` beside a

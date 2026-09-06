@@ -15,7 +15,7 @@ use CoolMS\Core\Workflow\ProcessDefinitionAst;
  *
  * Each rule:
  *  - Returns its sort key via {@see priority}. Lower runs first.
- *    Design doc §5.1 reserves three bands: 100..199 Structural,
+ *    Design doc section 5.1 reserves three bands: 100..199 Structural,
  *    200..299 Reference integrity, 300..399 Semantic.
  *  - Inspects the AST inside {@see check} and records findings via
  *    `$ctx->violations->add(new Violation(...))`. Never throws on

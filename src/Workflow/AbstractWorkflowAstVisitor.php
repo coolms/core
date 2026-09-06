@@ -28,7 +28,7 @@ use CoolMS\Core\Workflow\SequenceFlowAst;
  * a future XML serialiser, the cockpit diagram renderer) extend
  * this class and override only the visit methods they care about. The
  * abstract layer keeps the interface stable as new element kinds land
- * (M3 inclusiveGateway, scriptTask, …) — existing subclasses keep
+ * (M3 inclusiveGateway, scriptTask, ...) -- existing subclasses keep
  * compiling because every new method ships a no-op here first.
  *
  * Mirrors DTMPL's `AbstractAstNodeVisitor` precedent.

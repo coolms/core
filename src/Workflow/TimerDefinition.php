@@ -13,11 +13,11 @@ use CoolMS\Core\Workflow\TimerKind;
  * cycle `RRULE:FREQ=DAILY...`) *or* an EL expression that resolves to
  * one at engine time.
  *
- * Disambiguation is the validator's job — see
- * `docs/investigations/m2c-design.md` §5.5(g):
- *  - `WF.TIMER_MULTIPLE_KINDS` — exactly one of duration/date/cycle
+ * Disambiguation is the validator's job -- see
+ * `docs/investigations/m2c-design.md` section 5.5(g):
+ *  - `WF.TIMER_MULTIPLE_KINDS` -- exactly one of duration/date/cycle
  *    per timer block in the source JSON.
- *  - `WF.TIMER_INVALID_SPEC`   — literal values type-checked by
+ *  - `WF.TIMER_INVALID_SPEC`   -- literal values type-checked by
  *    ISO-8601 regex (or `RRuleParser` for cycles); EL strings linted
  *    via `ExpressionService::lint()` against the allow-list.
  */

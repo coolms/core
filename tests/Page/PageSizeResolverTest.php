@@ -82,13 +82,13 @@ final class PageSizeResolverTest extends TestCase
     }
 
     /**
-     * Orientation is its own axis — `wide` was previously the only way
+     * Orientation is its own axis -- `wide` was previously the only way
      * to get landscape, and it means A4 specifically, so A3 landscape or
      * Letter landscape could not be expressed at all.
      */
     public function testOrientationAppliesOnTopOfAnySize(): void
     {
-        // A3 landscape — the combination that had no preset.
+        // A3 landscape -- the combination that had no preset.
         self::assertSame(
             ['pageSizeW' => 23811, 'pageSizeH' => 16838, 'orientation' => 'landscape'],
             $this->resolver->docxSection(['pageSize' => 'a3', 'pageOrientation' => 'landscape']),
@@ -144,7 +144,7 @@ final class PageSizeResolverTest extends TestCase
     }
 
     /**
-     * The sheet an author sees is the paper the renderer sets — same numbers,
+     * The sheet an author sees is the paper the renderer sets -- same numbers,
      * different unit. Asserting the millimetres directly (rather than "it is
      * non-null") is the point: a canvas drawn 210mm wide against a document
      * PHPWord lays out on Letter looks correct right up until it prints.
@@ -193,7 +193,7 @@ final class PageSizeResolverTest extends TestCase
 
                 self::assertNotNull($section);
                 self::assertNotNull($sheet);
-                // Wider paper must yield a wider sheet — a swap applied to one
+                // Wider paper must yield a wider sheet -- a swap applied to one
                 // and not the other shows up here as a transposed pair.
                 self::assertSame(
                     $section['pageSizeW'] > $section['pageSizeH'],

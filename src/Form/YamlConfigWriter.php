@@ -25,7 +25,7 @@ final readonly class YamlConfigWriter implements ConfigWriterInterface
         $path = rtrim($directory, '/') . "/$formId.yaml";
 
         // On a sparse update, deep-merge onto the existing file so manually
-        // maintained keys survive. On an authoritative replace, OVERWRITE — else
+        // maintained keys survive. On an authoritative replace, OVERWRITE -- else
         // a deleted field / a shortened layout would be resurrected by the merge.
         if (!$replace && file_exists($path)) {
             $existing = Yaml::parseFile($path) ?? [];

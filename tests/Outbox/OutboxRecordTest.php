@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
- * `OutboxRecord::fromMessage` — the message → row mapping: a fresh row is
+ * `OutboxRecord::fromMessage` -- the message -> row mapping: a fresh row is
  * unpublished with zero attempts, `createdAt` is the append time, and
  * `occurredAt` falls back to the append time when the producer omits it.
  */

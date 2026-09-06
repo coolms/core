@@ -5,7 +5,7 @@ namespace CoolMS\Core\Workflow;
 
 /**
  * Direction marker for gateway AST nodes per
- * `docs/investigations/m2c-design.md` §2.3 / §3.1.
+ * `docs/investigations/m2c-design.md` section 2.3 / section 3.1.
  *
  * On `parallelGateway` (AND) the direction is author-declared and the
  * validator rejects mismatched `in`/`out` cardinality

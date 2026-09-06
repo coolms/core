@@ -7,7 +7,7 @@ use CoolMS\CoreModule\Template\ContextContributorInterface;
 
 /**
  * Marker for Document-module contributors that run at **render
- * time** rather than prepare time — Phase 2 two-pipeline
+ * time** rather than prepare time -- Phase 2 two-pipeline
  * model. Render-time contributors fire inside
  * `DocumentInstanceService::executeRender()` just before the
  * renderer consumes the context; their output does NOT persist on
@@ -19,8 +19,8 @@ use CoolMS\CoreModule\Template\ContextContributorInterface;
  * contributor is `EntityHydratingContributor`.
  *
  * Distinction from {@see DocumentContextContributorInterface}:
- *  - This interface (render-time)   → re-runs every render, output ephemeral.
- *  - DocumentContextContributorInterface (prepare-time) → runs once at
+ *  - This interface (render-time)   -> re-runs every render, output ephemeral.
+ *  - DocumentContextContributorInterface (prepare-time) -> runs once at
  *    `prepare()`, output persisted to the row.
  */
 interface DocumentRenderContextContributorInterface extends ContextContributorInterface

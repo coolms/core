@@ -22,7 +22,7 @@ use const JSON_UNESCAPED_UNICODE;
 /**
  * Seed content without ever clobbering somebody's edit.
  *
- * ⚠️ ONE IMPLEMENTATION, because there are three callers -- the docs importer,
+ * !! ONE IMPLEMENTATION, because there are three callers -- the docs importer,
  * module installers and theme content seeding -- and three copies of this rule
  * will diverge until only one of them is right. It is deliberately pure: no
  * container, no database, no HTTP, so a standalone CLI tool and a domain service
@@ -35,11 +35,11 @@ use const JSON_UNESCAPED_UNICODE;
  * than "do these two differ?" -- the second is true every time a source file is
  * edited and would refuse exactly the updates a seeder exists to make.
  *
- * ⚠️ **No marker means REFUSE.** An artefact seeded before this guard existed,
+ * !! **No marker means REFUSE.** An artefact seeded before this guard existed,
  * or created by hand, has no baseline and an edit cannot be ruled out. Refusing
  * costs an operator one `--force`; assuming costs them their work.
  *
- * ⚠️ **And an occupied path is refused even when nothing is stored in the
+ * !! **And an occupied path is refused even when nothing is stored in the
  * locale being seeded.** "Nothing here in `uk`" is not "nothing here": a page
  * somebody wrote in `en` is a node this seeder does not own, and writing into it
  * would attach a second body to their page and merge a theme's title, order and
@@ -77,7 +77,7 @@ final readonly class SeedGuard
     }
 
     /**
-     * ⚠️ `$extras` doubles as the OCCUPANCY signal: null means nothing is at
+     * !! `$extras` doubles as the OCCUPANCY signal: null means nothing is at
      * this path at all, and an array -- empty included -- means something is.
      * Implementations of {@see SeedTargetInterface} are required to answer that
      * way, because the difference decides whether a free path or somebody's page
@@ -104,7 +104,7 @@ final readonly class SeedGuard
                 return SeedDecision::Create;
             }
 
-            // ⚠️ Occupied by something this seeder did not create. The absent
+            // !! Occupied by something this seeder did not create. The absent
             // body makes this look like a free path and it is not.
             return $force ? SeedDecision::ForcedOverwrite : SeedDecision::RefuseOccupied;
         }
@@ -116,7 +116,7 @@ final readonly class SeedGuard
 
         $sameBody = hash('sha256', $liveBody) === hash('sha256', $incomingBody);
 
-        // ⚠️ Compared over the INCOMING keys, which is the right set here: the
+        // !! Compared over the INCOMING keys, which is the right set here: the
         // question is "would this run change anything?", and a key this run does
         // not write is not this run's business. That differs from the edit check
         // above, which must use the RECORDED keys -- see {@see isEdited()}.
@@ -138,17 +138,17 @@ final readonly class SeedGuard
      * would otherwise have to pay for that render on every page it is about to
      * skip.
      *
-     * ⚠️ Returns true when there is no marker, for the reason given on the class:
+     * !! Returns true when there is no marker, for the reason given on the class:
      * absent proof is not proof of absence.
      *
-     * ⚠️ **A page's content is not always its body.** A landing page keeps its
+     * !! **A page's content is not always its body.** A landing page keeps its
      * sections in `extras['blocks']`, so a guard that watched only the body
      * called such a page unedited however much an author had rearranged it --
      * and the next body change then rewrote the extras and discarded that work.
      * So the marker records the extras keys it wrote, and this compares a
      * fingerprint of the live values over exactly those keys.
      *
-     * ⚠️ The RECORDED keys, never the current run's. Fingerprinting the live
+     * !! The RECORDED keys, never the current run's. Fingerprinting the live
      * side over the current keys was tried first and cannot work: the recorded
      * hash covers what the PREVIOUS run wrote, so a run whose key set changed
      * can never match and reports every page as edited. `VfsSeedTargetTest`
@@ -173,7 +173,7 @@ final readonly class SeedGuard
 
         $keys = $this->recordedKeys($marker);
 
-        // ⚠️ A marker written before the keys were recorded cannot answer for
+        // !! A marker written before the keys were recorded cannot answer for
         // the extras, and refusing every page seeded by an earlier version would
         // be safe, correct, and would make this change look broken. Same
         // precedent as the flat `importedHash` read below: fall back to the body
@@ -199,7 +199,7 @@ final readonly class SeedGuard
             return 'edited since the last seed';
         }
 
-        // ⚠️ Naming the owner matters when a section has carried more than one
+        // !! Naming the owner matters when a section has carried more than one
         // theme. "No marker" would be false -- there IS one, it belongs to
         // somebody else -- and it would send an operator looking for a hand edit
         // that never happened.
@@ -227,7 +227,7 @@ final readonly class SeedGuard
     /**
      * The reason for a decision that {@see SeedDecision::needsReporting()}.
      *
-     * ⚠️ Needs `$liveBody` to tell the two refusals apart: an occupied path has
+     * !! Needs `$liveBody` to tell the two refusals apart: an occupied path has
      * no stored body in this locale, which is exactly what an untouched new page
      * looks like from the extras alone.
      *
@@ -247,11 +247,11 @@ final readonly class SeedGuard
     /**
      * The marker to store, alongside whatever else the caller patches.
      *
-     * ⚠️ Write it AFTER the body, never before: recorded first, it would claim a
+     * !! Write it AFTER the body, never before: recorded first, it would claim a
      * state that a failed write never reached, and the next run would take that
      * claim as proof the artefact was untouched.
      *
-     * ⚠️ It records WHICH EXTRAS KEYS it wrote, not just the body hash. Those
+     * !! It records WHICH EXTRAS KEYS it wrote, not just the body hash. Those
      * keys are what {@see isEdited()} fingerprints the live values over, so a
      * landing page whose sections an author rearranged is recognised as edited
      * instead of being quietly rewritten on the next body change.
@@ -341,7 +341,7 @@ final readonly class SeedGuard
             }
         }
 
-        // ⚠️ The docs importer's existing flat marker. Read so that adopting
+        // !! The docs importer's existing flat marker. Read so that adopting
         // this guard does not refuse all twelve pages on its first run -- which
         // would be safe, correct, and would make the change look broken. It
         // carries no key list, which {@see isEdited()} treats as "cannot answer
@@ -398,13 +398,13 @@ final readonly class SeedGuard
     /**
      * A stable hash of `$source` restricted to `$keys`.
      *
-     * ⚠️ Only the SELECTED keys are sorted, and nested values are left in the
+     * !! Only the SELECTED keys are sorted, and nested values are left in the
      * order they were stored. A landing page's `blocks` is a list whose order is
      * the order of the sections on the page -- sorting it would make a rearranged
      * page fingerprint identical to the original, which is the exact edit this
      * exists to notice.
      *
-     * ⚠️ A key that was recorded and is now MISSING changes the fingerprint,
+     * !! A key that was recorded and is now MISSING changes the fingerprint,
      * because it is absent from the subset. That is correct: deleting a key is
      * an edit.
      *

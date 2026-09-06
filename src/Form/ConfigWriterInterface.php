@@ -22,10 +22,10 @@ interface ConfigWriterInterface
      * For the DB writer $directory is ignored (the entity alias is used instead).
      *
      * $replace controls how an EXISTING stored config is treated:
-     *   - false (default): a sparse update — file writers deep-merge $data onto
+     *   - false (default): a sparse update -- file writers deep-merge $data onto
      *     the existing file so manually-maintained keys survive; matches the
      *     `ConfigManager::update()` in the consuming application semantics.
-     *   - true: an authoritative full replace — file writers OVERWRITE (no merge),
+     *   - true: an authoritative full replace -- file writers OVERWRITE (no merge),
      *     so a removed field / a shortened array actually disappears. This is the
      *     Form Builder's Save path (`ConfigManager::replace()` in the consuming application).
      * Writers that already overwrite wholesale (the DB override writer) ignore it.

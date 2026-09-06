@@ -6,11 +6,11 @@ namespace CoolMS\Core\Workflow;
 /**
  * Discriminator for the three mutually-exclusive timer spellings on a
  * {@see \CoolMS\Core\Workflow\TimerDefinition} per
- * `docs/investigations/m2c-design.md` §2.3 / §3.1.
+ * `docs/investigations/m2c-design.md` section 2.3 / section 3.1.
  *
- * - `duration` — ISO-8601 duration literal or EL expression yielding one.
- * - `date`     — ISO-8601 datetime literal or EL expression.
- * - `cycle`    — RRULE literal (parsed via `RRuleParser` at deploy
+ * - `duration` -- ISO-8601 duration literal or EL expression yielding one.
+ * - `date`     -- ISO-8601 datetime literal or EL expression.
+ * - `cycle`    -- RRULE literal (parsed via `RRuleParser` at deploy
  *                time when literal) or EL expression.
  *
  * Validator rule `WF.TIMER_MULTIPLE_KINDS` enforces that exactly one

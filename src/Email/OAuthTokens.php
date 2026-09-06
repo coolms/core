@@ -22,10 +22,10 @@ use const JSON_THROW_ON_ERROR;
  * scope. Immutable; the sealed-at-rest form is the JSON of {@see toJson()} sealed
  * by `EmailCipherInterface` in the consuming application.
  *
- * `expiresAt` null = expiry unknown → treated as non-expiring (best-effort; a
+ * `expiresAt` null = expiry unknown -> treated as non-expiring (best-effort; a
  * provider that omits `expires_in` is trusted until a live 401 forces a reconnect
- * — the transport layer's concern). `refreshToken` null = a one-shot
- * grant (e.g. a provider that didn't return one) → not renewable in place.
+ * -- the transport layer's concern). `refreshToken` null = a one-shot
+ * grant (e.g. a provider that didn't return one) -> not renewable in place.
  */
 final readonly class OAuthTokens
 {
@@ -116,7 +116,7 @@ final readonly class OAuthTokens
     /**
      * Fold a refresh response onto the prior grant. Providers (Google included)
      * OMIT the refresh token on a refresh response, so carry the old one forward
-     * — losing it would strand the mailbox on the next expiry.
+     * -- losing it would strand the mailbox on the next expiry.
      */
     public function withRefreshedFrom(self $refreshed): self
     {

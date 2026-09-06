@@ -5,34 +5,34 @@ namespace CoolMS\Core\Workflow;
 
 /**
  * Subtype axis for {@see \CoolMS\Core\Workflow\BoundaryEventAst}
- * per `docs/investigations/m2c-design.md` §2.3 / §3.1.
+ * per `docs/investigations/m2c-design.md` section 2.3 / section 3.1.
  *
  * Three flavours in scope:
- * - `timer`   — attaches to `userTask`, `serviceTask`, intermediate
+ * - `timer`   -- attaches to `userTask`, `serviceTask`, intermediate
  *               timer/message events, or `parallelGateway` (G8
- *               workaround per verification-design §3.3).
- * - `message` — non-interrupting only, attaches to `serviceTask` only
+ *               workaround per verification-design section 3.3).
+ * - `message` -- non-interrupting only, attaches to `serviceTask` only
  *               (G7 promotion; enforced by `G7ScopeGuardRule`).
- * - `signal`  — BROADCAST catch attached to a host activity (userTask /
+ * - `signal`  -- BROADCAST catch attached to a host activity (userTask /
  *               serviceTask / intermediate timer or message event /
  *               parallelGateway per the same host-kind gate as timer).
  *               Interrupting OR non-interrupting (unlike message, which
  *               M2 restricted to non-interrupting). Fires when a matching
- *               signal is broadcast WHILE the host is live — the
+ *               signal is broadcast WHILE the host is live -- the
  *               `SignalBroadcaster` finds live host tokens carrying a
  *               matching signal boundary and diverts via the subtype-
  *               agnostic `TokenAdvancer::fireBoundary`. The name is the
  *               sole routing key (signals carry no correlation key);
  *               `SignalDeclarationRule` enforces a non-blank name.
- * - `error`   — interrupting only, attaches to `serviceTask` only (F7
+ * - `error`   -- interrupting only, attaches to `serviceTask` only (F7
  * / phase 4; enforced by `ErrorBoundaryScopeRule`).
  *               Catches a service-task handler failure and routes the
  *               token down the boundary's outgoing flow instead of
  *               failing the whole process instance.
- * - `compensation` — attaches to `serviceTask` only (
+ * - `compensation` -- attaches to `serviceTask` only (
  *               enforced by `CompensationScopeRule`). UNLIKE timer/message/
  *               error boundaries it does NOT fire on the host's lifecycle and
- *               does NOT divert a token during normal flow — it is purely an
+ *               does NOT divert a token during normal flow -- it is purely an
  *               association marking the host compensable; its outgoing flow
  *               targets the activity's `forCompensation` undo handler, which
  *               the engine runs ONLY when a `compensate` end-throw is reached

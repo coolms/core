@@ -83,7 +83,7 @@ final class RecordedEventsTraitTest extends TestCase
         };
     }
 
-    /** No expectations needed — stub is correct here, not a mock. */
+    /** No expectations needed -- stub is correct here, not a mock. */
     private function makeEvent(): DomainEventInterface
     {
         return $this->createStub(DomainEventInterface::class);

@@ -35,7 +35,7 @@ use Attribute;
  * Application + Infrastructure.
  *
  * **Choosing the domain.** When omitted, the resolver derives it from
- * the class's leading namespace segment (`Form`, `Navi`, `Section`, …)
+ * the class's leading namespace segment (`Form`, `Navi`, `Section`, ...)
  * lowercased. Operators rarely need to override;
  * the convention matches how the bundled `.xlf` files are organised
  * (`translations/form.en.xlf`, `translations/section.en.xlf`, etc.).
@@ -54,7 +54,7 @@ final readonly class Translatable
      *                                              should resolve through the translator.
      *                                              Default `['label']` covers the most
      *                                              common shape (NaviNode, SiteSection,
-     *                                              OptionValue, …).
+     *                                              OptionValue, ...).
      * @param string|null                 $domain   Translation domain. `null` = derive
      *                                              from class namespace. Operators
      *                                              override this when the target's

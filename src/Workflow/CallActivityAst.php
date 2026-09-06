@@ -10,7 +10,7 @@ use CoolMS\Core\Workflow\LoopCharacteristics;
 use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
- * BPMN-Lite **call activity** — invokes ANOTHER deployed definition as a
+ * BPMN-Lite **call activity** -- invokes ANOTHER deployed definition as a
  * child process instance and waits for it to finish.
  *
  * **The difference from an embedded subprocess** ({@see SubProcessAst})
@@ -23,7 +23,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * bag: nothing else crosses the boundary.
  *
  * `calledElement` is a definition KEY, resolved at RUNTIME against the
- * callee's currently-deployed version — not pinned at deploy time. So
+ * callee's currently-deployed version -- not pinned at deploy time. So
  * redeploying the callee changes what subsequent calls run, which is
  * the behaviour an operator expects from "call the current version of
  * X", and it means a call activity can reference a definition that does
@@ -44,8 +44,8 @@ final class CallActivityAst implements ElementInterface
     /**
      * @param list<string>                       $incomingIds
      * @param list<string>                       $outgoingIds
-     * @param array<string, ConditionExpression> $inputs      callee variable name → EL over the caller
-     * @param array<string, ConditionExpression> $outputs     caller variable name → EL over the finished child
+     * @param array<string, ConditionExpression> $inputs      callee variable name -> EL over the caller
+     * @param array<string, ConditionExpression> $outputs     caller variable name -> EL over the finished child
      */
     public function __construct(
         public readonly string $id,

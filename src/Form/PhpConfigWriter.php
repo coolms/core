@@ -11,8 +11,8 @@ namespace CoolMS\Core\Form;
  *
  *   return [
  *       'type' => 'form',
- *       'id' => '…',
- *       'fields' => [ … ],
+ *       'id' => '...',
+ *       'fields' => [ ... ],
  *   ];
  *
  * If the target file already exists, it is loaded via `require` and the result

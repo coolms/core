@@ -13,14 +13,14 @@ namespace CoolMS\Core\Decision;
  * comparison against the `<decisionTable hitPolicy="...">` attribute.
  *
  * **Semantics summary (full specs in the evaluator):**
- *  - `Unique`   — exactly one rule must match; multiple matches = error.
- *  - `First`    — first matching rule (in document order) wins.
- *  - `Priority` — the output entry's priority list (declared in the
+ *  - `Unique`   -- exactly one rule must match; multiple matches = error.
+ *  - `First`    -- first matching rule (in document order) wins.
+ *  - `Priority` -- the output entry's priority list (declared in the
  *                 `<output>` element) decides; highest-priority winning
  *                 entry across all matches selects the output row.
- *  - `Any`      — multiple rules MAY match but all their outputs MUST
+ *  - `Any`      -- multiple rules MAY match but all their outputs MUST
  *                 be identical; otherwise = error.
- *  - `Collect`  — every matching rule contributes; the optional
+ *  - `Collect`  -- every matching rule contributes; the optional
  *                 {@see CollectAggregator} folds the list into a scalar
  *                 (SUM / MIN / MAX / COUNT) or returns the raw list.
  */

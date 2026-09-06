@@ -5,7 +5,7 @@ namespace CoolMS\Core\Document;
 
 /**
  * Profile-specific viewer configuration. The `config` shape is
- * open-ended — each viewer interprets keys it understands (PDF reads
+ * open-ended -- each viewer interprets keys it understands (PDF reads
  * `toolbar.show`, `sidebar.tabs`; DOCX reads only `toolbar.buttons`).
  * Generic schema would force a lowest common denominator and rule out
  * legitimate library-specific options.

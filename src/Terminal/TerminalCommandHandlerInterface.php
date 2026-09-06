@@ -41,7 +41,7 @@ interface TerminalCommandHandlerInterface
      *
      * A command may also yield a typed SIGNAL that asks the session to change
      * (today only {@see ChangeDirectory}). Signals are values rather than
-     * formatted lines precisely so no ordinary output can impersonate one — the
+     * formatted lines precisely so no ordinary output can impersonate one -- the
      * processor dispatches on TYPE, not on a prefix.
      *
      * @return Generator<string|ChangeDirectory>

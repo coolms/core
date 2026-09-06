@@ -26,7 +26,7 @@ use function sprintf;
  *    with normal security, so a viewer who cannot read a module gets the 403
  *    they would get anywhere else. A server-rendered number would have to
  *    re-derive that here, and the first missed case leaks a count of something
- *    the viewer cannot see — exactly the trap this shape avoids.
+ *    the viewer cannot see -- exactly the trap this shape avoids.
  *  - **The widget owns its refresh.** A live figure and a nightly one differ
  *    only in how often the client asks.
  *
@@ -37,7 +37,7 @@ use function sprintf;
  * Because an empty tile is worse than an absent one. The endpoint decides
  * whether the DATA may be read; this decides whether the widget is worth
  * offering at all, so a viewer without the role never sees a card that can only
- * ever show an error. It is a display filter and nothing is trusted to it — the
+ * ever show an error. It is a display filter and nothing is trusted to it -- the
  * endpoint remains the authority, which is why it is stated separately rather
  * than being derived from one.
  */
@@ -64,17 +64,17 @@ final readonly class DashboardWidget
      * ## The grid is TWELVE columns wide, and that number is a promise.
      *
      * A width has to be expressed against something. "How many cards fit in a
-     * row" cannot be it — that answer changes with the viewport, so a widget
+     * row" cannot be it -- that answer changes with the viewport, so a widget
      * declaring `2` would mean a different width on every screen and no module
      * could reason about its own card. Twelfths do not move: a `4` is a third
      * of the dashboard everywhere, and the client decides only how a third
      * behaves when there is no room for one.
      *
-     * Twelve because it divides by 2, 3, 4 and 6 — halves, thirds, quarters and
+     * Twelve because it divides by 2, 3, 4 and 6 -- halves, thirds, quarters and
      * sixths all land on whole columns, which is why the same number underpins
      * every grid system the admin's users have already met.
      *
-     * ⚠️ Widened from 1-4 BEFORE any module outside VFS contributes.
+     * !! Widened from 1-4 BEFORE any module outside VFS contributes.
      * The scale is the wire contract: a `2` meaning "half" today and "a sixth"
      * tomorrow silently re-lays-out every dashboard that stored one. Free to
      * change while one module contributes; a migration once several do.
@@ -88,13 +88,13 @@ final readonly class DashboardWidget
      *
      * Before the grid was fixed the page auto-filled `minmax(220px, 1fr)` and
      * fitted three cards across the admin's content pane. Four twelfths keeps
-     * exactly that, so widening the scale re-lays-out nothing — and it stays
+     * exactly that, so widening the scale re-lays-out nothing -- and it stays
      * the right side of the 220px the auto-fill was tuned for, which a quarter
      * (182px in that pane) would not.
      */
     public const int COLUMNS_DEFAULT = 4;
 
-    /** A single number with a caption — the cheapest useful widget. */
+    /** A single number with a caption -- the cheapest useful widget. */
     public const string KIND_STAT = 'stat';
 
     /** A series over time. */
@@ -104,7 +104,7 @@ final readonly class DashboardWidget
     public const string KIND_LIST = 'list';
 
     /**
-     * What a client is guaranteed to be able to draw — TODAY, which is why it
+     * What a client is guaranteed to be able to draw -- TODAY, which is why it
      * is shorter than the constants above.
      *
      * A widget kind is a CONTRACT with the admin's renderer, not a free-form
@@ -115,14 +115,14 @@ final readonly class DashboardWidget
      * `chart` and `list` are named as constants because they are the intended
      * vocabulary, and deliberately NOT listed here until the admin can draw
      * them. Listing a kind the client cannot render would make this test
-     * meaningless — the point is that it refuses undrawable cards, and it can
+     * meaningless -- the point is that it refuses undrawable cards, and it can
      * only do that while it describes what is actually drawable. Widening it is
      * one line, at the same moment the renderer gains the case.
      */
     public const array KINDS = [self::KIND_STAT];
 
     /**
-     * @param string      $id           stable, module-prefixed — `document.count`.
+     * @param string      $id           stable, module-prefixed -- `document.count`.
      *                                  The client stores layout against it, so it
      *                                  outlives labels and translations
      * @param string      $label        shown on the card; a translation KEY is
@@ -130,22 +130,22 @@ final readonly class DashboardWidget
      * @param string      $icon         bootstrap-icons class, e.g. `bi-file-text`
      * @param string      $endpoint     API path the client GETs for this widget's
      *                                  own data. Its security is the real gate
-     * @param string      $kind         how to draw what comes back — see
+     * @param string      $kind         how to draw what comes back -- see
      *                                  {@see self::KINDS}. Unknown kinds are
      *                                  dropped by the registry rather than
      *                                  rendered as something they are not
      * @param string      $valuePath    dot-path to the figure inside whatever the
-     *                                  endpoint already returns — `fileCount`,
+     *                                  endpoint already returns -- `fileCount`,
      *                                  `stats.total`. See the note below on why
      *                                  this exists instead of a mandated
      *                                  response shape
      * @param string|null $displayPath  dot-path to a PRE-FORMATTED string to show
-     *                                  instead of the raw figure — VFS already
+     *                                  instead of the raw figure -- VFS already
      *                                  returns `humanSize` beside `totalSize`,
      *                                  and the module that owns the number knows
      *                                  best how to write it. Null shows the value
      * @param int         $columns      how much of the dashboard's TWELVE-column
-     *                                  grid the card wants — see
+     *                                  grid the card wants -- see
      *                                  {@see self::COLUMNS_MAX}
      * @param string|null $requiredRole hides the card from viewers without it;
      *                                  null offers it to anyone signed in
@@ -168,8 +168,8 @@ final readonly class DashboardWidget
         /*
          * ## Why this throws where the registry merely SKIPS
          *
-         * The registry's refusals — a duplicate id, an unknown kind, a missing
-         * role — all need context this object does not have: the other widgets,
+         * The registry's refusals -- a duplicate id, an unknown kind, a missing
+         * role -- all need context this object does not have: the other widgets,
          * and the viewer. A width does not. It is wrong on its own, in one
          * module's own code, and the module author is the only person who can
          * fix it.
@@ -194,7 +194,7 @@ final readonly class DashboardWidget
      * The only field a layout may change, and the reason is the seam: a layout
      * decides PLACEMENT, so it may say how much room a card gets and nothing
      * else. Where its data comes from, what it is called and who may see it
-     * stay the module's to answer — a layout that could rewrite `endpoint` or
+     * stay the module's to answer -- a layout that could rewrite `endpoint` or
      * `requiredRole` would be a config file quietly overruling a module's
      * security.
      */

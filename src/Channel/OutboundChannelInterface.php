@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace CoolMS\Core\Channel;
 
 /**
- * F3 — a module-published outbound delivery channel (RSS, chat, email
- * digest, …). The outbound counterpart of the Workflow
+ * F3 -- a module-published outbound delivery channel (RSS, chat, email
+ * digest, ...). The outbound counterpart of the Workflow
  * the workflow module's service-task handler contract: a single
  * `channel:publish` service task resolves ONE of these from the
  * {@see OutboundChannelRegistryInterface} by `channelId()` and hands it a
@@ -22,14 +22,14 @@ namespace CoolMS\Core\Channel;
  * section Node's extras; the caller passes the resolved map).
  *
  * Auto-tagged `coolms.outbound_channel` via interface autoconfiguration in the
- * Core Extension — a concrete channel needs no explicit DI.
+ * Core Extension -- a concrete channel needs no explicit DI.
  *
  * **Error contract:** a HARD failure (network error, provider rejection) THROWS
- * — the `channel:publish` handler wraps it as a
+ * -- the `channel:publish` handler wraps it as a
  * a service-task handler exception so the engine
  * surfaces it loudly. A SOFT no-op (this channel is not configured for the
  * target, nothing to push) returns {@see DeliveryResult::skipped()} instead of
- * throwing — the distribution workflow treats a skip as "this channel opted
+ * throwing -- the distribution workflow treats a skip as "this channel opted
  * out", not a failure.
  */
 interface OutboundChannelInterface

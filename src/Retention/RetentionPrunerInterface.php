@@ -9,15 +9,15 @@ namespace CoolMS\Core\Retention;
  * expired/spent rows from an unbounded-growth table. Implementers are collected
  * (tag `coolms.retention.pruner`, registered in the Core Extension) by
  * {@see \CoolMS\CoreModule\Retention\RetentionPruneRunner} so the platform can
- * run ALL retention in one place — the `coolms:retention:prune` command and the
- * `retention.prune` scheduled handler — instead of each module's prune command
+ * run ALL retention in one place -- the `coolms:retention:prune` command and the
+ * `retention.prune` scheduled handler -- instead of each module's prune command
  * having to be cron-wired independently (they were shipped but nothing ran them).
  *
- * Each pruner OWNS its own grace window (baked into its own defaults — analytics
+ * Each pruner OWNS its own grace window (baked into its own defaults -- analytics
  * `retention_days`, comment 30d, identity 7d/30d); this seam exposes no `$days`
  * because the windows differ per table. A pruner whose window is disabled simply
  * returns 0. The concrete pruners keep their standalone `coolms:*:prune-*`
- * commands too — this is an additional aggregate entry point, not a replacement.
+ * commands too -- this is an additional aggregate entry point, not a replacement.
  */
 interface RetentionPrunerInterface
 {
@@ -34,6 +34,6 @@ interface RetentionPrunerInterface
     /** Delete this pruner's expired rows; return the TOTAL rows removed. */
     public function pruneExpired(): int;
 
-    /** How many rows {@see pruneExpired} would remove — the dry-run preview. */
+    /** How many rows {@see pruneExpired} would remove -- the dry-run preview. */
     public function countExpired(): int;
 }

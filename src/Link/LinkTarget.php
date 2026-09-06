@@ -11,7 +11,7 @@ namespace CoolMS\Core\Link;
  *               (`{widget:link:TYPE:IDENTIFIER}`). Six built-ins planned in
  *               the picker: 'page', 'section', 'taxonomy', 'vfs', 'url',
  *               'route'. Unknown types fall through the aggregator and
- *               produce a broken result — the LinkResolver is responsible
+ *               produce a broken result -- the LinkResolver is responsible
  *               for never raising.
  *   identifier  resolver-specific identity. Per type:
  *                 page / section / taxonomy / vfs   -> UUID
@@ -19,7 +19,7 @@ namespace CoolMS\Core\Link;
  *                 route                              -> Symfony route name
  *               The format is not validated here; that's the resolver's
  *               concern (a malformed UUID is a broken link, not a fatal).
- *   params      free-form bag forwarded to the resolver — used by the
+ *   params      free-form bag forwarded to the resolver -- used by the
  *               'route' type to pass URL parameters
  *               (`{id: 42, slug: 'about'}`), reserved for future axes on
  *               other types.

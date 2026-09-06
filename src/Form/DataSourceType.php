@@ -8,5 +8,5 @@ enum DataSourceType: string
     case Static = 'static';
     case Enum = 'enum';
     case Api = 'api';
-    case Repo = 'repo'; // future — requires RQL module
+    case Repo = 'repo'; // future -- requires RQL module
 }

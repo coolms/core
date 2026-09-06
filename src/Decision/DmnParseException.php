@@ -37,7 +37,7 @@ use Throwable;
  *  - `DMN.MISSING_INPUT_EXPRESSION` -- `<input>` carries no `<inputExpression><text>`.
  *
  * `$sourceLocation` is accepted by the constructor but always passed
- * as `null` at this stage (mirrors the parser’s deferred decision; line/column
+ * as `null` at this stage (mirrors the parser's deferred decision; line/column
  * tracking lands when the editor needs it for inline marking).
  */
 final class DmnParseException extends DefinitionValidationException

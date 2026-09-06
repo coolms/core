@@ -13,11 +13,11 @@ namespace CoolMS\Core\Form;
  * matches and applies {@see overrides()} via {@see FieldItem::withOverrides()}.
  * Because this happens at BUILD time (inside
  * `FormConfigRenderBuilder` in the consuming application), the override
- * flows uniformly to every surface — SSR widget, the `/forms/{id}/render` API,
+ * flows uniformly to every surface -- SSR widget, the `/forms/{id}/render` API,
  * and the admin form-builder preview.
  *
  * The adapter returns a plain partial-override map (NOT a FieldItem) so an
- * implementing module never imports the Form Domain VO — only this interface.
+ * implementing module never imports the Form Domain VO -- only this interface.
  *
  * Example: Identity's identifier field overrides its label + input type from the
  * `allowed_registration_methods` deploy config (Email vs "Email or username" vs

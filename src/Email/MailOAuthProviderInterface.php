@@ -20,7 +20,7 @@ namespace CoolMS\Core\Email;
  */
 interface MailOAuthProviderInterface
 {
-    /** The stable provider key (e.g. `google`) — matches `Mailbox::$oauthProvider`. */
+    /** The stable provider key (e.g. `google`) -- matches `Mailbox::$oauthProvider`. */
     public function key(): string;
 
     /**

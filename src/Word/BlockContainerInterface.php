@@ -10,7 +10,7 @@ namespace CoolMS\Core\Word;
  * a cell or a grid column needs to append paragraphs "here" without knowing
  * which "here" it is, and this is that seam.
  *
- * ⚠️ Deliberately MUTABLE. Composing a document is an inherently stateful walk
+ * !! Deliberately MUTABLE. Composing a document is an inherently stateful walk
  * of a DOM tree, and a container that returned a new instance on every append
  * would have every mapper threading a return value back up through recursion
  * for no gain. The same reasoning the mapping cursor has always given.

@@ -31,7 +31,7 @@ use ReflectionClass;
  */
 final class TranslatableTest extends TestCase
 {
-    // ── #[Translatable] attribute shape ───────────────────────────────────────
+    // -- #[Translatable] attribute shape ---------------------------------------
 
     #[Test]
     public function defaultsToLabelField(): void
@@ -60,7 +60,7 @@ final class TranslatableTest extends TestCase
         $attr = new Translatable();
 
         $this->expectException(Error::class);
-        /* @phpstan-ignore-next-line — runtime check of readonly */
+        /* @phpstan-ignore-next-line -- runtime check of readonly */
         $attr->fields = ['x'];
     }
 
@@ -87,7 +87,7 @@ final class TranslatableTest extends TestCase
         self::assertEmpty($rc->getAttributes(Translatable::class));
     }
 
-    // ── TranslatableMisconfigurationException factories ───────────────────────
+    // -- TranslatableMisconfigurationException factories -----------------------
 
     #[Test]
     public function notTranslatableExceptionNamesTheClass(): void
@@ -148,7 +148,7 @@ final class TranslatableTest extends TestCase
     }
 }
 
-// ── Fixtures (private to this test file by namespace) ─────────────────────────
+// -- Fixtures (private to this test file by namespace) -------------------------
 
 #[Translatable(fields: ['label', 'description'])]
 final class TranslatableFixture

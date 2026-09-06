@@ -11,26 +11,26 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
  * BPMN-Lite Service Task. {@see $implementation} is a dotted handler
- * key (`notification.send`, `identity.assign_role`, …) resolved at
+ * key (`notification.send`, `identity.assign_role`, ...) resolved at
  * runtime against the future `WorkflowServiceTaskRegistry`.
- * The validator deliberately does NOT check the registry — only that
+ * The validator deliberately does NOT check the registry -- only that
  * the key is non-blank (`WF.SERVICETASK_MISSING_IMPL`).
  *
  * Both {@see $inputs} and {@see $outputs} are keyed maps of EL
  * expressions:
- *  - inputs:  `map<string, ConditionExpression>` — keys are
+ *  - inputs:  `map<string, ConditionExpression>` -- keys are
  *    handler-defined parameter names; values are EL strings the
  *    engine evaluates against the process-variable scope.
- *  - outputs: `map<string, ConditionExpression>` — keys are
+ *  - outputs: `map<string, ConditionExpression>` -- keys are
  *    LVALUES like `'vars.foo'` or `'task.<id>.output.code'`; values
  *    are EL expressions over the handler's return shape.
  *
  * Service tasks are the M2-mandatory boundary host for non-interrupting
- * MESSAGE catch events (G7 promotion — locked decision). The validator
+ * MESSAGE catch events (G7 promotion -- locked decision). The validator
  * enforces that restriction; this AST node accepts the slice unaware.
  *
  * {@see $forCompensation} marks this service task as a
- * COMPENSATION HANDLER — the undo activity a compensation boundary
+ * COMPENSATION HANDLER -- the undo activity a compensation boundary
  * ({@see \CoolMS\Core\Workflow\BoundarySubtype::Compensation}) points
  * at. A `forCompensation` handler lives OFF the normal sequence flow (no token
  * ever reaches it during normal execution); the engine invokes it directly,

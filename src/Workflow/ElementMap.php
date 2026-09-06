@@ -14,10 +14,10 @@ use function array_values;
 use function count;
 
 /**
- * Read-only `id → ElementInterface` index for everything in the flat
- * `elements[]` JSON list *except* sequence flows and boundary events —
+ * Read-only `id -> ElementInterface` index for everything in the flat
+ * `elements[]` JSON list *except* sequence flows and boundary events --
  * those live in dedicated root slots (see
- * `docs/investigations/m2c-design.md` §3.2).
+ * `docs/investigations/m2c-design.md` section 3.2).
  *
  * The map underpins `ProcessDefinitionAst::element()` and is the
  * canonical lookup source for the validator's Pass 2 reference-

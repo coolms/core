@@ -15,8 +15,8 @@ namespace CoolMS\Core\Dashboard;
  * nothing about what any of them MEAN.
  *
  * Auto-tagged `coolms.core.dashboard_widget_provider` by the Core extension.
- * ⚠️ Modules registering services with `setAutoconfigured(false)` must add the
- * tag EXPLICITLY — implementing the interface is not enough there, which has
+ * !! Modules registering services with `setAutoconfigured(false)` must add the
+ * tag EXPLICITLY -- implementing the interface is not enough there, which has
  * caught a contributor before.
  */
 interface DashboardWidgetProviderInterface
@@ -24,7 +24,7 @@ interface DashboardWidgetProviderInterface
     /**
      * The widgets this module offers, in the order it wants them shown.
      *
-     * May be empty — a module whose figures depend on configuration, or that
+     * May be empty -- a module whose figures depend on configuration, or that
      * has nothing to say until it has data, returns nothing rather than
      * offering a card that can only be blank.
      *

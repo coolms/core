@@ -12,7 +12,7 @@ namespace CoolMS\Core\Seed;
  * installers -- the docs importer uses the guard directly because it is a
  * standalone HTTP tool with its own transport.
  *
- * ⚠️ Pure apart from the {@see SeedTargetInterface} it is handed, so the whole
+ * !! Pure apart from the {@see SeedTargetInterface} it is handed, so the whole
  * of the seeding behaviour is unit-testable without a database.
  */
 final readonly class ContentSeeder
@@ -34,7 +34,7 @@ final readonly class ContentSeeder
             $extras = $this->target->readExtras($page->path);
             $live = $this->target->readBody($page->path, $page->locale);
 
-            // ⚠️ The EXTRAS are part of the comparison, not just the body. A
+            // !! The EXTRAS are part of the comparison, not just the body. A
             // page's content is not always its body: a landing page keeps its
             // sections in `extras.blocks`, and a guard watching only the body
             // both missed manifest changes (reporting `unchanged` while new
@@ -52,7 +52,7 @@ final readonly class ContentSeeder
                 continue;
             }
 
-            // ⚠️ The marker is computed from the bytes being written and merged
+            // !! The marker is computed from the bytes being written and merged
             // into the EXISTING extras, so another seeder's marker and whatever
             // the editor set both survive. Written with the body rather than
             // after it, because this port has one write: there is no window in

@@ -16,7 +16,7 @@ namespace CoolMS\Core\Translation;
  * value never leaves a dangling `{}` leaf behind.
  *
  * Pure + stateless: it only reshapes the `extras` array, returning a new one.
- * The default-locale (canonical) write is intentionally NOT handled here —
+ * The default-locale (canonical) write is intentionally NOT handled here --
  * that slot differs per call site (a setter vs an extras key), so the caller
  * branches on `$locale === $defaultLocale` and only delegates the override
  * branch to {@see applyOverride()}.

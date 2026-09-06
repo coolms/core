@@ -6,7 +6,7 @@ namespace CoolMS\Core\Field;
 /**
  * Implement this interface (auto-tagged `coolms.field.widget_provider`) to map
  * a field **type** to the richer admin input ("widget") a module provides for
- * it — so the admin editor renders that widget for any field declared with
+ * it -- so the admin editor renders that widget for any field declared with
  * that type, without the editor knowing the contributing module.
  *
  * Distinct from {@see FormTypeProviderInterface}, which lists Symfony FormType
@@ -17,7 +17,7 @@ namespace CoolMS\Core\Field;
  *
  * Module gating is automatic: a provider that lives in module X only exists in
  * the container when X is installed, so its widget simply isn't offered when X
- * is absent — a field of that type falls back to the built-in input.
+ * is absent -- a field of that type falls back to the built-in input.
  */
 interface FieldWidgetProviderInterface
 {
@@ -33,7 +33,7 @@ interface FieldWidgetProviderInterface
      * widget-specific config (e.g. a `suggestionsUrl`, `multiple`).
      *
      * The field's resolved schema config is passed in so a provider can
-     * specialise the descriptor per field — e.g. the Taxonomy widget reads a
+     * specialise the descriptor per field -- e.g. the Taxonomy widget reads a
      * `widget: { tree: <code> }` key to scope itself to a specific tree, instead
      * of every `taxonomy` field sharing one hardcoded tree. Providers that need
      * no field-level config simply ignore the argument.

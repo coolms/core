@@ -15,7 +15,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * the AST anyway so a future M3+ promotion can land without a node
  * shape rewrite.
  *
- * Per the design doc §2.3, an end event has zero outgoing flows; the
+ * Per the design doc section 2.3, an end event has zero outgoing flows; the
  * validator owns the `WF.END_HAS_OUTGOING` check.
  */
 final class EndEventAst implements ElementInterface

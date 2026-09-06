@@ -7,7 +7,7 @@ namespace CoolMS\Core\Block;
 /**
  * Where a block sits within its row, when the row is taller than it is.
  *
- * ⚠️ **The companion to {@see BlockWidth}, and it was recorded as impossible
+ * !! **The companion to {@see BlockWidth}, and it was recorded as impossible
  * before it was tried.** The parity pass wrote down that the design centres the
  * hero row's two halves, that this vocabulary aligns their tops, and that
  * nothing could be done because "vertical alignment is a property of the ROW,
@@ -20,13 +20,13 @@ namespace CoolMS\Core\Block;
  * one day from the other direction. It is repeated here because a comment
  * saying "this cannot be done" is the kind nobody re-examines.
  *
- * ⚠️ PER ITEM, not per row, and that is what makes it expressible at all.
+ * !! PER ITEM, not per row, and that is what makes it expressible at all.
  * Blocks wrap into visual rows; there is no row ELEMENT to address, so "centre
  * this row" cannot be said and "centre this block against whatever it sits
  * beside" can. In practice only the SHORTER block in a pair needs to say it --
  * the taller one already fills the row and centring it is a no-op.
  *
- * ⚠️ A finite, abstract set, for the three reasons {@see BlockWidth} gives, and
+ * !! A finite, abstract set, for the three reasons {@see BlockWidth} gives, and
  * a CLOSED one: these four are the whole of cross-axis alignment rather than a
  * sample of it. There is no fifth to ask for later, which is exactly the
  * property a free-form value would not have.
@@ -45,7 +45,7 @@ enum BlockAlign: string
     /**
      * The alignment an unset or unrecognised value means.
      *
-     * ⚠️ Top, not stretch, even though stretch is what flexbox does by default.
+     * !! Top, not stretch, even though stretch is what flexbox does by default.
      * Every block authored before this existed rendered under
      * `align-items:flex-start`, and a default that changed them would restyle
      * pages nobody edited -- the same rule {@see BlockWidth::default()} follows.
@@ -56,7 +56,7 @@ enum BlockAlign: string
     }
 
     /**
-     * ⚠️ Never throws. An alignment arrives from stored author data, and an
+     * !! Never throws. An alignment arrives from stored author data, and an
      * unrecognised one is a page that renders slightly wrong rather than a page
      * that does not render.
      */

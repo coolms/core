@@ -20,16 +20,16 @@ final readonly class DataSourceDefinition
         public ?string $url = null, // populated for api + repo
         /**
          * Widget variant for rendering.
-         * select        — native <select> (default, ≤8 options or explicit)
-         * select-search — custom dropdown with inline search (>8 options or explicit)
-         * select-tree   — hierarchical dropdown built from parentId field in API response.
-         * media-picker — visual media browser (see the media picker docs).
+         * select        -- native <select> (default, <=8 options or explicit)
+         * select-search -- custom dropdown with inline search (>8 options or explicit)
+         * select-tree   -- hierarchical dropdown built from parentId field in API response.
+         * media-picker -- visual media browser (see the media picker docs).
          */
         public string $widget = 'select',
         /**
          * Loading strategy.
-         * eager — fetch all options once on form open, filter on client (default)
-         * lazy  — fetch on dropdown open + debounced server-side search (future).
+         * eager -- fetch all options once on form open, filter on client (default)
+         * lazy  -- fetch on dropdown open + debounced server-side search (future).
          */
         public string $loading = 'eager',
         /**

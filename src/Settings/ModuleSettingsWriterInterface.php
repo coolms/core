@@ -14,7 +14,7 @@ namespace CoolMS\Core\Settings;
  * one thing worth testing about a write (that it happens, and in what order)
  * unreachable.
  *
- * ⚠️ `$scope` is the site's identifier, and passing one to a block that did not
+ * !! `$scope` is the site's identifier, and passing one to a block that did not
  * declare itself `siteScopable` is a programming error the implementation
  * refuses -- unlike reading, which forgives it and answers platform-wide.
  * Writing cannot afford that: a scoped value silently stored against the

@@ -9,13 +9,13 @@ use CoolMS\Core\Workflow\SignalDefinition;
 use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
- * BPMN-Lite Intermediate Signal Catch Event — a flow-on-the-wire pause
+ * BPMN-Lite Intermediate Signal Catch Event -- a flow-on-the-wire pause
  * that resumes when a matching signal is BROADCAST. {@see $signal}
  * carries the name only (signals have no correlation key); the
  * validator checks the name is present (`WF.SIGNAL_MISSING_NAME`).
  *
  * Source JSON uses `type: 'intermediateCatchEvent'` with
- * `subtype: 'signal'` — the same dual-spelling shape as the timer /
+ * `subtype: 'signal'` -- the same dual-spelling shape as the timer /
  * message catch events. The parser distinguishes `boundaryEvent`s by
  * the presence of `attachedTo`; without it, the event becomes this
  * on-the-wire intermediate catch.

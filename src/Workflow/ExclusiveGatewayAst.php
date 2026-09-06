@@ -10,7 +10,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 /**
  * BPMN-Lite Exclusive (XOR) Gateway. Direction (diverging / converging
  * / merge) is derived by the parser/validator from `in`/`out`
- * cardinality — NOT author-declared (design §2.3). The validator owns
+ * cardinality -- NOT author-declared (design section 2.3). The validator owns
  * the degree check (`WF.GATEWAY_DEGREE`).
  *
  * {@see $defaultFlowId} carries the optional fallback flow id when no

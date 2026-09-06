@@ -7,8 +7,8 @@ namespace CoolMS\Core\Theme;
 /**
  * Read port: "which stylesheets does the site use for this section?".
  *
- * Lives in Core L0 so Content — and anything else that grows an authoring or
- * preview surface — can ask without importing Theme's Application layer. The
+ * Lives in Core L0 so Content -- and anything else that grows an authoring or
+ * preview surface -- can ask without importing Theme's Application layer. The
  * contract sits BELOW both modules rather than one importing the other, the
  * same move that removed the Navi and Terminal cross-module suppressions.
  *

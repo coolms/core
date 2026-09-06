@@ -10,7 +10,7 @@ use Throwable;
 /**
  * Which sites is a module turned on for?
  *
- * ⚠️ **Presence of a directory is a consequence, not a signal.** Documents listed
+ * !! **Presence of a directory is a consequence, not a signal.** Documents listed
  * every site as a space, which assumes document handling belongs everywhere -- a
  * site running a blog will never use it and was offered it anyway. Inferring it
  * from whether `/docs/<site>` happens to exist is worse: a directory can be
@@ -32,7 +32,7 @@ use Throwable;
  * one reader for them: it merges the declared defaults, then the platform row,
  * then the site's own. A module does not read the tiers itself.
  *
- * ⚠️ **Absent reads as OFF**, the same failure direction as the public widgets:
+ * !! **Absent reads as OFF**, the same failure direction as the public widgets:
  * a settings tier that cannot be reached must never be the thing that turns a
  * feature on for a site that never asked for it.
  */
@@ -56,7 +56,7 @@ final readonly class ModuleSpaceSettings
         try {
             $effective = $this->settings->effective($settingsKey, $siteSlug);
         } catch (Throwable) {
-            // ⚠️ An undeclared block, an unreachable tier, a typo in the key:
+            // !! An undeclared block, an unreachable tier, a typo in the key:
             // none of them are permission to show a space nobody enabled.
             return false;
         }
@@ -69,7 +69,7 @@ final readonly class ModuleSpaceSettings
     /**
      * The subset of `$siteSlugs` this module is enabled for, in the order given.
      *
-     * ⚠️ Order preserved rather than sorted: the caller's order is the site
+     * !! Order preserved rather than sorted: the caller's order is the site
      * order a person already sees elsewhere, and re-sorting here would make two
      * lists of the same sites disagree for no reason.
      *
@@ -92,7 +92,7 @@ final readonly class ModuleSpaceSettings
     /**
      * Sites the module is not yet enabled for -- what an "Add space" action offers.
      *
-     * ⚠️ The button is not "show me another one": it is "enable this module
+     * !! The button is not "show me another one": it is "enable this module
      * here", and offering a site that already has it would make it read as the
      * former.
      *

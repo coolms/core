@@ -14,7 +14,7 @@ namespace CoolMS\Core\Block;
  * such provider and has no privileged path. So neither the read-time normalizer
  * nor the editor-palette endpoint changes when a type is added.
  *
- * ⚠️ This contract lives in the package rather than in the application for one
+ * !! This contract lives in the package rather than in the application for one
  * reason: a module cannot contribute a block while the vocabulary for declaring
  * one belongs to another module. Published at one end only, the seam does not
  * exist.
@@ -34,7 +34,7 @@ interface BlockTypeProviderInterface
     /**
      * Merge order: higher-priority providers are applied first, so when two
      * providers declare the same block-type id the higher-priority one wins.
-     * Built-in types use 100 — module contributors (default 0) can ADD new
+     * Built-in types use 100 -- module contributors (default 0) can ADD new
      * types but never silently override a built-in.
      */
     public function priority(): int;

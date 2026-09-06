@@ -19,32 +19,32 @@ use function sprintf;
 use function trim;
 
 /**
- * Root AST node — the shared output shape of the BPMN-Lite JSON
+ * Root AST node -- the shared output shape of the BPMN-Lite JSON
  * parser and the future BPMN XML parser. Immutable.
  *
  * All cross-element references inside the tree are id-based strings
- * (design doc §2.5) — the AST graph never carries object refs across
- * the element ↔ flow boundary. Authors lift the strings into typed
+ * (design doc section 2.5) -- the AST graph never carries object refs across
+ * the element <-> flow boundary. Authors lift the strings into typed
  * lookups via {@see element()} / {@see flow()}.
  *
  * The root exposes a property-hook-cached flow index
  * ({@see $flowsByElement}) so callers don't repeatedly scan the flat
  * flow list. The index is built lazily on first read and cached for
- * the lifetime of the (immutable) AST instance — validator rules pay
+ * the lifetime of the (immutable) AST instance -- validator rules pay
  * the indexing cost exactly once per `validate()` call.
  *
  * Carries the parser's INFO-only `$version` (the deployer mints the
  * real monotonic version# ); ignore at parse time. The
  * sectionId / ownerId fields live on the `WorkflowDefinition` in the consuming application
- * entity, never on the AST — the soft-reference convention + the
- * AST stays a pure parsing artefact (design doc §3.5 last row).
+ * entity, never on the AST -- the soft-reference convention + the
+ * AST stays a pure parsing artefact (design doc section 3.5 last row).
  */
 final class ProcessDefinitionAst
 {
     /**
-     * Lazy index: element id → {incoming flow ids, outgoing flow ids}.
+     * Lazy index: element id -> {incoming flow ids, outgoing flow ids}.
      *
-     * Property hook — built once on first read, then cached for the
+     * Property hook -- built once on first read, then cached for the
      * lifetime of this readonly instance. Validators
      * (`FlowEndpointsExistRule`, `GatewayDegreeRule`,
      * `IncomingOutgoingConsistencyRule`, `ReachabilityRule`) read
@@ -59,7 +59,7 @@ final class ProcessDefinitionAst
     /**
      * @param list<SequenceFlowAst>  $flows
      * @param list<BoundaryEventAst> $boundaryEvents
-     * @param array<string, string>  $scopeParents   child element id → owning
+     * @param array<string, string>  $scopeParents   child element id -> owning
      *                                               `subProcess` element id, from
      *                                               each entry's `"parent"` field.
      *                                               Absent = root scope. A body
@@ -100,7 +100,7 @@ final class ProcessDefinitionAst
      * sits at the root of the process.
      *
      * One level of lookup, not a walk: `$scopeParents` is already the
-     * transitive-free child→parent edge, and nesting is resolved by
+     * transitive-free child->parent edge, and nesting is resolved by
      * repeated calls rather than by flattening here (a caller asking
      * "which scope is this in" always means the IMMEDIATE one).
      */
@@ -110,7 +110,7 @@ final class ProcessDefinitionAst
     }
 
     /**
-     * Element ids DIRECTLY inside `$subProcessId` (not transitively —
+     * Element ids DIRECTLY inside `$subProcessId` (not transitively --
      * a nested subprocess appears here, its children do not).
      *
      * @return list<string>
@@ -132,7 +132,7 @@ final class ProcessDefinitionAst
      * at.
      *
      * `SubProcessScopeRule` guarantees exactly one at deploy time, so
-     * a null here means the AST was hand-built or the rule regressed —
+     * a null here means the AST was hand-built or the rule regressed --
      * the caller raises rather than silently doing nothing.
      */
     public function startElementOfScope(string $subProcessId): ?StartEventAst
@@ -192,9 +192,9 @@ final class ProcessDefinitionAst
     }
 
     /**
-     * Whole-tree walk. Order: enterDefinition → every element (via
-     * `$element->accept($visitor)`) → every sequence flow → every
-     * boundary event → leaveDefinition.
+     * Whole-tree walk. Order: enterDefinition -> every element (via
+     * `$element->accept($visitor)`) -> every sequence flow -> every
+     * boundary event -> leaveDefinition.
      *
      * Boundary events come after flows because the validator's G7
      * pass reads the boundary host's `incomingIds` / `outgoingIds`
@@ -226,7 +226,7 @@ final class ProcessDefinitionAst
      * O(E) where E is element-with-edges count.
      *
      * Elements that appear in {@see $elements} but have no flow are
-     * still emitted with an empty {@see FlowSet} — keeps validator
+     * still emitted with an empty {@see FlowSet} -- keeps validator
      * loops uniform.
      *
      * @return array<string, FlowSet>

@@ -15,15 +15,15 @@ use Throwable;
  *
  * Distinct from {@see DefinitionValidationException}: this is for the
  * pure value-object self-checks performed inside the AST constructors
- * themselves — the kind of footgun you can hit only by hand-building
+ * themselves -- the kind of footgun you can hit only by hand-building
  * an AST (or feeding the parser a wildly malformed tree). The
  * validator's deploy-time rule violations live in `Violations` and
  * surface via `DefinitionValidationException`.
  *
- * The constructor carries an optional {@see SourceLocation} which —
- * once the parser's source-location tracking sidecar lands — will let
+ * The constructor carries an optional {@see SourceLocation} which --
+ * once the parser's source-location tracking sidecar lands -- will let
  * the deployer surface line/column hints. The parser currently passes
- * `null` everywhere (locked decision §10 Q3 deferred).
+ * `null` everywhere (locked decision section 10 Q3 deferred).
  */
 final class AstViolationException extends DomainException
 {

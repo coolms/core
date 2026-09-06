@@ -20,7 +20,7 @@ use function array_map;
  *
  * The rule under nearly every test here is that a layout is an OVERRIDE: it
  * says what to change and stays quiet about the rest. The failure that model
- * exists to prevent is silent and slow — install a module a year after someone
+ * exists to prevent is silent and slow -- install a module a year after someone
  * saved a layout, and an exhaustive layout would leave its widget nowhere, with
  * nothing logged and nothing to see.
  */
@@ -97,7 +97,7 @@ final class DashboardLayoutTest extends TestCase
     }
 
     /**
-     * MARKED, not removed — and kept where it was. A dashboard skips it;
+     * MARKED, not removed -- and kept where it was. A dashboard skips it;
      * an editor needs it, because the only cards anyone wants to add back are
      * the ones that are not being drawn. Dropping it here would have forced a
      * second endpoint returning the unfiltered catalogue.
@@ -125,10 +125,10 @@ final class DashboardLayoutTest extends TestCase
     }
 
     /**
-     * ⚠️ The effective width and the STATED width are different facts, and only
+     * !! The effective width and the STATED width are different facts, and only
      * an editor can tell them apart from the outside. It re-submits the whole
      * layout on every save, so a card nobody touched must go back as "unstated"
-     * — sending the number it happens to measure would convert a module's
+     * -- sending the number it happens to measure would convert a module's
      * default into a stored decision, permanently.
      */
     #[Test]
@@ -158,7 +158,7 @@ final class DashboardLayoutTest extends TestCase
 
     /**
      * A layout outliving the module it mentions must not take the dashboard
-     * with it. The placement is skipped, not refused — and deliberately not
+     * with it. The placement is skipped, not refused -- and deliberately not
      * pruned, so the position survives a module being reinstalled.
      */
     #[Test]
@@ -173,8 +173,8 @@ final class DashboardLayoutTest extends TestCase
     }
 
     /**
-     * ⚠️ A layout may only REORDER, RESIZE and HIDE. It cannot add a card, so
-     * one written when the viewer had more roles — or edited by hand — can
+     * !! A layout may only REORDER, RESIZE and HIDE. It cannot add a card, so
+     * one written when the viewer had more roles -- or edited by hand -- can
      * never put back a widget the registry refused to offer.
      */
     #[Test]

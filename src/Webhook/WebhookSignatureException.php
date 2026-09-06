@@ -7,7 +7,7 @@ namespace CoolMS\Core\Webhook;
 use RuntimeException;
 
 /**
- * A signed inbound webhook failed HMAC verification — a missing or a wrong
+ * A signed inbound webhook failed HMAC verification -- a missing or a wrong
  * signature. The receiving controller maps it to HTTP 401, opaquely (a missing
  * and a wrong signature are reported the same way so an unauthenticated caller
  * learns nothing). Shared across the platform's secret-store-keyed inbound

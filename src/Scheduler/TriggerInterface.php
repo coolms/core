@@ -49,7 +49,7 @@ interface TriggerInterface
      * feeding each result back as the next `$from` re-anchors the
      * sequence and COUNT never exhausts. So:
      *  - RRULE expands from a SINGLE DTSTART (`$from`) and respects
-     *    COUNT / UNTIL — the list is shorter than `$count` once the
+     *    COUNT / UNTIL -- the list is shorter than `$count` once the
      *    sequence ends.
      *  - Cron is memoryless, so it loops `nextRunAfter` (and effectively
      *    never runs dry).

@@ -12,7 +12,7 @@ final readonly class DataGridConfig
      * `showWhen` (optional, per action) carries the same predicate
      * shape the toolbar navi tree already uses
      * (`{field, op, value}` with optional `and`/`or` nesting). The FE
-     * evaluates it against the row's projection — `delete` for the
+     * evaluates it against the row's projection -- `delete` for the
      * user's default personal calendar, for instance, can be hidden
      * with `{field: isDefaultPersonal, op: eq, value: false}`. Mirror
      * of the toolbar's row-level gating.
@@ -37,13 +37,13 @@ final readonly class DataGridConfig
          */
         public ?TreeConfig $tree = null,
         /**
-         * Plural noun for the grid's EMPTY state — "contacts", "backup
-         * bundles" — so an unfiltered empty grid reads "No contacts yet"
+         * Plural noun for the grid's EMPTY state -- "contacts", "backup
+         * bundles" -- so an unfiltered empty grid reads "No contacts yet"
          * instead of a generic line. Null = keep the generic wording.
          *
          * Deliberately not reusing `$title`: every shipped grid YAML declares
          * `label: ''`, so there is no existing field carrying a usable noun.
-         * A filtered-empty grid ignores this and says "No matches" instead —
+         * A filtered-empty grid ignores this and says "No matches" instead --
          * the two situations need different words.
          */
         public ?string $emptyLabel = null,

@@ -7,13 +7,13 @@ namespace CoolMS\Core\Block;
 /**
  * How much of a row one block occupies.
  *
- * ⚠️ **The gap nobody had named.** Thirteen block types and no notion of "this
+ * !! **The gap nobody had named.** Thirteen block types and no notion of "this
  * one takes half a row", so every landing page was a single-column stack. It
  * did not appear in any earlier survey of what blocks were missing, because
  * before a real page was converted every block was full-width by default and
  * the absence of the concept looked like the presence of a default.
  *
- * ⚠️ A FINITE, ABSTRACT SET -- not a column constructor and not a free number.
+ * !! A FINITE, ABSTRACT SET -- not a column constructor and not a free number.
  * Three reasons, in the order they matter:
  *
  *  1. It is a better editing affordance. "Half" is a choice; "6" is a
@@ -28,7 +28,7 @@ namespace CoolMS\Core\Block;
  *     that hazard is latent rather than present. It is cheap to stay immune to
  *     it and expensive to retrofit.)
  *
- * ⚠️ Nested rows, per-breakpoint ordering and spacing controls are NOT here.
+ * !! Nested rows, per-breakpoint ordering and spacing controls are NOT here.
  * The goal is to stop being a single-column stack, not to become a layout
  * engine -- a page builder that can express any arrangement is one an author
  * can make unreadable, and a theme can no longer promise anything about how a
@@ -53,7 +53,7 @@ enum BlockWidth: string
     /**
      * The width an unset or unrecognised value means.
      *
-     * ⚠️ Full, not "narrowest": every block authored before this existed has no
+     * !! Full, not "narrowest": every block authored before this existed has no
      * width, and they were all full-width. A default that changed their layout
      * would rewrite pages nobody edited.
      */
@@ -63,7 +63,7 @@ enum BlockWidth: string
     }
 
     /**
-     * ⚠️ Never throws. A width arrives from stored author data, and an
+     * !! Never throws. A width arrives from stored author data, and an
      * unrecognised one is a page that renders slightly wrong rather than a page
      * that does not render. Same rule the block reader applies to every other
      * stored value.
