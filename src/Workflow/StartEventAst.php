@@ -12,8 +12,8 @@ use CoolMS\Core\Workflow\TimerDefinition;
 use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
- * BPMN-Lite Start Event. Three variants in scope for M2: `none`,
- * `message`, `timer` (per ADR-112 + verification-design G1). Validator
+ * BPMN-Lite Start Event. Three variants in scope at this stage: `none`,
+ * `message`, `timer` (per the verification design). Validator
  * enforces the message/timer payload presence aligns with
  * {@see $variant}; constructor accepts the slice unaware.
  *

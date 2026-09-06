@@ -8,13 +8,13 @@ namespace CoolMS\Core\Workflow;
  *
  * - `none`       — the token simply ends; the instance completes once no
  *                  other Active/Waiting tokens remain.
- * - `terminate`  — a FATAL end (F7 / ADR-137 phase 4): reaching it kills
+ * - `terminate` — a FATAL end: reaching it kills
  *                  every remaining token in the instance and completes the
  *                  instance immediately, regardless of other in-flight
  *                  branches. Composes with error boundaries (a service-task
  *                  error → error boundary → terminate end = abort the whole
  *                  process). Handled by `TokenAdvancer` in the consuming application.
- * - `compensate` — a compensation THROW end (F7 / ADR-137 phase 4): reaching
+ * - `compensate` — a compensation THROW end: reaching
  *                  it runs the compensation handlers of every completed
  *                  compensable activity in the instance, in REVERSE completion
  *                  order (LIFO undo), then completes this token like a normal

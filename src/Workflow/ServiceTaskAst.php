@@ -12,7 +12,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 /**
  * BPMN-Lite Service Task. {@see $implementation} is a dotted handler
  * key (`notification.send`, `identity.assign_role`, …) resolved at
- * runtime against the future `WorkflowServiceTaskRegistry` (M2.j).
+ * runtime against the future `WorkflowServiceTaskRegistry`.
  * The validator deliberately does NOT check the registry — only that
  * the key is non-blank (`WF.SERVICETASK_MISSING_IMPL`).
  *
@@ -29,7 +29,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * MESSAGE catch events (G7 promotion — locked decision). The validator
  * enforces that restriction; this AST node accepts the slice unaware.
  *
- * {@see $forCompensation} (F7 / ADR-137 phase 4) marks this service task as a
+ * {@see $forCompensation} marks this service task as a
  * COMPENSATION HANDLER — the undo activity a compensation boundary
  * ({@see \CoolMS\Core\Workflow\BoundarySubtype::Compensation}) points
  * at. A `forCompensation` handler lives OFF the normal sequence flow (no token

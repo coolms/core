@@ -14,7 +14,7 @@ use function sprintf;
  * companion `DecisionDraftVersion` in the consuming application row
  * at deploy time.
  *
- * "Exactly one draft row per Definition" is the M3.1.b invariant
+ * "Exactly one draft row per Definition" is the invariant
  * (`uq_decision_draft_definition`). A missing draft means upstream
  * code created the Definition row but never minted the draft -- the
  * deploy can't proceed because there's nothing to copy bytes from.

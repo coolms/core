@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace CoolMS\Core\Email;
 
 /**
- * M8.f — the outbound port to an OAuth2 mail provider (Gmail today; Microsoft
- * Graph = M8.g slots in as another tagged impl). Purpose-built for MAIL access
+ * The outbound port to an OAuth2 mail provider (Gmail today; Microsoft
+ * Graph slots in as another tagged implementation). Purpose-built for MAIL access
  * (the `https://mail.google.com/` full-IMAP/SMTP scope), distinct from the SSO
  * login providers which request identity scopes and store tokens in the session.
  *

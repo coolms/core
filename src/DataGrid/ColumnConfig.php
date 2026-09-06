@@ -18,7 +18,6 @@ final readonly class ColumnConfig
      *                  `<app-date-range-picker>` in the filter row.
      *   - `datetime` — ISO-8601 timestamp; FE renders cells + filter in the
      *                  user's TZ via `UserCalendarPreferencesService.tz()`
-     *                  (DataGrid Ship C — task #449).
      *   - `time`     — wall-clock HH:MM[:SS]; FE renders
      *                  `<app-time-range-picker>` in the filter row.
      *
@@ -84,7 +83,7 @@ final readonly class ColumnConfig
          * Present because the FE has always honoured `truncate` on its column
          * definition, but this VO had no such property — so a YAML column
          * declaring `truncate: false` had it silently DROPPED here and the
-         * flag never reached the browser (ledger #1657). Every existing
+         * flag never reached the browser. Every existing
          * declaration happened to sit on a `snippet` or `avatar` column, which
          * the FE already treats as no-truncate, so nothing looked broken; the
          * key was decorative. It works now, which matters the first time

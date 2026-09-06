@@ -6,7 +6,7 @@ namespace CoolMS\Core\Decision;
 use CoolMS\Core\Decision\DataType;
 
 /**
- * One `<output>` column on a DMN decision table (M3.1.c). Immutable.
+ * One `<output>` column on a DMN decision table. Immutable.
  *
  * Mirrors {@see InputClauseAst} structurally but without the
  * resolving expression -- outputs are pure projection clauses

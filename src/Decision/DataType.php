@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace CoolMS\Core\Decision;
 
 /**
- * Input/output column data types (M3.1.c). Maps the DMN 1.3
+ * Input/output column data types. Maps the DMN 1.3
  * `typeRef` attribute on `<input>` / `<output>` clauses. The
- * evaluator (M3.1.f) uses these to coerce EL-evaluated cell
+ * evaluator uses these to coerce EL-evaluated cell
  * expressions before unary-test matching.
  *
  * `Any` is the catch-all when the author leaves `typeRef` unset --
@@ -32,8 +32,8 @@ enum DataType: string
     /**
      * Resolve a `typeRef` attribute string with lenient fallback. The
      * DMN 1.3 spec allows unknown typeRefs (vendor extensions, XSD
-     * imports); per M3.1.c scope we collapse those to {@see Any}
-     * rather than tripping a parse error, mirroring the M2.c BPMN-Lite
+     * imports); at this stage we collapse those to {@see Any}
+     * rather than tripping a parse error, mirroring the BPMN-Lite
      * "lenient parser, strict validator" split.
      */
     public static function fromTypeRef(?string $typeRef): self

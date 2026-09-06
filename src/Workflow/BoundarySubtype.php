@@ -25,11 +25,11 @@ namespace CoolMS\Core\Workflow;
  *               sole routing key (signals carry no correlation key);
  *               `SignalDeclarationRule` enforces a non-blank name.
  * - `error`   — interrupting only, attaches to `serviceTask` only (F7
- *               / ADR-137 phase 4; enforced by `ErrorBoundaryScopeRule`).
+ * / phase 4; enforced by `ErrorBoundaryScopeRule`).
  *               Catches a service-task handler failure and routes the
  *               token down the boundary's outgoing flow instead of
  *               failing the whole process instance.
- * - `compensation` — attaches to `serviceTask` only (F7 / ADR-137 phase 4;
+ * - `compensation` — attaches to `serviceTask` only (
  *               enforced by `CompensationScopeRule`). UNLIKE timer/message/
  *               error boundaries it does NOT fire on the host's lifecycle and
  *               does NOT divert a token during normal flow — it is purely an

@@ -22,10 +22,10 @@ namespace CoolMS\Core\Definition;
  * Mirrors the Document + format-provider pattern (no Word/Pdf
  * installed → empty document library + install hints).
  *
- * **Lazy registry per ADR-118**: providers are wrapped in
+ * **Lazy registry**: providers are wrapped in
  * `Closure(): DefinitionCatalogProviderInterface` factories by the
  * compiler pass. Cold start (`coolms:install`, container debug) skips
- * the Doctrine connection setup unless the admin page actually
+ * the database connection setup unless the admin page actually
  * needs the data.
  *
  * **Tag**: `coolms.definition.catalog_provider`. Auto-applied via

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Mcp;
 
 /**
- * One governed MCP tool (ADR-147) — a self-describing capability an external AI
+ * One governed MCP tool — a self-describing capability an external AI
  * agent can discover via `tools/list` and invoke via `tools/call`.
  *
  * Impls are auto-tagged `coolms.mcp.tool` (see the Mcp Extension) and keyed into
@@ -19,7 +19,7 @@ namespace CoolMS\Core\Mcp;
  *
  * Each tool is an adapter over an EXISTING module port (content search, workflow
  * start, VFS read…) — the `Mcp` module owns no domain model of its own, per
- * ADR-147. Keep tool constructors lazy-friendly: the registry only materialises
+ * Keep tool constructors lazy-friendly: the registry only materialises
  * a tool on first lookup, so a heavy capability is never built until called.
  */
 interface McpToolInterface
@@ -53,7 +53,7 @@ interface McpToolInterface
     /**
      * The role a caller must hold to SEE and CALL this tool, or null when any
      * authenticated caller may use it. Enforced by `McpServer` in the consuming application
-     * via the platform authorization checker — the "governed tools" gate (ADR-147).
+     * via the platform authorization checker — the "governed tools" gate.
      */
     public function requiredRole(): ?string;
 

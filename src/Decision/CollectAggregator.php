@@ -5,12 +5,12 @@ namespace CoolMS\Core\Decision;
 
 /**
  * Optional aggregator on a {@see HitPolicy::Collect} decision table
- * (M3.1.c). When the hit policy is COLLECT, this attribute folds the
+ * When the hit policy is COLLECT, this attribute folds the
  * list of matching outputs into a single scalar; when absent, the
  * evaluator returns the raw match list. Backing string values match
  * the OMG DMN 1.3 spec letter-case.
  *
- * **Semantics summary (full specs in the M3.1.f evaluator):**
+ * **Semantics summary (full specs in the evaluator):**
  *  - `Sum`   — numeric sum across all matching output rows.
  *  - `Min`   — numeric minimum.
  *  - `Max`   — numeric maximum.

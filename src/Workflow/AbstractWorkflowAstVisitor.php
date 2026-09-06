@@ -25,7 +25,7 @@ use CoolMS\Core\Workflow\SequenceFlowAst;
  * No-op base implementation of {@see WorkflowAstVisitorInterface}.
  *
  * Designed for partial subclassing: consumers (validator rules, the
- * future M2.l XML serialiser, the M3 cockpit diagram renderer) extend
+ * a future XML serialiser, the cockpit diagram renderer) extend
  * this class and override only the visit methods they care about. The
  * abstract layer keeps the interface stable as new element kinds land
  * (M3 inclusiveGateway, scriptTask, …) — existing subclasses keep

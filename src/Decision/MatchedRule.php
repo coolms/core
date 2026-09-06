@@ -7,7 +7,7 @@ use CoolMS\Core\Decision\RuleAst;
 
 /**
  * One {@see RuleAst} that fired during evaluation, paired with its
- * EL-evaluated output values (M3.1.f). Strategies consume lists of
+ * EL-evaluated output values. Strategies consume lists of
  * these to produce the final {@see EvaluationResult}.
  *
  * `outputs` is keyed by output column NAME (falling back to the

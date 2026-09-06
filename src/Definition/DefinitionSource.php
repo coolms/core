@@ -19,7 +19,7 @@ namespace CoolMS\Core\Definition;
  *    loader. Authors edit drafts via the Designer, deploy via the
  *    per-module deployer, and every subsequent version is minted as
  *    a fresh Node. This is the canonical author-driven path that
- *    M2.d/M2.n shipped.
+ *    the workflow definition surfaces shipped.
  *
  *  - {@see self::Contributor}: the version's body comes from a
  *    module-owned {@see WorkflowDefinitionContributorInterface}
@@ -42,7 +42,7 @@ namespace CoolMS\Core\Definition;
  * drops the lock + the VFS-source versions and re-points the
  * active flag back at the latest contributor-source row.
  *
- * **Why a string-backed enum**, not int: Doctrine's enum mapping
+ * **Why a string-backed enum**, not int: the persistence layer's enum mapping
  * surfaces the case name as the column value, so `vfs` / `contributor`
  * appear in DB tooling + log lines. Int-backed would have been
  * marginally smaller but unreadable in queries.

@@ -17,14 +17,14 @@ use function json_encode;
 use const JSON_THROW_ON_ERROR;
 
 /**
- * M8.f — an OAuth2 grant for a mailbox: the current access token, the (optional)
+ * An OAuth2 grant for a mailbox: the current access token, the (optional)
  * refresh token used to renew it, the access token's expiry, and the granted
  * scope. Immutable; the sealed-at-rest form is the JSON of {@see toJson()} sealed
  * by `EmailCipherInterface` in the consuming application.
  *
  * `expiresAt` null = expiry unknown → treated as non-expiring (best-effort; a
  * provider that omits `expires_in` is trusted until a live 401 forces a reconnect
- * — the transport layer's concern, M8.f.2). `refreshToken` null = a one-shot
+ * — the transport layer's concern). `refreshToken` null = a one-shot
  * grant (e.g. a provider that didn't return one) → not renewable in place.
  */
 final readonly class OAuthTokens

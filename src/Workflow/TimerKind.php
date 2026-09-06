@@ -10,7 +10,7 @@ namespace CoolMS\Core\Workflow;
  *
  * - `duration` — ISO-8601 duration literal or EL expression yielding one.
  * - `date`     — ISO-8601 datetime literal or EL expression.
- * - `cycle`    — RRULE literal (parsed via M1.1 `RRuleParser` at deploy
+ * - `cycle`    — RRULE literal (parsed via `RRuleParser` at deploy
  *                time when literal) or EL expression.
  *
  * Validator rule `WF.TIMER_MULTIPLE_KINDS` enforces that exactly one

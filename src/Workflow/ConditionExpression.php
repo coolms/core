@@ -5,7 +5,7 @@ namespace CoolMS\Core\Workflow;
 
 /**
  * Carries an expression-language source fragment as data — never
- * evaluated by the AST or validator. The engine (M2.f+) hands the
+ * evaluated by the AST or validator. The engine hands the
  * `expression` string to `ExpressionService` at token-advance time;
  * the deploy-time validator only invokes `ExpressionService::lint()`
  * for syntax checks (see `docs/investigations/m2c-design.md` §5.5(f)).

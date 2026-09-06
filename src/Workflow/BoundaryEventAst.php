@@ -50,11 +50,11 @@ final readonly class BoundaryEventAst
         public ?TimerDefinition $timer = null,
         public string $outgoingFlowId = '',
         public ?SourceLocation $sourceLocation = null,
-        // The ERROR-boundary payload (F7 / ADR-137 phase 4); non-null
+        // The ERROR-boundary payload; non-null
         // only when `$subtype` is BoundarySubtype::Error. Appended last
         // (defaulted) so existing positional callers are unaffected.
         public ?ErrorDefinition $error = null,
-        // The SIGNAL-boundary payload (#1631); non-null only when
+        // The SIGNAL-boundary payload; non-null only when
         // `$subtype` is BoundarySubtype::Signal. Carries the broadcast
         // name (signals have no correlation key). Appended last +
         // defaulted so existing positional callers are unaffected.

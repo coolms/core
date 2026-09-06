@@ -22,7 +22,7 @@ use Throwable;
  *
  * The constructor carries an optional {@see SourceLocation} which —
  * once the parser's source-location tracking sidecar lands — will let
- * the deployer surface line/column hints. For M2.c the parser passes
+ * the deployer surface line/column hints. The parser currently passes
  * `null` everywhere (locked decision §10 Q3 deferred).
  */
 final class AstViolationException extends DomainException

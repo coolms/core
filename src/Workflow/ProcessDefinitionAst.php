@@ -20,7 +20,7 @@ use function trim;
 
 /**
  * Root AST node — the shared output shape of the BPMN-Lite JSON
- * parser (M2.c) and the future BPMN XML parser (M2.l). Immutable.
+ * parser and the future BPMN XML parser. Immutable.
  *
  * All cross-element references inside the tree are id-based strings
  * (design doc §2.5) — the AST graph never carries object refs across
@@ -34,9 +34,9 @@ use function trim;
  * the indexing cost exactly once per `validate()` call.
  *
  * Carries the parser's INFO-only `$version` (the deployer mints the
- * real monotonic version# per ADR-113); ignore at parse time. The
+ * real monotonic version# ); ignore at parse time. The
  * sectionId / ownerId fields live on the `WorkflowDefinition` in the consuming application
- * entity, never on the AST — soft-ref convention #311 / #333 + the
+ * entity, never on the AST — the soft-reference convention + the
  * AST stays a pure parsing artefact (design doc §3.5 last row).
  */
 final class ProcessDefinitionAst

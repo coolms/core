@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Workflow;
 
 /**
- * Error metadata for an ERROR boundary event (F7 / ADR-137 phase 4) — the BPMN
+ * Error metadata for an ERROR boundary event — the BPMN
  * `errorEventDefinition` carried by a {@see \CoolMS\Core\Workflow\BoundaryEventAst}
  * whose subtype is {@see \CoolMS\Core\Workflow\BoundarySubtype::Error}.
  *

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Decision;
 
 /**
- * One `<rule>` row on a DMN decision table (M3.1.c). Immutable.
+ * One `<rule>` row on a DMN decision table. Immutable.
  *
  * **Arity invariant** (enforced at parse time by
  * `DmnXmlParser` in the consuming application): the row
@@ -17,12 +17,12 @@ namespace CoolMS\Core\Decision;
  * **Cell content** (per-cell, stored as raw text):
  *  - **inputEntries** are unary tests (DMN-spec "S-FEEL unary test")
  *    -- examples: `>= 18`, `< 100`, `[1..10]`, `"high"`, `not(0)`.
- *    M3.1 wires EL-evaluated tests via a small `UnaryTestParser`
- *    in the M3.1.f evaluator; raw strings here so future ships can
+ *    The evaluator wires EL-evaluated tests via a small `UnaryTestParser`
+ * in the evaluator; raw strings here so future ships can
  *    swap to FEEL or extend the test grammar without an AST flip.
  *  - **outputEntries** are EL expressions evaluated against the
  *    process variables when the rule matches. Per the roadmap the
- *    M3.1 evaluator uses EL (not FEEL) so each entry is a Symfony
+ * evaluator uses EL (not FEEL) so each entry is a Symfony
  *    Expression Language literal/expression.
  *
  * `$description` is optional cockpit metadata; the evaluator ignores

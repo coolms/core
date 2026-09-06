@@ -23,7 +23,7 @@ use CoolMS\Core\Space\SpaceProviderInterface;
  * user. Providers MUST NOT throw on permission denials — they should
  * silently skip the affected entry.
  *
- * Under ADR-153 this is the surface that survives: an article and a page
+ * This is the surface that survives: an article and a page
  * are the same Package (`application/vnd.coolms.page`), so page spaces
  * are what the admin browses and article spaces retire with the Articles
  * slice.

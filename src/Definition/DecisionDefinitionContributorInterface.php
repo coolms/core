@@ -5,12 +5,12 @@ namespace CoolMS\Core\Definition;
 
 /**
  * Module-owned contributor that ships a DMN 1.3 XML decision-table
- * body along with the module that authored it (M3.1.g).
+ * body along with the module that authored it.
  *
  * Sibling to {@see WorkflowDefinitionContributorInterface}: same
  * shape, different format (DMN XML instead of BPMN-Lite JSON).
- * Sits in {@see \App\Definition} (level 1) rather than
- * {@see \App\Decision} (level 1) so that ANY module -- including the
+ * Sits in the Definition module (level 1) rather than
+ * the Decision module (level 1) so that ANY module -- including the
  * foundation tier (Identity, VFS, Form) -- can implement the contract
  * without breaking the module-boundary rule. The Decision module's
  * installer iterates every tagged implementation at boot/install
@@ -19,7 +19,7 @@ namespace CoolMS\Core\Definition;
  *
  * **Why this lives where it lives (read this before extracting):**
  *
- * The monorepo will eventually split into independent packages.
+ * This package is consumed independently of the application that ships it.
  * In that future:
  *  - `core/identity` ships, say, an identity-scoring DMN body + this
  *    contributor implementation. Identity is the package that
@@ -31,9 +31,9 @@ namespace CoolMS\Core\Definition;
  *    Workflow and Decision.
  *
  * That cleanly separates business-rule ownership (per-module) from
- * deploy infrastructure (Decision). Mirrors the M2.n architectural
- * refactor that introduced the Workflow contributor pattern (ledger
- * #622-625).
+ * deploy infrastructure (Decision). Mirrors the architectural
+ * refactor that introduced the Workflow contributor pattern (recorded
+ *).
  *
  * Auto-discovered via Symfony DI: any concrete implementation in
  * an `App\` autoconfigure-enabled namespace gets the
@@ -65,7 +65,7 @@ interface DecisionDefinitionContributorInterface
 
     /**
      * The DMN 1.3 XML body to deploy as the initial draft. The
-     * deployer pipes this through the M3.1.c parser + M3.1.d
+     * deployer pipes this through the parser and
      * validator before persisting; malformed bodies fail loudly
      * during install.
      *

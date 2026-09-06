@@ -5,7 +5,7 @@ namespace CoolMS\Core\VFS;
 
 /**
  * One kind of file a module can create, offered wherever the platform lets
- * somebody make a new file (#2056).
+ * somebody make a new file.
  *
  * ## Why a catalogue and not a create() method
  *
@@ -16,7 +16,6 @@ namespace CoolMS\Core\VFS;
  * `contextSchema` extraction, per-space roots. Routing creation through VFS
  * would mean either duplicating all of that or reducing every module to
  * "touch an empty file", which is how `.dsheet` documents were born broken
- * (#2054).
  *
  * So this describes WHAT can be created and HOW TO ASK for it. The module keeps
  * ownership of the act; VFS only knows the menu. A second creation path is
@@ -67,7 +66,7 @@ final readonly class CreatableFileKind
             'endpoint' => $this->endpoint,
             'nameField' => $this->nameField,
             'folderField' => $this->folderField,
-            // Cast so an EMPTY payload encodes as `{}` and not `[]` (ADR-157) —
+            // Cast so an EMPTY payload encodes as `{}` and not `[]` —
             // a client that spreads it into a request body cannot use an array.
             'payload' => (object) $this->payload,
             'extension' => $this->extension,

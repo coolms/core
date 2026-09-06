@@ -6,12 +6,12 @@ namespace CoolMS\Core\Decision;
 use CoolMS\Core\Decision\DataType;
 
 /**
- * One `<input>` column on a DMN decision table (M3.1.c). Immutable.
+ * One `<input>` column on a DMN decision table. Immutable.
  *
  * **Cell-content split**: the `$expression` field carries the
  * input-resolving expression text -- typically a variable reference
  * like `applicant.age` or `variables.input.income` -- which the
- * M3.1.f evaluator passes through the M1.4 EL service against the
+ * evaluator passes through the EL service against the
  * process variables provided at evaluation time. This is the value
  * being tested; the per-rule input *entries* (held on
  * {@see RuleAst::$inputEntries}) are the unary tests applied to it.
@@ -25,7 +25,7 @@ use CoolMS\Core\Decision\DataType;
  * **Label vs id**: `$id` is the spec-required stable identifier
  * (rule entries reference it implicitly by column position; the id
  * is for cockpit hover-text + future column-renaming refactors).
- * `$label` is the human-friendly column header rendered by the M3.2
+ * `$label` is the human-friendly column header rendered by the
  * BPMN-editor's DMN sibling view.
  */
 final readonly class InputClauseAst
@@ -36,7 +36,7 @@ final readonly class InputClauseAst
         /**
          * Expression text evaluated against process variables to
          * produce the value tested by per-rule unary tests. Stored
-         * raw; the M3.1.f evaluator pipes it through the M1.4 EL
+         * raw; the evaluator pipes it through the EL
          * service (`ExpressionService`).
          */
         public string $expression,

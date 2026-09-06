@@ -11,11 +11,11 @@ use function sprintf;
  * Raised by `DecisionEvaluator` in the consuming application
  * when the target `DecisionDefinition` in the consuming application
  * carries no `latestVersionId` -- author created the Definition (so
- * the M3.1.b row + the M3.1.b draft exist) but never deployed.
+ * the row + the draft exist) but never deployed.
  *
  * Distinct shape from "Definition row doesn't exist at all" (that
  * raises an upstream lookup error before this point) and from
- * "deploy failed mid-flight" (the M3.1.e deployer's atomic tx means
+ * "deploy failed mid-flight" (the deployer's atomic tx means
  * a failed deploy doesn't advance the pointer, so the symptom is
  * exactly the same as "never deployed" -- which is correct, both
  * cases are "no deployable version exists right now").

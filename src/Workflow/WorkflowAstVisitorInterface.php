@@ -33,13 +33,13 @@ use CoolMS\Core\Workflow\SequenceFlowAst;
  *     — every rule walks once via `ast->accept($ruleVisitor)`. Per-rule
  *     `match($element::class)` would have to be kept in sync as the
  *     element catalogue grows; the visitor centralises the dispatch.
- *  2. The future M2.l XML round-trip serialiser + the M3 cockpit
+ * 2. A future XML round-trip serialiser + the cockpit
  *     diagram renderer — both want a generic "for each element /
  *     boundary / flow" walk that does not bake in any one consumer's
  *     element-kind ordering.
  *
  * Crucially the engine runtime (`TokenAdvancer` in the consuming application
- * — M2.f) does NOT use this visitor. It walks tokens, not the
+ * ) does NOT use this visitor. It walks tokens, not the
  * whole tree, and dispatches by `ElementKind` directly. Mixing the
  * two would force every token-advance to allocate a visitor.
  *

@@ -23,7 +23,7 @@ final readonly class DataSourceDefinition
          * select        — native <select> (default, ≤8 options or explicit)
          * select-search — custom dropdown with inline search (>8 options or explicit)
          * select-tree   — hierarchical dropdown built from parentId field in API response.
-         * media-picker  — visual media browser (see App\Media\... picker docs).
+         * media-picker — visual media browser (see the media picker docs).
          */
         public string $widget = 'select',
         /**

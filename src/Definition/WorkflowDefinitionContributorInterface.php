@@ -7,8 +7,8 @@ namespace CoolMS\Core\Definition;
  * Module-owned contributor that ships a BPMN-Lite JSON workflow
  * definition body along with the module that authored it.
  *
- * Sits in {@see \App\Definition} (level 1) rather than
- * {@see \App\Workflow} (level 3) so that ANY module -- including
+ * Sits in the Definition module (level 1) rather than
+ * the Workflow module (level 3) so that ANY module -- including
  * the foundation tier (Identity, VFS, Form) -- can implement the
  * contract without breaking the module-boundary rule. The Workflow
  * module's installer iterates every tagged implementation at
@@ -17,7 +17,7 @@ namespace CoolMS\Core\Definition;
  *
  * **Why this lives where it lives (read this before extracting):**
  *
- * The monorepo will eventually split into independent packages.
+ * This package is consumed independently of the application that ships it.
  * In that future:
  *  - `core/identity` ships its own verification BPMN body + this
  *    contributor implementation. Identity is the package that
@@ -29,11 +29,11 @@ namespace CoolMS\Core\Definition;
  *    foundation (Definition, DraftVersion, DefinitionVersion).
  *
  * That cleanly separates business-process ownership (Identity) from
- * deploy infrastructure (Workflow). Future Decision-tables (M3) +
+ * deploy infrastructure (Workflow). Future Decision-tables +
  * Form Builder (M3+) will follow the same pattern with their own
  * `Decision*` and `Form*` contributor interfaces alongside this one.
  *
- * Identity's verification spine (M2.n) is the first consumer:
+ * Identity's verification spine is the first consumer:
  * `IdentityVerificationWorkflowContributor` in the consuming application.
  *
  * Auto-discovered via Symfony DI: any concrete implementation in
@@ -64,7 +64,7 @@ interface WorkflowDefinitionContributorInterface
 
     /**
      * The BPMN-Lite JSON body to deploy as the initial draft. The
-     * deployer pipes this through the M2.c parser + validator before
+     * deployer pipes this through the parser + validator before
      * persisting; malformed bodies fail loudly during install.
      *
      * Implementations typically `file_get_contents()` a resource

@@ -6,7 +6,7 @@ namespace CoolMS\Core\Document;
 /**
  * Marker for a format module's async render handler that can also produce a
  * PDF, and therefore needs to know at compile time whether the PDF module is
- * installed (#1781).
+ * installed.
  *
  * A marker rather than a method, deliberately: the handlers share no callable
  * surface — each takes its own message type — and the only thing this declares

@@ -9,8 +9,8 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
  * Shared shape for every BPMN-Lite AST element node — the immutable,
- * id-string-linked nodes the parser (M2.c) and the future BPMN XML
- * parser (M2.l) both produce.
+ * id-string-linked nodes the parser and the future BPMN XML
+ * parser both produce.
  *
  * Cross-element references are id strings (not nested children); see
  * design doc §2.5 for the rationale. {@see $incomingIds} and

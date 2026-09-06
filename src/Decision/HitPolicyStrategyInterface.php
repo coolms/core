@@ -8,7 +8,7 @@ use CoolMS\Core\Decision\DecisionTableAst;
 use CoolMS\Core\Decision\DecisionEvaluationException;
 
 /**
- * Strategy seam for the 5 DMN 1.3 hit policies the M3.1 scope pins
+ * Strategy seam for the 5 DMN 1.3 hit policies the scope pins
  * (UNIQUE / FIRST / PRIORITY / ANY / COLLECT). One implementation per
  * {@see HitPolicy} case.
  *
@@ -24,11 +24,11 @@ use CoolMS\Core\Decision\DecisionEvaluationException;
  * the `HitPolicyStrategyPass` in the consuming application
  * into the `HitPolicyStrategyRegistry` in the consuming application
  * keyed by their `supports()` return value. The registry holds
- * closures-of-strategies per ADR-118 so the EL provider graph (pulled
- * in transitively by the strategies that use the M1.4 expression
+ * closures-of-strategies so the EL provider graph (pulled
+ * in transitively by the strategies that use the expression
  * service) only resolves on first lookup, not on registry construction.
  *
- * Mirrors the M2.f `ElementStrategyInterface` shape.
+ * Mirrors the `ElementStrategyInterface` shape.
  */
 interface HitPolicyStrategyInterface
 {

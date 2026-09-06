@@ -6,7 +6,7 @@ namespace CoolMS\Core\Decision;
 use Symfony\Component\Uid\Uuid;
 
 /**
- * Result returned by `DecisionEvaluator::evaluate` in the consuming application (M3.1.f).
+ * Result returned by `DecisionEvaluator::evaluate` in the consuming application.
  *
  * **Shape of `$value`** depends on the table's hit policy and the
  * number of declared output columns:
@@ -30,11 +30,11 @@ use Symfony\Component\Uid\Uuid;
  * `$matchedRules` is the audit trail -- which rules fired, in what
  * order, with what per-rule output values. M4 cockpit reads this for
  * the decision-instance detail view; the dmn:evaluate service-task
- * handler (M3.1.h) writes a digest into the engine history payload.
+ * handler writes a digest into the engine history payload.
  *
  * `$decisionVersionId` identifies the {@see
  * `DecisionDefinitionVersion`} whose deployed body
- * actually produced this result (#1557). It is REQUIRED, not optional: every
+ * actually produced this result. It is REQUIRED, not optional: every
  * real evaluation resolves a version before it can parse a body, so a result
  * that cannot name its version does not correspond to anything that ran.
  *
@@ -43,7 +43,7 @@ use Symfony\Component\Uid\Uuid;
  * Without carrying it, an audit replay months later re-resolves "latest" and
  * can silently get a DIFFERENT answer than the one that was recorded, with
  * nothing anywhere identifying the divergence -- the exact reproducibility
- * hole ADR-113 §"Reproducibility" says must not exist. Recording which
+ * hole the Reproducibility gap that must not exist. Recording which
  * version ran is orthogonal to (and safe under) that ADR's still-open
  * question of WHICH version a running instance ought to select.
  */

@@ -6,11 +6,11 @@ namespace CoolMS\Core\Decision;
 use CoolMS\Core\Decision\DecisionDefinitionAst;
 
 /**
- * Contract for a single deploy-time DMN-validation rule (M3.1.d).
+ * Contract for a single deploy-time DMN-validation rule.
  *
  * Mirrors {@see \CoolMS\Core\Workflow\ValidationRuleInterface}
- * for the M2.c BPMN-Lite validator. The duplicated shape will
- * consolidate once a third deployable-definition module lands (M3.3
+ * for the BPMN-Lite validator. The duplicated shape will
+ * consolidate once a third deployable-definition module lands (a form definition
  * FormDefinition) and we extract a generic Definition-tier rule
  * interface; doing the consolidation now would be premature.
  *
@@ -21,7 +21,7 @@ use CoolMS\Core\Decision\DecisionDefinitionAst;
  *
  * Each rule:
  *  - Returns its sort key via {@see priority}. Lower runs first.
- *    Priority bands (matching M2.c):
+ *    Priority bands (matching the BPMN-Lite validator):
  *      - 100..199 Pass 1 -- Structural identity (duplicate ids).
  *      - 200..299 Pass 2 -- Reference integrity (output-name rules).
  *      - 300..399 Pass 3 -- Semantic / EL-syntax (cell expressions).

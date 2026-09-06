@@ -19,7 +19,7 @@ use CoolMS\CoreModule\Template\ContextContributorInterface;
  * Implementations are auto-tagged `coolms.document.context_contributor`
  * via the Document module's DI extension. Contributors MUST
  * return JSON-serializable arrays so the persisted context
- * round-trips cleanly through Doctrine + Messenger.
+ * round-trips cleanly through persistence and the message bus.
  */
 interface DocumentContextContributorInterface extends ContextContributorInterface
 {

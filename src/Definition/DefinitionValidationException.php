@@ -13,7 +13,7 @@ use function sprintf;
  * Thrown by a per-module deploy-time validator when one or more
  * error-severity violations exist on a parsed definition. Carries
  * the full {@see Violations} collection so the deployer rolls back
- * the Doctrine transaction and surfaces every problem at once
+ * the surrounding transaction and surfaces every problem at once
  * (collect-all UX -- one round trip exposes every fix).
  *
  * Per-module parse exceptions

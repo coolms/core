@@ -14,7 +14,7 @@ use DateTimeZone;
  * Each implementation handles one {@see TriggerKind}. The
  * `SchedulerService` in the consuming application consumes
  * implementations via the `coolms.scheduler.trigger` autoconfigured tag
- * (per ADR-118: the registry is leaf-light so eager
+ * (the registry is leaf-light so eager
  * `TaggedIteratorArgument` injection is fine -- the same triage that
  * applies to the Calendar holiday rule materializers).
  *

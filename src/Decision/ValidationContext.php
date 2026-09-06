@@ -7,15 +7,15 @@ use CoolMS\Core\Decision\DecisionDefinitionAst;
 use CoolMS\Core\Definition\Violations;
 
 /**
- * Shared scratch space for a single Decision-validation run (M3.1.d).
+ * Shared scratch space for a single Decision-validation run.
  *
  * Constructed once per
  * `DecisionValidator::validate` in the consuming application
  * call via the {@see for} static factory and threaded through every
- * {@see ValidationRuleInterface::check} invocation. Mirrors the M2.c
+ * {@see ValidationRuleInterface::check} invocation. Mirrors the BPMN-Lite
  * {@see \CoolMS\Core\Workflow\ValidationContext} pattern --
  * the duplicated shape will consolidate into a generic Definition-
- * tier context once a third concrete (M3.3 FormDefinition) lands and
+ * tier context once a third concrete definition type lands and
  * the abstraction earns its keep.
  *
  * Pre-computes id sets the Pass 1 duplicate-id rules would otherwise

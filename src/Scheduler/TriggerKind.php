@@ -11,7 +11,7 @@ namespace CoolMS\Core\Scheduler;
  *    by `CronTrigger` in the consuming application.
  *  - {@see RRULE} -- the `triggerSpec` is a full RFC 5545 spec
  *    (`RRULE:...` plus optional `EXDATE:` / `RDATE:` lines per the
- *    M1.1.c parser); handled by
+ *    cron parser); handled by
  *    `RRuleTrigger` in the consuming application.
  *  - {@see AT} -- a ONE-SHOT trigger: the `triggerSpec` is a single
  *    absolute ISO-8601 datetime (e.g. `2026-06-20T14:30:00+00:00`),

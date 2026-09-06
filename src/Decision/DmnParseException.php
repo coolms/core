@@ -16,18 +16,18 @@ use Throwable;
  * {@see \CoolMS\Core\Decision\DecisionDefinitionAst}.
  *
  * Mirrors `BpmnLiteParseException` in the consuming application
- * for the M2.c BPMN-Lite parser. Extends
- * {@see DefinitionValidationException} so the M3.1.e deployer catches
+ * for the BPMN-Lite parser. Extends
+ * {@see DefinitionValidationException} so the deployer catches
  * a single base type for parse + validate failures and renders one
  * Violations list to the editor.
  *
- * **DMN.* code catalogue** (M3.1.c parser-side; M3.1.d validator
+ * **DMN.* code catalogue** (parser-side; validator
  * codes layer on top):
  *  - `DMN.PARSE_ERROR`            -- malformed XML / libxml load failure.
  *  - `DMN.MISSING_DECISION`       -- no `<decision>` element in `<definitions>`.
  *  - `DMN.MISSING_DECISION_ID`    -- `<decision>` carries no `id` attribute.
  *  - `DMN.MISSING_DECISION_TABLE` -- `<decision>` body is not a decision table
- *                                    (literal expression, context, etc. -- out of M3.1 scope).
+ *                                    (literal expression, context, etc. -- out of scope at this stage).
  *  - `DMN.UNKNOWN_HIT_POLICY`     -- unknown hit-policy string on the table.
  *  - `DMN.UNKNOWN_AGGREGATOR`     -- unknown / wrongly-placed aggregator.
  *  - `DMN.EMPTY_DECISION_TABLE`   -- table has no `<rule>` rows.
@@ -37,8 +37,8 @@ use Throwable;
  *  - `DMN.MISSING_INPUT_EXPRESSION` -- `<input>` carries no `<inputExpression><text>`.
  *
  * `$sourceLocation` is accepted by the constructor but always passed
- * as `null` for M3.1.c (mirrors M2.c's deferred decision; line/column
- * tracking lands when the M3.2 editor needs it for inline marking).
+ * as `null` at this stage (mirrors the parser’s deferred decision; line/column
+ * tracking lands when the editor needs it for inline marking).
  */
 final class DmnParseException extends DefinitionValidationException
 {

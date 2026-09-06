@@ -10,7 +10,7 @@ use Throwable;
 use function sprintf;
 
 /**
- * M8.f — a fault in the OAuth mailbox-credential subsystem: a malformed provider
+ * A fault in the OAuth mailbox-credential subsystem: a malformed provider
  * response, an unknown provider key, a mailbox with no sealed grant, or a grant
  * that can no longer be refreshed (the user must reconnect).
  *

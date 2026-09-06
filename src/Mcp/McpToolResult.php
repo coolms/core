@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Mcp;
 
 /**
- * The result of an MCP `tools/call` (ADR-147) — a `content` array plus the
+ * The result of an MCP `tools/call` — a `content` array plus the
  * `isError` flag, matching the MCP tool-result shape.
  *
  * Per the MCP spec a tool's OWN failure is a normal result with `isError: true`

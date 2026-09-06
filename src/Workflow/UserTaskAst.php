@@ -12,10 +12,10 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 /**
  * BPMN-Lite User Task. Form-bound; candidate users/groups carried as
  * EL holders so the engine resolves them at TaskInstance-creation
- * time (ADR-114 point-in-time snapshot).
+ * time (point-in-time snapshot).
  *
  * Boundary events on a user task are M2-restricted to interrupting
- * timers only (per ADR-112 + verification-design G7). Validator
+ * timers only (per the verification design). Validator
  * enforces; constructor accepts the slice unaware. Boundary events
  * are stored on the root AST, not nested here — UserTaskAst exposes
  * convenience getters via the root's index if/when needed.
@@ -30,7 +30,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * every raw form field verbatim. Keys are lvalues like `'vars.approved'`;
  * only the `vars.*` namespace writes today (mirroring `ServiceTaskInvoker`'s
  * limitation — a `task.*` output sink is a shared follow-up). An EMPTY map
- * means "no ioMapping declared" → the completion seam keeps the M2.k raw
+ * means "no ioMapping declared" → the completion seam keeps the raw
  * merge, so every existing deployed definition is unaffected.
  */
 final class UserTaskAst implements ElementInterface

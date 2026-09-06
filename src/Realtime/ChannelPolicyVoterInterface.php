@@ -18,7 +18,7 @@ use Symfony\Component\Uid\Uuid;
  *     the registry when no voter supports the channel at all.
  *
  * Lives in the `Realtime` module (the transport-agnostic abstraction
- * layer) intentionally -- the contract knows nothing about Centrifugo,
+ * layer) intentionally -- the contract knows nothing about the transport,
  * Mercure, or any other concrete bus. The string `$channel` is the
  * only transport-touching value, and even that is treated as opaque
  * by the registry (the owning voter parses it per its convention).
@@ -26,18 +26,18 @@ use Symfony\Component\Uid\Uuid;
  * to a Mercure equivalent but leave every voter unchanged.
  *
  * Voters live in the module that publishes their channel namespace:
- *   - Centrifugo ships voters for its broadcast/user-notification
+ *   - the realtime module ships voters for its broadcast/user-notification
  *     primitives
  *   - VFS owns `vfs.parent.{uuid}`
  *   - Calendar owns `calendar.items.{uuid}`
  *   - Inbox owns `inbox.{uuid}`
- *   - DataGrid owns `datagrid.{alias}.list`
+ *   - a grid module owns `datagrid.{alias}.list`
  *
- * Per ADR-118 triage: voters are leaf-light and consumed by a
+ * voters are leaf-light and consumed by a
  * per-request API Platform processor, so the registry uses
  * `TaggedIteratorArgument` rather than the lazy-closure pattern. If a
  * future voter needs the heavy graph (NodeRepository, EntityManager)
- * the registry should escalate per the ADR-118 audit table.
+ * the registry should escalate the escalation table in the platform docs.
  *
  * Implementations are auto-tagged via interface autoconfiguration in
  * `Realtime\Infrastructure\DependencyInjection\Extension`; concrete

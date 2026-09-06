@@ -7,12 +7,12 @@ use CoolMS\Core\Decision\CollectAggregator;
 use CoolMS\Core\Decision\HitPolicy;
 
 /**
- * `<decisionTable>` body of a DMN decision (M3.1.c). Immutable.
+ * `<decisionTable>` body of a DMN decision. Immutable.
  *
  * **Aggregator constraint** (validated at parse time): `$aggregator`
  * may only be non-null when `$hitPolicy === HitPolicy::Collect`. The
  * parser raises `DMN.UNKNOWN_AGGREGATOR` if the XML declares one on a
- * non-COLLECT table; the M3.1.f evaluator double-checks the invariant
+ * non-COLLECT table; the evaluator double-checks the invariant
  * but the AST-level guard is faster + scoped to authoring errors.
  *
  * **Order matters** in two specific places:

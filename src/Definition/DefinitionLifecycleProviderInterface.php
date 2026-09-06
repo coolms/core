@@ -25,8 +25,8 @@ namespace CoolMS\Core\Definition;
  *
  * **Tag**: `coolms.definition.lifecycle_provider`, wrapped in
  * `Closure(): DefinitionLifecycleProviderInterface` factories by the
- * compiler pass (ADR-118 lazy registry), so cold paths never pay for a
- * Doctrine connection.
+ * compiler pass (lazy registry), so cold paths never pay for a
+ * database connection.
  */
 interface DefinitionLifecycleProviderInterface
 {

@@ -6,15 +6,15 @@ namespace CoolMS\Core\Decision;
 use CoolMS\Core\Decision\DecisionTableAst;
 
 /**
- * Root AST node for a DMN 1.3 decision (M3.1.c). Immutable.
+ * Root AST node for a DMN 1.3 decision. Immutable.
  *
- * Single-decision shape only -- the M3.1 ship scope per the locked
+ * Single-decision shape only -- the ship scope per the locked
  * decisions defers full DRD (Decision Requirements Diagram, multiple
  * linked decisions with `<informationRequirement>` cross-references)
  * to M4. When DRD lands this class will be one node in a graph keyed
  * by decision id.
  *
- * **M3.1.c scope: decision tables only.** Other decision-body shapes
+ * **Scope: decision tables only.** Other decision-body shapes
  * the DMN 1.3 spec allows -- literal expressions, function
  * definitions, invocations, contexts, relations, lists -- are
  * out-of-scope. The parser trips `DMN.MISSING_DECISION_TABLE` when
