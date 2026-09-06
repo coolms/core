@@ -8,7 +8,7 @@ namespace CoolMS\Core\Settings;
  * Write one module settings block, optionally for one site.
  *
  * The narrow counterpart to {@see ModuleSettingsReaderInterface}. It exists
- * because callers that only need to SET a value should not have to depend on the
+ * because callers that only need to set a value should not have to depend on the
  * whole settings manager -- its definitions, its reset, its storage ids -- and
  * because a concrete final class cannot be substituted in a test, which made the
  * one thing worth testing about a write (that it happens, and in what order)

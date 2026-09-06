@@ -10,7 +10,7 @@ use Throwable;
 /**
  * Which sites is a module turned on for?
  *
- * ⚠️ **PRESENCE OF A DIRECTORY IS A CONSEQUENCE, NOT A SIGNAL.** Documents listed
+ * ⚠️ **Presence of a directory is a consequence, not a signal.** Documents listed
  * every site as a space, which assumes document handling belongs everywhere -- a
  * site running a blog will never use it and was offered it anyway. Inferring it
  * from whether `/docs/<site>` happens to exist is worse: a directory can be
@@ -20,8 +20,8 @@ use Throwable;
  * ## One shape, not five
  *
  * Media, forms and calendars face the same question. Solving it per module grows
- * five near-identical implementations that drift, so the QUERY and the
- * CONVENTION live here and only the module-specific part -- what to create when
+ * five near-identical implementations that drift, so the query and the
+ * Convention live here and only the module-specific part -- what to create when
  * a space is enabled -- is left to the module, via
  * {@see SpaceProvisionerInterface}.
  *
@@ -90,7 +90,7 @@ final readonly class ModuleSpaceSettings
     }
 
     /**
-     * Sites the module is NOT yet enabled for -- what an "Add space" action offers.
+     * Sites the module is not yet enabled for -- what an "Add space" action offers.
      *
      * ⚠️ The button is not "show me another one": it is "enable this module
      * here", and offering a site that already has it would make it read as the
