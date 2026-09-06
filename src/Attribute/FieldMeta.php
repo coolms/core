@@ -16,7 +16,7 @@ use Attribute;
  * for any omitted value (e.g., label falls back to ucfirst of the
  * property name).
  *
- * Phase X-2.5 — filter/sort/search/enum properties added for the
+ * Filter/sort/search/enum properties added for the
  * `EntityFieldDescriptor` service that powers the document-generation
  * wizard's filter UI. Defaults preserve backwards compatibility:
  * existing usages without the new params behave exactly as before
