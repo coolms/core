@@ -8,7 +8,7 @@ namespace CoolMS\Core\Backup;
  * A module-published seam for backup/restore: something that knows how to
  * serialise its OWN data slice into a portable bundle and replay it back.
  * Implementers are collected (tag `coolms.backup.contributor`, registered in the
- * Core Extension) by {@see \CoolMS\CoreModule\Backup\BackupRunner} so the
+ * Core Extension) by {@see \CoolMS\CoreApp\Backup\BackupRunner} so the
  * platform can back up/restore everything in one place --
  * `coolms:backup:create` / `coolms:backup:restore` -- with every module owning
  * exactly how to export + import its own tables/blobs.
@@ -61,7 +61,7 @@ interface BackupContributorInterface
     /**
      * The DB tables this contributor serialises -- the SAME set its {@see export}
      * writes (typically the contributor's own table constants). Declaring it makes
-     * the "synced universe" programmatically enumerable ({@see \CoolMS\CoreModule\Backup\BackupTableRegistry}
+     * the "synced universe" programmatically enumerable ({@see \CoolMS\CoreApp\Backup\BackupTableRegistry}
      * aggregates every contributor's), which the controller->edge sync
      * change-feed needs: the feed's row-change CAPTURE scope must be provably EQUAL
      * to what backup EXPORTS, so it never silently misses a synced write (the

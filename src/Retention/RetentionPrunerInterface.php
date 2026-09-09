@@ -8,7 +8,7 @@ namespace CoolMS\Core\Retention;
  * A module-published seam for a retention sweep: something that deletes its own
  * expired/spent rows from an unbounded-growth table. Implementers are collected
  * (tag `coolms.retention.pruner`, registered in the Core Extension) by
- * {@see \CoolMS\CoreModule\Retention\RetentionPruneRunner} so the platform can
+ * {@see \CoolMS\CoreApp\Retention\RetentionPruneRunner} so the platform can
  * run ALL retention in one place -- the `coolms:retention:prune` command and the
  * `retention.prune` scheduled handler -- instead of each module's prune command
  * having to be cron-wired independently (they were shipped but nothing ran them).

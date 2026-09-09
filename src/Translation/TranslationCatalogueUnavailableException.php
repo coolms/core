@@ -7,7 +7,7 @@ namespace CoolMS\Core\Translation;
 use RuntimeException;
 
 /**
- * Thrown by {@see \CoolMS\CoreModule\Translation\NullInlineLabelCatalogueWriter}
+ * Thrown by {@see \CoolMS\CoreApp\Translation\NullInlineLabelCatalogueWriter}
  * when something tries to AUTHOR a per-locale translation but no translation
  * catalogue is wired -- i.e. the I18n module (`coolms/i18n`) is not installed.
  *

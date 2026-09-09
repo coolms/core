@@ -10,7 +10,7 @@ use Throwable;
 use function sprintf;
 
 /**
- * Raised by {@see \CoolMS\CoreModule\Json\JsoncDecoderInterface}
+ * Raised by {@see \CoolMS\CoreApp\Json\JsoncDecoderInterface}
  * when a JSONC source either (a) fails to parse as JSON after comment
  * stripping or (b) decodes to a non-array root.
  *
