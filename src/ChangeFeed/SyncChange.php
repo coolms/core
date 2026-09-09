@@ -19,7 +19,7 @@ use Symfony\Component\Uid\Uuid;
  * and its record commit together or neither does.
  *
  * Capture scope = the backup contributors' tables
- * ({@see \CoolMS\CoreApp\Backup\BackupTableRegistry}, B.2.1) -- **now equal to what
+ * ({@see \CoolMS\Core\Application\Backup\BackupTableRegistry}, B.2.1) -- **now equal to what
  * backup exports.** That claim has been wrong in both directions and the history is
  * worth keeping: it originally read "provably equal", then was narrowed to "their
  * single-`id`, entity-mapped rows" on discovering `coolms_identity_user_groups` was

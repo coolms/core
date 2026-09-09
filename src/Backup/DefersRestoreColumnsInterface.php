@@ -12,8 +12,8 @@ namespace CoolMS\Core\Backup;
  *
  * **Why this is DECLARED rather than done privately inside `import()`.** Two engines
  * replay these rows now: the bundle restore (`import()`, via
- * {@see \CoolMS\CoreApp\Backup\BackupReaderInterface::loadTableDeferring()}) and the
- * sync apply path ({@see \CoolMS\CoreApp\ChangeFeed\SyncChangeApplier}),
+ * {@see \CoolMS\Core\Application\Backup\BackupReaderInterface::loadTableDeferring()}) and the
+ * sync apply path ({@see \CoolMS\Core\Application\ChangeFeed\SyncChangeApplier}),
  * which writes straight through {@see TableBackupPortInterface} and never calls a
  * contributor at all. A contributor that keeps its FK knowledge to itself protects the
  * first engine and leaves the second one silently corrupting the same rows --
@@ -26,7 +26,7 @@ namespace CoolMS\Core\Backup;
  * rule at the row that just landed. `ON DELETE SET NULL` blanks the child's pointer;
  * `ON DELETE CASCADE` deletes the child outright, and its turn has passed, so nothing
  * puts it back. Neither throws. See
- * {@see \CoolMS\CoreApp\Backup\BackupReaderInterface::loadTableDeferring()} for why
+ * {@see \CoolMS\Core\Application\Backup\BackupReaderInterface::loadTableDeferring()} for why
  * deferral beats a parent-first sort, and for the CHECK-coherence rule that governs
  * which columns may travel together.
  */

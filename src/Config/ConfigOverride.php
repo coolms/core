@@ -33,7 +33,7 @@ use Symfony\Component\Uid\Uuid;
  * Form's table is deliberately NOT migrated here. It carries a `sourceHash` and
  * a boot-time registry overlay this does not have, and rewriting a working
  * write path to prove a point is how a refactor becomes an outage -- see
- * {@see \CoolMS\CoreApp\Config\ChainedConfigWriter} for what would have to
+ * {@see \CoolMS\Core\Application\Config\ChainedConfigWriter} for what would have to
  * be reconciled first.
  */
 class ConfigOverride implements IdentifierProviderInterface

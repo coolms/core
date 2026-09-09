@@ -11,16 +11,16 @@ namespace CoolMS\Core\Option;
  * Module authors implement this to expose a select datasource --
  * timezones, message handlers, user lookups, calendar slugs, role
  * names, anything where the FE wants a friendly picker instead of a
- * free-text input. The {@see \CoolMS\CoreApp\Option\OptionSourceRegistry}
+ * free-text input. The {@see \CoolMS\Core\Application\Option\OptionSourceRegistry}
  * collects every tagged implementation and routes API requests by key.
  *
  * Each implementation is autoconfigured with the tag
- * `coolms.option.source` -- see {@see \CoolMS\CoreBundle\DependencyInjection\Extension::load}.
+ * `coolms.option.source` -- see {@see \CoolMS\Core\Bundle\DependencyInjection\Extension::load}.
  *
  * **Keying convention.** `$key` is dot-namespaced lowercase
  * (`<module>.<noun>`), e.g. `calendar.timezones`, `identity.users`,
  * `scheduler.handlers`. Two providers with the same key throw at boot
- * via {@see \CoolMS\CoreApp\Option\OptionSourceRegistry}.
+ * via {@see \CoolMS\Core\Application\Option\OptionSourceRegistry}.
  *
  * **Provide semantics.** Implementations decide their own ordering
  * (the registry doesn't re-sort). When `$query` is supplied, it's a

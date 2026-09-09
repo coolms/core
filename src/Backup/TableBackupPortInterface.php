@@ -32,7 +32,7 @@ interface TableBackupPortInterface
     /**
      * Every row of `$table`, yielded ONE AT A TIME instead of collected into an
      * array -- the bounded-memory sibling of {@see dumpTable()} and the path
-     * {@see \CoolMS\CoreApp\Backup\BackupWriterInterface::dumpTable()} exports on.
+     * {@see \CoolMS\Core\Application\Backup\BackupWriterInterface::dumpTable()} exports on.
      *
      * The rows are identical in shape to `dumpTable()`'s (raw scalar/null values,
      * DB-generated columns stripped), so a consumer can swap one for the other.
@@ -66,7 +66,7 @@ interface TableBackupPortInterface
      * {@see SyncsAsOwnedCollectionInterface}) it is the OWNER column and `$ids` are owner
      * ids, so the call returns those owners' whole current sets -- the input to the
      * applier's set-replace. Callers must resolve the column via
-     * {@see \CoolMS\CoreApp\Backup\BackupTableRegistry::ownerColumnFor()} rather
+     * {@see \CoolMS\Core\Application\Backup\BackupTableRegistry::ownerColumnFor()} rather
      * than hard-coding `id`.
      *
      * @param list<string> $ids
@@ -121,7 +121,7 @@ interface TableBackupPortInterface
     /**
      * The `$idColumn` values of every live row of `$table` whose `$membershipColumn`
      * is IN `$allowedValues` -- the whitelist half of a GROUPED delete-reconcile
-     * ({@see \CoolMS\CoreApp\Backup\BackupReaderInterface::reconcileTableWithinGroups()}).
+     * ({@see \CoolMS\Core\Application\Backup\BackupReaderInterface::reconcileTableWithinGroups()}).
      * Lets a contributor restrict the live set to rows belonging to an allowed
      * partition (e.g. a Definition ladder's authored, non-module-owned definition
      * ids) in ONE query -- instead of one query per group, which is O(groups). Empty

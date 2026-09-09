@@ -9,7 +9,7 @@ namespace CoolMS\Core\Blameable;
  *
  * Mirrors TimestampableInterface in structure but tracks actor UUIDs instead of timestamps.
  * Entities implementing this interface have their blameable fields populated automatically
- * by CoolMS\CoreBundle\Event\Behaviour\BlameableEntityEventListener on every
+ * by CoolMS\Core\Bundle\Event\Behaviour\BlameableEntityEventListener on every
  * OnCreateEvent / OnUpdateEvent, using the current security context.
  */
 interface BlameableInterface extends AccessedByProviderInterface, CreatedByProviderInterface, UpdatedByProviderInterface

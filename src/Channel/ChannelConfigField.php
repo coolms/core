@@ -36,7 +36,7 @@ final readonly class ChannelConfigField
      * What is stored is a key into the F1 secret store (`env`, encrypted
      * `filesystem`, or `vault` -- an operator's choice, not the channel's). The
      * NAME is not sensitive, so it round-trips through reads normally. The VALUE
-     * is resolved by {@see \CoolMS\CoreApp\Channel\ChannelConfigResolver}
+     * is resolved by {@see \CoolMS\Core\Application\Channel\ChannelConfigResolver}
      * immediately before `deliver()`, which keeps it out of the workflow's
      * persisted instance variables as well as out of `extras`.
      */

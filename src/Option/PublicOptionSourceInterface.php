@@ -14,7 +14,7 @@ namespace CoolMS\Core\Option;
  * (a contact form's country dropdown, say) has no Bearer token and can't
  * reach it. A source additionally implementing THIS interface also becomes
  * reachable at the firewall-public `GET /api/v1/public-options/{source}`
- * ({@see \CoolMS\CoreBundle\ApiPlatform\Resource\OptionResource}),
+ * ({@see \CoolMS\Core\Bundle\ApiPlatform\Resource\OptionResource}),
  * so an `api`-data-source select on a public page can populate itself.
  *
  * **Default is closed.** A plain `OptionSourceProviderInterface` is

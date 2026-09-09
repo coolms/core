@@ -27,7 +27,7 @@ namespace CoolMS\Core\Backup;
  *
  * **The cost, stated plainly:** for these tables `row_id` holds an OWNER id, not a row id
  * -- the one place the feed's column name lies. Both readers of the key derive it from
- * here ({@see \CoolMS\CoreApp\Backup\BackupTableRegistry::ownerColumnFor()}) rather
+ * here ({@see \CoolMS\Core\Application\Backup\BackupTableRegistry::ownerColumnFor()}) rather
  * than assuming `id`, so the two ends cannot drift.
  */
 interface SyncsAsOwnedCollectionInterface

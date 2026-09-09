@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\ChangeFeed;
 
 /**
- * Where {@see \CoolMS\CoreApp\ChangeFeed\SyncChangeApplier} fetches the CURRENT data
+ * Where {@see \CoolMS\Core\Application\ChangeFeed\SyncChangeApplier} fetches the CURRENT data
  * of the rows an `upsert` delta names. The lean change feed carries only
  * `(table, row-UUID, op)`, so applying an upsert needs the row's live data from the
  * authoritative side.

@@ -12,7 +12,7 @@ use CoolMS\Core\Identity\UserInterface;
  * Each Library tags its providers under its own namespace
  * (e.g. `coolms.media.space_provider`, `coolms.document.space_provider`)
  * and aggregates them via a per-module subclass of
- * {@see \CoolMS\CoreApp\Space\SpaceRegistry}.
+ * {@see \CoolMS\Core\Application\Space\SpaceRegistry}.
  *
  * Providers MAY return an empty list when no spaces apply for the
  * given user. Providers MUST NOT throw on permission denials --

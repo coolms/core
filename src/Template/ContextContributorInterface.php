@@ -28,7 +28,7 @@ namespace CoolMS\Core\Template;
  * explicit rather than removing it. Nothing about the contract needed the
  * higher tier: it names no type at all, its own or anyone else's.
  *
- * {@see \CoolMS\CoreApp\Template\ContextContributorInterface} still exists
+ * {@see \CoolMS\Core\Application\Template\ContextContributorInterface} still exists
  * and extends this, so any consumer typed against the old name keeps working.
  */
 interface ContextContributorInterface
