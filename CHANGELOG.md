@@ -10,6 +10,53 @@ major number means here.
 history when this file was created. Every entry after that is written in the
 same commit as the change it describes.
 
+## 2.0.0-alpha3 - 2026-09-09
+### Added
+
+- `Template\ContextContributorInterface`, moved down from the application tier.
+  Three contracts here extended the application's copy while that package
+  required this one back -- the one dependency shape declaring cannot repair,
+  because the declaration writes the cycle down instead of removing it. The old
+  name survives there as a subtype with nothing added, so consumers typed
+  against either still compile.
+- The extension-point contracts a module implements: 44 seams that could
+  previously only be implemented from inside an application, with the value
+  objects and enums their signatures name -- 160 types. Which seams was asked of
+  the container rather than of a naming convention: every type passed to
+  `registerForAutoconfiguration()` is an extension point by definition.
+- `ApiDescription` as a core contract. An attribute defined in an application
+  can only ever describe that application's own routes, so a package shipping
+  routes of its own had no way to describe them at all.
+- The per-site space convention. `ModuleSpaceSettings` answers "which sites is
+  this module turned on for" once for every module, leaving only the
+  module-specific half -- what to create when a space is enabled -- to
+  `SpaceProvisionerInterface`.
+- The seeding guard and the block-type vocabulary, which application code and
+  its tests already depended on.
+- `BlockWidth` (full, two-thirds, half, third, quarter) and `BlockAlign` (top,
+  middle, bottom, stretch), the horizontal and vertical halves of the block
+  vocabulary, plus `BlockField::KIND_CHOICE`. Names rather than column counts,
+  so the vocabulary means the same thing in a theme built on Bootstrap, on CSS
+  grid, or on nothing.
+- `ReservedFieldNames` and its exception, which sat in a module that never
+  referenced them while their only consumer read them across a boundary.
+
+### Changed
+
+- A seed records which `extras` keys it wrote. The guard compared bodies only,
+  so a landing page whose blocks an editor had rearranged still matched its
+  recorded body hash, was called unedited, and had the arrangement overwritten.
+- `coolms/rql` is declared. It was already reached from two public grid
+  signatures; the dependency was correct and only the declaration was missing.
+- Comments, docblocks and changelogs are ascii and no longer cite internal slice
+  or ticket ids.
+- Development-only files are export-ignored, so `composer require` no longer
+  downloads them.
+
+!! **Release this with the rest of generation 2.** Nothing in `CoolMS\Core\`
+moved -- the domain package keeps the root prefix -- but the tiers above it were
+renamed and their namespaces nested in this same generation.
+
 ## 2.0.0-alpha2 - 2026-09-03
 
 ### Added
