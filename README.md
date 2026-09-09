@@ -70,7 +70,7 @@ step instead of one.
 
 | Package | Role |
 |---|---|
-| [`coolms/core-module`](https://github.com/coolms/core-module) | application services composed over these contracts |
+| [`coolms/core-application`](https://github.com/coolms/core-application) | application services composed over these contracts |
 | [`coolms/core-bundle`](https://github.com/coolms/core-bundle) | Symfony integration |
 | [`coolms/core-doctrine`](https://github.com/coolms/core-doctrine) | Doctrine ORM/DBAL adapter |
 

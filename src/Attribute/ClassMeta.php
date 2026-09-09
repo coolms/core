@@ -8,7 +8,7 @@ use Attribute;
 
 /**
  * Annotates an entity class with a human-readable label and an
- * optional Phase 2 entity alias.
+ * optional entity alias.
  *
  * `label` is consumed by `DoctrineEntitySchemaProvider` to enrich
  * `EntityClassMetadata` shown in Domain Explorer.

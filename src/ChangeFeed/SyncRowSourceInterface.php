@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\ChangeFeed;
 
 /**
- * Where {@see \CoolMS\CoreModule\ChangeFeed\SyncChangeApplier} fetches the CURRENT data
+ * Where {@see \CoolMS\Core\Application\ChangeFeed\SyncChangeApplier} fetches the CURRENT data
  * of the rows an `upsert` delta names. The lean change feed carries only
  * `(table, row-UUID, op)`, so applying an upsert needs the row's live data from the
  * authoritative side.
@@ -21,7 +21,7 @@ interface SyncRowSourceInterface
 {
     /**
      * The current rows of `$table` for `$ids` (order unspecified; ids matching no live row
-     * are simply absent), in the same shape backup exports — ready for `restoreRows`.
+     * are simply absent), in the same shape backup exports -- ready for `restoreRows`.
      *
      * @param list<string> $ids
      *

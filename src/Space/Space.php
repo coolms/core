@@ -6,7 +6,7 @@ namespace CoolMS\Core\Space;
 
 /**
  * Concrete Space value object -- emitted by tagged providers, consumed
- * by per-module {@see \CoolMS\CoreModule\Space\SpaceRegistry} subclasses
+ * by per-module {@see \CoolMS\Core\Application\Space\SpaceRegistry} subclasses
  * (e.g. `MediaSpaceRegistry`, `DocumentSpaceRegistry`) and projected
  * onto module-specific API resources.
  */

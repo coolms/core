@@ -12,7 +12,7 @@ namespace CoolMS\Core\Settings;
  * datagrids and navigraph trees as well as settings -- an admin settings screen
  * must not be a way to rewrite a navigation tree.
  *
- * ⚠️ Belongs to the KERNEL rather than to whichever module implements the
+ * !! Belongs to the KERNEL rather than to whichever module implements the
  * settings surface, and the reason is a layering one. An application that
  * enforces module boundaries typically bars a module from importing a SIBLING
  * module's domain types, and the settings implementation sits low -- so while
@@ -78,7 +78,7 @@ final class ModuleSettingsDefinition
      *                                                              rather than looked up from its sidebar node:
      *                                                              one owner, no cross-module read, and no second
      *                                                              request to render a heading.
-     * @param array<string, mixed>                    $defaults     see {@see $defaults}. ⚠️ Use `$lazyDefaults`
+     * @param array<string, mixed>                    $defaults     see {@see $defaults}. !! Use `$lazyDefaults`
      *                                                              instead whenever computing these costs
      *                                                              anything: reading ONE block forces every
      *                                                              contributor to declare itself, so an eager
@@ -114,7 +114,7 @@ final class ModuleSettingsDefinition
          * Resolved per request, because a contributor is a service: a default
          * that depends on a seeded row or a parameter stays current.
          *
-         * ⚠️ Pass `$lazyDefaults` instead whenever computing these costs
+         * !! Pass `$lazyDefaults` instead whenever computing these costs
          * anything -- see the note on that parameter. Reading ONE block forces
          * every contributor to declare itself, so an eager default is paid for by
          * every reader of every other block.
@@ -140,7 +140,7 @@ final class ModuleSettingsDefinition
         /**
          * Keys an admin may CLEAR, as a list of settings keys.
          *
-         * ⚠️ **Stated, not inferred, and the inference was tried first.** An
+         * !! **Stated, not inferred, and the inference was tried first.** An
          * earlier rule derived nullability from the declared default's type --
          * clear a key whose default is null, refuse one whose default is a
          * string. It made the same save valid on one install and refused on
@@ -166,7 +166,7 @@ final class ModuleSettingsDefinition
         /**
          * Whether one site may override this block's values.
          *
-         * ⚠️ **Off by default, and a scoped write to a block that has not opted
+         * !! **Off by default, and a scoped write to a block that has not opted
          * in is REFUSED.** Not ignored: a per-site row nothing reads is the same
          * silent failure as an undeclared key -- it saves, reads back, and
          * changes nothing.
@@ -182,7 +182,7 @@ final class ModuleSettingsDefinition
          * Defaults that cost something to work out, deferred until this block is
          * actually read.
          *
-         * ⚠️ **Measured, not hypothetical.** Resolving one block's
+         * !! **Measured, not hypothetical.** Resolving one block's
          * settings calls `getSettings()` on EVERY contributor, because that is
          * the only way to find which one owns the key. Agent access resolves its
          * default from a `findByName` on the installer's group, so asking for the
@@ -205,7 +205,7 @@ final class ModuleSettingsDefinition
     /**
      * The pins actually IN FORCE, as `settings key => env var name`.
      *
-     * ⚠️ **The precedence this expresses: env beats the saved row beats the
+     * !! **The precedence this expresses: env beats the saved row beats the
      * shipped parameter.** An operator who pins `PAGE_CACHE_TTL=0` to ride out an
      * incident must not be overridden by a row somebody saved months ago. The
      * other half of that bargain is not optional: a locked key must render

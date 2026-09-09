@@ -14,7 +14,7 @@ use DateTimeImmutable;
  * `outboxId` is the row id (the relay's mark-published handle + a stable delivery
  * id); `messageId` is the producer's id (the consumer's idempotency key, a later
  * F7 slice). In the monolith this dispatches in-process; once a module is
- * extracted the publisher behind the relay swaps to a broker — consumers unchanged.
+ * extracted the publisher behind the relay swaps to a broker -- consumers unchanged.
  */
 final readonly class OutboxMessagePublished
 {

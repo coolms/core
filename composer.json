@@ -18,6 +18,7 @@
     ],
     "require": {
         "php": "^8.5",
+        "coolms/rql": "^1.0",
         "symfony/messenger": "^8.0",
         "symfony/serializer": "^8.0",
         "symfony/uid": "^8.0",

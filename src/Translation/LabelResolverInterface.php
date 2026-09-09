@@ -32,7 +32,7 @@ namespace CoolMS\Core\Translation;
  *
  * **What this interface does NOT do:**
  *   - It does not read or write VFS XLIFF files directly. That's
- *     `VfsCatalogueLoaderInterface`'s job, already wired by F5.a/b.
+ *     `VfsCatalogueLoaderInterface`'s job, already wired.
  *   - It does not resolve per-row content (Page variant titles, Article
  *     body). Those are variant Nodes; LabelResolver only handles
  *     definition-level metadata.

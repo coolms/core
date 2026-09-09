@@ -9,7 +9,7 @@ namespace CoolMS\Core\Block;
  * discriminator a theme dispatches on), a human `label`, and the ordered
  * {@see BlockField} schema declaring which fields the block carries.
  *
- * ⚠️ The `id` is what stored content REFERENCES, so renaming one orphans every
+ * !! The `id` is what stored content REFERENCES, so renaming one orphans every
  * block already using it. Add a type rather than rename one.
  *
  * The application aggregates these from every registered provider, validates

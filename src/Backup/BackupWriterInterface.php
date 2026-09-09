@@ -9,7 +9,7 @@ namespace CoolMS\Core\Backup;
  *
  * Exists so the Domain contract does not name the Application class that
  * implements it -- without this, `coolms/core` (Domain) would depend on
- * `coolms/core-module` (Application) and the two packages would cycle.
+ * `coolms/core-application` (Application) and the two packages would cycle.
  *
  * Scope is measured, not mirrored: these are the methods contributors actually
  * call. The implementation's `recordsWritten()`/`blobsWritten()` are deliberately

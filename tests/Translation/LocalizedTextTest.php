@@ -52,7 +52,7 @@ final class LocalizedTextTest extends TestCase
         self::assertSame('', LocalizedText::pick(['en' => ''], 'en'));
     }
 
-    // ── override(): exact-locale override else the source fallback ──────────────
+    // -- override(): exact-locale override else the source fallback --------------
 
     #[Test]
     public function overrideReturnsTheExactLocaleOverride(): void
@@ -63,7 +63,7 @@ final class LocalizedTextTest extends TestCase
     #[Test]
     public function overrideFallsBackToTheSourceWhenLocaleAbsent(): void
     {
-        // No `uk` override → the source column, NOT another locale's override
+        // No `uk` override -> the source column, NOT another locale's override
         // (the key difference from pick()).
         self::assertSame('Intro video', LocalizedText::override(['de' => 'Einführungsvideo'], 'uk', 'Intro video'));
     }
@@ -79,7 +79,7 @@ final class LocalizedTextTest extends TestCase
     #[Test]
     public function overridePropagatesANullSourceWhenNoOverride(): void
     {
-        // The Node column can be null (no title set) — that flows through.
+        // The Node column can be null (no title set) -- that flows through.
         self::assertNull(LocalizedText::override(['de' => 'X'], 'uk', null));
     }
 }

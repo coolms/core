@@ -10,11 +10,11 @@ namespace CoolMS\Core\Analytics;
  * LOW-cardinality *derived* dimensions (device / os / browser family, referrer
  * type, geo country, `utm_*` campaign tags) that producers merge onto an
  * {@see AnalyticsEvent}. The raw user-agent + `Referer` + IP are read here and
- * DROPPED — only the coarse, non-identifying families ever reach the event store
+ * DROPPED -- only the coarse, non-identifying families ever reach the event store
  * ("~90% of the marketing value with no PII at rest").
  *
  * **Geo** (country, from a CDN edge header) and **UTM** (author-authored campaign
- * labels — high-value, not PII) are included only when present, so producers off
+ * labels -- high-value, not PII) are included only when present, so producers off
  * a geo proxy / non-campaign visits carry neither. Returns an empty array off the
  * request edge (CLI / worker), so producers degrade cleanly.
  *

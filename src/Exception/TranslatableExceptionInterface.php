@@ -7,8 +7,7 @@ namespace CoolMS\Core\Exception;
 use Throwable;
 
 /**
- * Marks an exception whose user-facing message can be localized. F6
- * Phase 3.
+ * Marks an exception whose user-facing message can be localized.
  *
  * The exception still carries a raw `getMessage()` -- that stays the
  * developer-facing string and the log line (always in the source

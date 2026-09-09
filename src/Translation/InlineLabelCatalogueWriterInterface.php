@@ -55,7 +55,7 @@ interface InlineLabelCatalogueWriterInterface
      *                                                               An empty map is a no-op. A `null` value REMOVES that locale's
      *                                                               override (clear-to-source: the resolver falls back to the
      *                                                               inline source value); an empty-string value is written
-     *                                                               verbatim (a deliberate blank translation) — the two are
+     *                                                               verbatim (a deliberate blank translation) -- the two are
      *                                                               distinct.
      *
      * @throws TranslatableMisconfigurationException when `$translatable`
@@ -84,7 +84,7 @@ interface InlineLabelCatalogueWriterInterface
      *                                                                          `null` value REMOVES that locale's override (clear-to-source:
      *                                                                          the resolver falls back to the inline source value); an
      *                                                                          empty-string value is written verbatim (a deliberate blank
-     *                                                                          translation) — the two are distinct. Upsert +
+     *                                                                          translation) -- the two are distinct. Upsert +
      *                                                                          sibling-preservation semantics are identical to {@see write()}.
      *
      * @throws TranslatableMisconfigurationException see

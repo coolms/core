@@ -9,7 +9,7 @@ namespace CoolMS\Core\Channel;
  *
  * The point of declaring these rather than hard-coding them in the admin: the
  * per-section dialog used to carry a bespoke "Webhook URL" input, so a channel
- * that needed anything else — a chat provider's bot token and room id, WebSub's hub —
+ * that needed anything else -- a chat provider's bot token and room id, WebSub's hub --
  * had nowhere to put it and soft-skipped forever. A channel that declares its
  * fields gets an editor for free, in Connector or in a module the platform has
  * never heard of.
@@ -25,8 +25,8 @@ final readonly class ChannelConfigField
      * The value is the NAME of a secret, not the secret.
      *
      * There is deliberately no "raw credential" field kind. Per-section config
-     * is persisted in the collection Node's `extras` — plain JSON readable by
-     * anyone who can read the section — so a field carrying a live token there
+     * is persisted in the collection Node's `extras` -- plain JSON readable by
+     * anyone who can read the section -- so a field carrying a live token there
      * would be a credential in content metadata no matter how the admin renders
      * it. An earlier design shipped a `secret: bool` flag meaning "render a
      * password box and never echo it", which hid that problem behind a UI
@@ -34,16 +34,16 @@ final readonly class ChannelConfigField
      * replaces it, because the safe path has to be the only path.
      *
      * What is stored is a key into the F1 secret store (`env`, encrypted
-     * `filesystem`, or `vault` — an operator's choice, not the channel's). The
+     * `filesystem`, or `vault` -- an operator's choice, not the channel's). The
      * NAME is not sensitive, so it round-trips through reads normally. The VALUE
-     * is resolved by {@see \CoolMS\CoreModule\Channel\ChannelConfigResolver}
+     * is resolved by {@see \CoolMS\Core\Application\Channel\ChannelConfigResolver}
      * immediately before `deliver()`, which keeps it out of the workflow's
      * persisted instance variables as well as out of `extras`.
      */
     public const string TYPE_SECRET_REF = 'secretRef';
 
     public function __construct(
-        /** Key inside the channel's `$config` array — what `deliver()` reads. */
+        /** Key inside the channel's `$config` array -- what `deliver()` reads. */
         public string $key,
         /** Human label for the admin input. */
         public string $label,

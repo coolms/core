@@ -11,7 +11,7 @@ use InvalidArgumentException;
  * constructed with input that can never produce a valid email.
  *
  * These are programming errors (an empty subject, an attachment with neither a
- * path nor bytes), not delivery failures — a transport problem surfaces from
+ * path nor bytes), not delivery failures -- a transport problem surfaces from
  * the sender instead, so Messenger can retry it.
  */
 final class InvalidRichMailException extends InvalidArgumentException

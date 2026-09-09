@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Config;
 
 /**
- * Platform-wide default user-facing settings. F6 Phase 1.
+ * Platform-wide default user-facing settings.
  *
  * The floor of the settings cascade `Platform -> User`: when a user has
  * no stored preference for one of these, this is what applies. The same
@@ -22,17 +22,17 @@ namespace CoolMS\Core\Config;
  *
  * **Locale authority.** `$locale` is sourced from
  * `coolms_core.default_locale`, which `I18nBundle::prepend()` syncs from
- * the authoritative `coolms_i18n.default_locale` — the platform keeps
+ * the authoritative `coolms_i18n.default_locale` -- the platform keeps
  * exactly one authoritative locale knob. It is the BCP-47 floor that
  * non-request contexts (exceptions, CLI, async handlers) translate
  * against when no request locale is in scope.
  *
  * Lives in `Core\Domain\Config` alongside {@see SupportedLocalesProvider}
- * — platform-wide, operator-configured, dependency-free. Excluded from
- * the autowire prototype scan; registered explicitly in `Core\…\Extension`.
+ * -- platform-wide, operator-configured, dependency-free. Excluded from
+ * the autowire prototype scan; registered explicitly in `Core\...\Extension`.
  *
  * Extensible: number / currency / measurement-unit defaults land here
- * when a consumer needs them. Phase 1 keeps it to the five settings that
+ * when a consumer needs them. It starts with the five settings that
  * already have per-user counterparts.
  */
 final readonly class PlatformDefaults
@@ -51,7 +51,7 @@ final readonly class PlatformDefaults
          * literally what this class documents itself as: the floor of the
          * `Platform -> User` cascade. A user with no `accentColor` of their own
          * gets this; with no deployment value either, the palette's default
-         * stands. Nullable for exactly that reason — an operator who has not
+         * stands. Nullable for exactly that reason -- an operator who has not
          * chosen a brand colour must not be given one, and a non-null default
          * here would freeze every deployment to today's amber.
          *
@@ -64,7 +64,7 @@ final readonly class PlatformDefaults
 
     /**
      * The calendar-section shape, matching `CalendarPreferencesContributor`'s
-     * keys so Phase 2 can `array_merge($this->forCalendarSection(), $stored)`
+     * keys so a caller can `array_merge($this->forCalendarSection(), $stored)`
      * as a literal drop-in for the contributor's hardcoded defaults.
      *
      * `defaultCalendarSlug` is intentionally absent: it has no platform

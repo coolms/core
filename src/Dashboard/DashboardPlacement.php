@@ -13,14 +13,14 @@ use function sprintf;
  *
  * ## Why a placement is not just an id and a width
  *
- * A layout is an OVERRIDE of the catalogue, not a replacement for it — the same
+ * A layout is an OVERRIDE of the catalogue, not a replacement for it -- the same
  * relationship every other `config/modules` file has with the contributors it
  * sits above. That makes each field optional in its own way:
  *
  *  - `columns` null keeps whatever the module asked for. A layout that only
  *    re-ORDERS should not have to restate every width, and one that restates
  *    them freezes each card at the width it happened to have the day the layout
- *    was saved — so a module that later improves its own card is overruled by a
+ *    was saved -- so a module that later improves its own card is overruled by a
  *    file nobody meant as a decision.
  *  - `hidden` removes a card while KEEPING its position, so putting it back is
  *    a toggle rather than a re-drag. It lives here rather than in a separate
@@ -31,7 +31,7 @@ final readonly class DashboardPlacement
     /**
      * @param string   $widget  id of the {@see DashboardWidget} being placed. A
      *                          layout naming a widget no installed module
-     *                          offers is IGNORED rather than an error — see
+     *                          offers is IGNORED rather than an error -- see
      *                          {@see DashboardLayout::apply()}
      * @param int|null $columns width in twelfths, overriding the module's own;
      *                          null keeps it

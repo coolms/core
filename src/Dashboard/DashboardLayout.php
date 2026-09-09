@@ -9,7 +9,7 @@ use function array_key_exists;
 /**
  * A saved arrangement of dashboard cards, applied over the catalogue.
  *
- * ## An OVERRIDE, never a replacement — and that is the whole design
+ * ## An OVERRIDE, never a replacement -- and that is the whole design
  *
  * The obvious model is "the layout lists the dashboard". It is wrong, and
  * wrong in a way that only shows up months later: install a module, and its
@@ -29,8 +29,8 @@ use function array_key_exists;
  *
  * The catalogue has already dropped widgets this viewer may not be offered, and
  * this only ever REORDERS, RESIZES and HIDES what it is given. A layout cannot
- * add a widget, so an edited file — or one written when the viewer had more
- * roles — can never put back a card the registry refused.
+ * add a widget, so an edited file -- or one written when the viewer had more
+ * roles -- can never put back a card the registry refused.
  */
 final readonly class DashboardLayout
 {
@@ -55,7 +55,7 @@ final readonly class DashboardLayout
      * The catalogue as this layout arranges it.
      *
      * Hidden widgets are MARKED and kept in place rather than removed:
-     * a dashboard skips them, and an editor needs them — the only cards anyone
+     * a dashboard skips them, and an editor needs them -- the only cards anyone
      * wants to add back are the ones that are not being drawn.
      *
      * @param list<DashboardWidget> $catalogue as the registry offered it
@@ -72,7 +72,7 @@ final readonly class DashboardLayout
         $out = [];
         $placed = [];
         foreach ($this->placements as $placement) {
-            // A placement for a widget that is not on offer — the module was
+            // A placement for a widget that is not on offer -- the module was
             // uninstalled, or the registry filtered it out for this viewer.
             // Ignored rather than refused: a layout outliving one module must
             // not take the whole dashboard down with it, and re-saving would

@@ -10,7 +10,7 @@ use Throwable;
 use function sprintf;
 
 /**
- * The message could not be turned into an email — a body that fails to render,
+ * The message could not be turned into an email -- a body that fails to render,
  * a theme layout that is missing and has no usable fallback.
  *
  * Scope is deliberately narrow. A missing IMAGE or an unreadable ATTACHMENT does

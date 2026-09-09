@@ -8,7 +8,7 @@ namespace CoolMS\Core\Config;
  * The port the config store persists through.
  *
  * Domain-side so the writer and the loader depend on an interface rather than
- * on the ORM — the platform's ORM-agnostic rule, and the reason a `(type, id)`
+ * on the ORM -- the platform's ORM-agnostic rule, and the reason a `(type, id)`
  * override could later live somewhere that is not a relational table without
  * anything above this changing.
  */

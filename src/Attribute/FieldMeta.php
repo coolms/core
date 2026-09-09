@@ -16,7 +16,7 @@ use Attribute;
  * for any omitted value (e.g., label falls back to ucfirst of the
  * property name).
  *
- * Phase X-2.5 — filter/sort/search/enum properties added for the
+ * Filter/sort/search/enum properties added for the
  * `EntityFieldDescriptor` service that powers the document-generation
  * wizard's filter UI. Defaults preserve backwards compatibility:
  * existing usages without the new params behave exactly as before
@@ -36,7 +36,7 @@ final readonly class FieldMeta
      * @param string[]             $securityRead          Roles allowed to read this field. Empty means all roles.
      * @param string[]             $securityWrite         Roles allowed to write this field. Empty means all roles.
      * @param int|null             $sortOrder             Display order in forms and grids
-     * @param bool                 $private               Internal implementation detail — never expose in any UI.
+     * @param bool                 $private               Internal implementation detail -- never expose in any UI.
      *                                                    Distinct from showInForm (form-only) and hidden (hidden input).
      * @param bool                 $filterable            Field may be used in RQL filter clauses (X-2.5).
      * @param list<string>|null    $filterOperators       Whitelist of CoolMS\Rql operator codes (eq, ne, gt, lt,
@@ -46,7 +46,7 @@ final readonly class FieldMeta
      * @param bool                 $sortable              Field may be used in RQL sort clauses (X-2.5).
      * @param bool                 $searchable            Field participates in free-text search (X-2.5).
      * @param class-string|null    $enumClass             BackedEnum class describing legal values. When set, the
-     *                                                    descriptor emits an `enumValues` map of case → label
+     *                                                    descriptor emits an `enumValues` map of case -> label
      *                                                    so the frontend can render a select widget (X-2.5).
      */
     public function __construct(

@@ -17,7 +17,7 @@ use function trim;
 /**
  * Resolves a terminal path argument against a working directory.
  *
- * Until now every VFS terminal command took an ABSOLUTE path — `ls` defaulted
+ * Until now every VFS terminal command took an ABSOLUTE path -- `ls` defaulted
  * to `/`, and `cat themes/x` meant nothing. That is the one thing that makes
  * the terminal not feel like a shell, and the fix is not per-command: it is a
  * single resolution rule that every command reaches through
@@ -25,7 +25,7 @@ use function trim;
  *
  * ## The rules, in the order they apply
  *
- *  - `~` alone, or a `~/…` prefix, expands to the caller's home directory.
+ *  - `~` alone, or a `~/...` prefix, expands to the caller's home directory.
  *  - a leading `/` is absolute and the cwd is ignored.
  *  - anything else is relative to the cwd.
  *  - `.` and `..` segments are then collapsed LEXICALLY, and `..` at the root
@@ -34,7 +34,7 @@ use function trim;
  * ## Lexical, deliberately
  *
  * Collapsing happens on the string, without consulting the VFS. That differs
- * from a real kernel, which resolves symlinks first — so under a symlinked
+ * from a real kernel, which resolves symlinks first -- so under a symlinked
  * directory, `cd a/b/..` returns to `a` rather than to the link target's
  * parent. The alternative is a VFS round-trip per segment on every argument of
  * every command, and this platform's symlinks are terminal-node links rather
@@ -44,7 +44,7 @@ use function trim;
  * hidden.
  *
  * Returns paths WITHOUT a trailing slash (except the root itself), which is the
- * form `materializedPath` uses — so a resolved path can be compared to a stored
+ * form `materializedPath` uses -- so a resolved path can be compared to a stored
  * one without normalising again.
  */
 final readonly class TerminalPath
@@ -60,7 +60,7 @@ final readonly class TerminalPath
     {
         $raw = trim($argument);
 
-        // An omitted path means "here" — the shell default that makes bare `ls`
+        // An omitted path means "here" -- the shell default that makes bare `ls`
         // list the working directory rather than the root.
         if ('' === $raw) {
             return self::normalize($cwd);
@@ -85,7 +85,7 @@ final readonly class TerminalPath
      *
      * `..` past the root is clamped rather than rejected: `cd /..` in a shell
      * leaves you at `/`, and a terminal that errored there would be surprising
-     * without protecting anything — the VFS permission check is what actually
+     * without protecting anything -- the VFS permission check is what actually
      * guards access.
      */
     public static function normalize(string $path): string
@@ -96,7 +96,7 @@ final readonly class TerminalPath
                 continue;
             }
             if ('..' === $segment) {
-                array_pop($segments); // no-op at the root — clamped, not an error
+                array_pop($segments); // no-op at the root -- clamped, not an error
                 continue;
             }
             $segments[] = $segment;
@@ -108,7 +108,7 @@ final readonly class TerminalPath
     /**
      * Render a path for the PROMPT: the home directory contracts back to `~`.
      *
-     * The inverse of `~` expansion, and the reason it exists is width — a home
+     * The inverse of `~` expansion, and the reason it exists is width -- a home
      * path is `/home/{uuid}`, which would eat most of a prompt line and tell the
      * reader nothing they did not know.
      */

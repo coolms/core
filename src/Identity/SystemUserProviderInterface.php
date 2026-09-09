@@ -11,7 +11,7 @@ namespace CoolMS\Core\Identity;
  */
 interface SystemUserProviderInterface
 {
-    /** Username and primary group name — singular snake_case. */
+    /** Username and primary group name -- singular snake_case. */
     public string $systemUsername { get; }
 
     /**
@@ -20,6 +20,6 @@ interface SystemUserProviderInterface
      */
     public string $displayName { get; }
 
-    /** Module alias used for registry lookup — unique across all providers. */
+    /** Module alias used for registry lookup -- unique across all providers. */
     public string $moduleAlias { get; }
 }

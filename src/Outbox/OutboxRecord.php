@@ -12,7 +12,7 @@ use DateTimeImmutable;
 use Symfony\Component\Uid\Uuid;
 
 /**
- * The persisted form of an {@see OutboxMessage} — one row in the transactional
+ * The persisted form of an {@see OutboxMessage} -- one row in the transactional
  * outbox. Written in the producer's transaction; a Messenger relay
  * (a later F7 slice) publishes committed rows and stamps `publishedAt`.
  *

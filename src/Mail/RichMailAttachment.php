@@ -12,7 +12,7 @@ use function substr;
 use function trim;
 
 /**
- * One file travelling with a {@see RichMailMessage} — either a normal
+ * One file travelling with a {@see RichMailMessage} -- either a normal
  * attachment or an image inlined into the HTML body.
  *
  * **Two sources, deliberately.** A caller either names a VFS path
@@ -24,7 +24,7 @@ use function trim;
  *
  * **`cid` is what makes an image inline.** A non-null `cid` tells the composer
  * to attach this part with that Content-ID and expect the body's `<img src>` to
- * reference `cid:{cid}` — the form mail clients render without the
+ * reference `cid:{cid}` -- the form mail clients render without the
  * "load remote images?" prompt. A null `cid` is an ordinary attachment shown in
  * the client's attachment tray. See {@see RichMailComposerInterface} for why
  * remote `src` URLs are rewritten this way rather than left alone.
@@ -53,7 +53,7 @@ final readonly class RichMailAttachment
     /**
      * Attach a file the composer will read from the VFS.
      *
-     * The composer reads it as the SENDING user, never as a system identity —
+     * The composer reads it as the SENDING user, never as a system identity --
      * a message must not be able to exfiltrate a file its author cannot open.
      */
     public static function fromVfsPath(string $path, ?string $filename = null, ?string $contentType = null): self

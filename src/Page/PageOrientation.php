@@ -7,7 +7,7 @@ namespace CoolMS\Core\Page;
 /**
  * Page orientation, an axis SEPARATE from {@see PageSize}.
  *
- * The catalog used to carry `wide`, which is A4-in-landscape — size and
+ * The catalog used to carry `wide`, which is A4-in-landscape -- size and
  * orientation fused into one preset. That works for exactly one combination
  * and makes every other one unexpressible: there was no way to say A3
  * landscape, or Letter landscape, because the preset list would have to grow a
@@ -39,7 +39,7 @@ enum PageOrientation: string
      * dimensions when it disagrees with how the size declared itself.
      *
      * PHPWord wants BOTH the swapped `pageSizeW`/`pageSizeH` and the
-     * `orientation` marker — setting the marker alone leaves the paper portrait
+     * `orientation` marker -- setting the marker alone leaves the paper portrait
      * and produces a landscape-labelled document with portrait dimensions.
      *
      * @param array{pageSizeW: int, pageSizeH: int, orientation: string} $section

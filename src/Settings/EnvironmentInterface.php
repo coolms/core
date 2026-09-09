@@ -11,13 +11,13 @@ namespace CoolMS\Core\Settings;
  * is a decision the settings tier makes on every request and must be able to
  * test both ways.
  *
- * ⚠️ **Presence, never the value.** The value an operator pinned is already in
- * the container parameter the module ships with -- `%env(int:default:…:PAGE_CACHE_TTL)%`
+ * !! **Presence, never the value.** The value an operator pinned is already in
+ * the container parameter the module ships with -- `%env(int:default:...:PAGE_CACHE_TTL)%`
  * resolves to the environment when the variable is set and to the fallback when
  * it is not. So the only thing left to ask is whether it WAS set, and reading
  * the value here would be a second, competing resolution of the same fact.
  *
- * ⚠️ Belongs to the KERNEL rather than to whichever module implements the
+ * !! Belongs to the KERNEL rather than to whichever module implements the
  * settings surface, and the reason is a layering one. An application that
  * enforces module boundaries typically bars a module from importing a SIBLING
  * module's domain types, and the settings implementation sits low -- so while

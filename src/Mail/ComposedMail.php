@@ -17,7 +17,7 @@ final readonly class ComposedMail
 {
     /**
      * @param list<string>             $to
-     * @param list<RichMailAttachment> $inline      parts referenced from $html as `cid:…`
+     * @param list<RichMailAttachment> $inline      parts referenced from $html as `cid:...`
      * @param list<RichMailAttachment> $attachments parts shown in the client's attachment tray
      * @param array<string, string>    $headers
      */

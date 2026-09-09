@@ -14,22 +14,22 @@ use function trim;
  * {@see ComposedMail}.
  *
  * **The body is authored markup, not final HTML.** It may still contain dtmpl
- * widget tags (`{widget:media:UUID …}`) and `<img src="/media/…">` references,
+ * widget tags (`{widget:media:UUID ...}`) and `<img src="/media/...">` references,
  * because that is what the rich editor produces. Turning it into something a
- * mail client renders is exactly the composer's job — see
+ * mail client renders is exactly the composer's job -- see
  * {@see RichMailComposerInterface}. Callers must NOT pre-render it, or inline
  * images silently stop working.
  *
  * **`template` names a theme layout, not a file.** The composer resolves it
  * against the active theme (`templates/emails/{template}.html.dtmpl`) with a
  * platform default as the fallback, so a theme can restyle every outbound mail
- * without any module knowing. `null` means "no wrapper" — the body is the whole
+ * without any module knowing. `null` means "no wrapper" -- the body is the whole
  * email, which is what a plain notification wants.
  *
  * **`context` is the layout's variables**, not the body's: a site name, a
  * greeting, an unsubscribe URL. Keeping it separate from the body is what lets
  * the unsubscribe link be a *link in the template* instead of a string
- * concatenated onto the HTML — the shape campaign senders used before this
+ * concatenated onto the HTML -- the shape campaign senders used before this
  * seam existed, which made the footer unstylable and English-only.
  */
 final readonly class RichMailMessage
@@ -52,7 +52,7 @@ final readonly class RichMailMessage
         public ?string $from = null,
         /**
          * The user whose read permissions gate every VFS read during composition
-         * — inline images and path attachments alike.
+         * -- inline images and path attachments alike.
          *
          * `null` means a system-originated mail, which composes as **anonymous**:
          * the VFS resolves it against the `other` permission bits, so a public

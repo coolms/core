@@ -9,7 +9,7 @@ use function array_keys;
 use function ksort;
 
 /**
- * Which entities `rql:explain` can inspect — contributed by the modules that
+ * Which entities `rql:explain` can inspect -- contributed by the modules that
  * own them.
  *
  * ## Why this exists
@@ -21,7 +21,7 @@ use function ksort;
  *         'VfsNode'  => Node::class,
  *     ]);
  *
- * — which made the shell import Navi and VFS just to name them, and left the
+ * -- which made the shell import Navi and VFS just to name them, and left the
  * parameter pointing at a dead class the moment either module was deleted. It is
  * the same inversion the commands themselves needed, in a different shape: a map
  * rather than a service, so the tagged-interface route the commands use does not
@@ -38,7 +38,7 @@ use function ksort;
  *
  * ## How a module contributes
  *
- * In the owning module's `Extension::load()` — no attribute, per the standing
+ * In the owning module's `Extension::load()` -- no attribute, per the standing
  * rule that configurable wiring lives in DI, not in classes:
  *
  *     $container->getDefinition(RqlExplainableEntityRegistry::class)
@@ -62,7 +62,7 @@ final class RqlExplainableEntityRegistry
     }
 
     /**
-     * @return class-string|null null when the label was never contributed —
+     * @return class-string|null null when the label was never contributed --
      *                           normally because the owning module is not
      *                           installed, which is a legitimate answer rather
      *                           than an error

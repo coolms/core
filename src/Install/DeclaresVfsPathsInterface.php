@@ -11,7 +11,7 @@ namespace CoolMS\Core\Install;
  * method to that one would break every existing implementer, and an installer
  * that claims nothing has nothing to say.
  *
- * ⚠️ This is ADVISORY. Nothing refuses an install over it today. That is a
+ * !! This is ADVISORY. Nothing refuses an install over it today. That is a
  * deliberate first step and not an oversight -- but a declaration nothing reads
  * is worthless, so `coolms:install` reads these and reports two modules
  * claiming the same path before it runs either of them. Enforcement can follow

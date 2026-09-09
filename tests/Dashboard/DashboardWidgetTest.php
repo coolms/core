@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
  *
  * Everything else a widget claims is checked by the registry, which can see the
  * other widgets and the viewer. A width needs neither, and the registry could
- * not check it in any case — the widget is constructed inside its module's
+ * not check it in any case -- the widget is constructed inside its module's
  * provider, upstream of anything the catalogue sees.
  */
 #[CoversClass(DashboardWidget::class)]
@@ -38,7 +38,7 @@ final class DashboardWidgetTest extends TestCase
 
     /**
      * Rejected rather than clamped. A clamp would hand back a card the module
-     * never chose, at a width its author cannot see is wrong — the silent
+     * never chose, at a width its author cannot see is wrong -- the silent
      * no-op, where the loud failure is the cheap one.
      */
     #[Test]
@@ -50,7 +50,7 @@ final class DashboardWidgetTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         // The id, because the module author reading this needs to know WHICH
-        // widget — a stack trace through a tagged-iterator registry does not
+        // widget -- a stack trace through a tagged-iterator registry does not
         // say, and a dashboard collects widgets from every installed module.
         $this->expectExceptionMessageMatches('/vfs\.file-count/');
 

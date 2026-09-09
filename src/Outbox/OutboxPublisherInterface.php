@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Outbox;
 
 /**
- * The relay's publish seam (Core L0) — hands a committed outbox message off to
+ * The relay's publish seam (Core L0) -- hands a committed outbox message off to
  * its consumers. The default in-monolith impl dispatches an
  * {@see OutboxMessagePublished} event in-process; at service-extraction time it
  * swaps to a broker publisher WITHOUT touching the relay or producers.

@@ -12,7 +12,7 @@ use DateTimeImmutable;
 use Symfony\Component\Uid\Uuid;
 
 /**
- * The consumer-side dedupe record — one row per
+ * The consumer-side dedupe record -- one row per
  * `(consumer, messageId)` a handler has already processed. The partner to the
  * outbox: at-least-once delivery is safe to process twice because a replay hits
  * the UNIQUE `(consumer, message_id)` constraint and the handler skips.

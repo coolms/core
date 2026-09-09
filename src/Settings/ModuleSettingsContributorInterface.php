@@ -17,7 +17,7 @@ namespace CoolMS\Core\Settings;
  * import the container it happens to run in, and phpstan's boundary rule
  * enforces exactly that.
  *
- * ⚠️ Belongs to the KERNEL rather than to whichever module implements the
+ * !! Belongs to the KERNEL rather than to whichever module implements the
  * settings surface, and the reason is a layering one. An application that
  * enforces module boundaries typically bars a module from importing a SIBLING
  * module's domain types, and the settings implementation sits low -- so while

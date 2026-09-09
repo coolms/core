@@ -6,7 +6,6 @@ namespace CoolMS\Core\Exception;
 
 /**
  * Convenience implementation of {@see TranslatableExceptionInterface}.
- * F6 Phase 3.
  *
  * Holds the translation triple and exposes the getters; the concrete
  * exception calls {@see setTranslation()} from its constructor or a

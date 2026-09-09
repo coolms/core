@@ -39,8 +39,8 @@ final readonly class TerminalInput
      * A positional argument resolved to an ABSOLUTE VFS path.
      *
      * This is what makes the terminal behave like a shell, and it exists here
-     * rather than in each command so the rule — `~`, absolute, relative-to-cwd,
-     * then lexical `.`/`..` collapsing — has exactly one implementation. A
+     * rather than in each command so the rule -- `~`, absolute, relative-to-cwd,
+     * then lexical `.`/`..` collapsing -- has exactly one implementation. A
      * command that reads {@see arg()} for a path is not wrong so much as
      * stranded at the root.
      *
