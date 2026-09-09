@@ -35,7 +35,7 @@ final readonly class StartWorkflowRequested
      *                                                  `(definitionKey, businessKey)`. Off by default, so a
      *                                                  workflow that legitimately allows concurrent instances
      *                                                  per key (e.g. multiple content reviews) is unaffected.
-     *                                                  The CDP segment-entry journey seam (Track E Phase 5)
+     *                                                  The CDP segment-entry journey seam
      *                                                  sets it so a subject oscillating in/out of a segment
      *                                                  starts its journey once.
      */

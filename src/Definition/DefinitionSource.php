@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Definition;
 
 /**
- * Ship A Phase 2 -- discriminator on
+ * Discriminator on
  * `AbstractDefinitionVersion` in the consuming application
  * marking where the body bytes for this version come from.
  *
@@ -47,8 +47,8 @@ namespace CoolMS\Core\Definition;
  * appear in DB tooling + log lines. Int-backed would have been
  * marginally smaller but unreadable in queries.
  *
- * **Why in `Domain/Install` instead of `Domain/Entity`** (Phase 3
- * move): the enum is part of the public contract shared with
+ * **Why in `Domain/Install` instead of `Domain/Entity`**: the enum
+ * is part of the public contract shared with
  * cross-module contributor implementations
  * ({@see WorkflowDefinitionContributorInterface::getSource}). Living
  * alongside the contract namespace -- rather than the entity that

@@ -9,11 +9,11 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
- * F6 Phase 1 -- the platform-defaults value object.
+ * The platform-defaults value object.
  *
  * It's a dumb readonly VO; the only behaviour worth pinning is
  * `forCalendarSection()`, which maps the VO onto the exact key shape
- * `CalendarPreferencesContributor` uses so Phase 2 can drop it in as the
+ * `CalendarPreferencesContributor` uses so a caller can drop it in as the
  * cascade floor.
  */
 final class PlatformDefaultsTest extends TestCase

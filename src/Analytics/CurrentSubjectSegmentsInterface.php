@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Analytics;
 
 /**
- * Request-edge seam (Track E Phase 4 -- content personalization) that resolves
+ * Request-edge seam for content personalization that resolves
  * the CDP segment keys the CURRENT request's subject belongs to.
  *
  * The fourth "Current*" request-edge reader alongside

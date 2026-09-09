@@ -30,7 +30,7 @@ final class ReservedFieldNames
         'extras' => 'reserved by ExtrasProviderTrait (the dynamic field bag itself)',
         // IdentifierProviderTrait -- identity is immutable and framework-managed
         'id' => 'reserved by IdentifierProviderTrait',
-        // TimestampableTrait -- lifecycle timestamps are managed by Doctrine listeners
+        // TimestampableTrait -- lifecycle timestamps are set by the persistence layer
         'createdAt' => 'reserved by TimestampableTrait',
         'updatedAt' => 'reserved by TimestampableTrait',
         'accessedAt' => 'reserved by TimestampableTrait',
@@ -38,8 +38,8 @@ final class ReservedFieldNames
         // BlameableTrait -- set by the security layer, not user input
         'createdBy' => 'reserved by BlameableTrait',
         'updatedBy' => 'reserved by BlameableTrait',
-        // SQL / Doctrine reserved words -- would corrupt the discriminator column or DDL
-        'type' => 'reserved SQL/Doctrine keyword (discriminator column)',
+        // SQL and ORM reserved words -- would corrupt the discriminator column or DDL
+        'type' => 'reserved SQL and ORM keyword (discriminator column)',
         'table' => 'reserved SQL keyword in all major RDBMS',
         // NOTE: 'name' and 'description' are intentionally NOT reserved here.
         // They are native properties on entities that use NameProviderTrait /

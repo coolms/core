@@ -7,8 +7,8 @@ namespace CoolMS\Core\Event;
 use DateTimeImmutable;
 
 /**
- * A CDP subject just ENTERED or EXITED an audience segment -- the Track E
- * **Phase 5 (activation)** substrate. Dispatched once per membership delta by
+ * A CDP subject just ENTERED or EXITED an audience segment -- the
+ * **activation** substrate. Dispatched once per membership delta by
  * the analytics module's segment-membership recomputer (the
  * sole writer of `Subject.segments`), AFTER the change is committed.
  *
@@ -16,7 +16,7 @@ use DateTimeImmutable;
  * membership change", so it is modelled as one Core (L0) domain event that any
  * module may listen to independently -- exactly like {@see StartWorkflowRequested}
  * (the cross-module workflow-start seam). The recomputer stays closed to
- * modification while Phase 5 grows: this ships with a single listener
+ * modification while activation grows: this ships with a single listener
  * (the analytics module's transition recorder,
  * aggregate telemetry), and later slices add a journey-start listener (Workflow),
  * a real-time push, and an external-CDP fan-out -- with zero

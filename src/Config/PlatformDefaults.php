@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CoolMS\Core\Config;
 
 /**
- * Platform-wide default user-facing settings. F6 Phase 1.
+ * Platform-wide default user-facing settings.
  *
  * The floor of the settings cascade `Platform -> User`: when a user has
  * no stored preference for one of these, this is what applies. The same
@@ -32,7 +32,7 @@ namespace CoolMS\Core\Config;
  * the autowire prototype scan; registered explicitly in `Core\...\Extension`.
  *
  * Extensible: number / currency / measurement-unit defaults land here
- * when a consumer needs them. Phase 1 keeps it to the five settings that
+ * when a consumer needs them. It starts with the five settings that
  * already have per-user counterparts.
  */
 final readonly class PlatformDefaults
@@ -64,7 +64,7 @@ final readonly class PlatformDefaults
 
     /**
      * The calendar-section shape, matching `CalendarPreferencesContributor`'s
-     * keys so Phase 2 can `array_merge($this->forCalendarSection(), $stored)`
+     * keys so a caller can `array_merge($this->forCalendarSection(), $stored)`
      * as a literal drop-in for the contributor's hardcoded defaults.
      *
      * `defaultCalendarSlug` is intentionally absent: it has no platform

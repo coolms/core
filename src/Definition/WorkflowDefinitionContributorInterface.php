@@ -74,7 +74,7 @@ interface WorkflowDefinitionContributorInterface
     public function getBody(): string;
 
     /**
-     * Tells the Workflow installer (Ship A Phase 4) which lifecycle to
+     * Tells the Workflow installer which lifecycle to
      * use for this contributor's body.
      *
      *  - {@see DefinitionSource::Vfs} (default semantics for existing
@@ -86,12 +86,12 @@ interface WorkflowDefinitionContributorInterface
      *    first-deploy.
      *  - {@see DefinitionSource::Contributor}: the body stays in the
      *    bundled module resource forever (or until a user explicitly
-     *    Forks-to-VFS per Phase 5). The installer skips VFS dir + draft
+     *    Forks-to-VFS). The installer skips VFS dir + draft
      *    creation entirely and stamps the version row with
      *    `nodeId=null, source=Contributor`. Every read at engine /
      *    cockpit time routes back through `getBody()` via the
      *    `ContributorDefinitionBodyLoader` in the consuming application.
-     *    Idempotency / drift detection is by body hash (Phase 4).
+     *    Idempotency / drift detection is by body hash.
      *
      * Existing contributors (Identity's verify-new-user spine, etc.)
      * default to {@see DefinitionSource::Vfs} -- behaviour-preserving.

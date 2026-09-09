@@ -15,7 +15,7 @@ namespace CoolMS\Core\Secret;
  *
  * The active backend is chosen per-environment via
  * `coolms_core.secret_store.driver`; the Core Extension aliases this
- * interface to the selected implementation. F1.a ships the dev-default
+ * interface to the selected implementation. The platform ships the dev-default
  * {@see \CoolMS\CoreBundle\Secret\EnvSecretStore}; the libsodium
  * filesystem store and the Vault store land in later F1 slices.
  *
