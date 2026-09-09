@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace CoolMS\Core\Web;
 
-use CoolMS\CoreModule\Template\ContextContributorInterface;
+use CoolMS\Core\Template\ContextContributorInterface;
 
 /**
  * Web-scoped marker for SSR context contributors. The signature

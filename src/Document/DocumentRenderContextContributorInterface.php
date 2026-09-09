@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace CoolMS\Core\Document;
 
-use CoolMS\CoreModule\Template\ContextContributorInterface;
+use CoolMS\Core\Template\ContextContributorInterface;
 
 /**
  * Marker for Document-module contributors that run at **render
