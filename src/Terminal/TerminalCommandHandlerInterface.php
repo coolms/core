@@ -32,7 +32,7 @@ interface TerminalCommandHandlerInterface
 
     /**
      * Minimum Symfony role required to execute this command.
-     * One of 'ROLE_USER', 'ROLE_ADMIN', or 'ROLE_ROOT'.
+     * One of 'ROLE_USER' or 'ROLE_ADMIN'.
      */
     public function getRequiredRole(): string;
 

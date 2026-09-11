@@ -9,7 +9,7 @@ final readonly class ApiResourceDefinition
 {
     /**
      * @param string                                                                  $path        Absolute path (route), e.g. '/api/v1/media/assets'
-     * @param string                                                                  $ownerAlias  System user module alias, e.g. 'media' or 'root'
+     * @param string                                                                  $ownerAlias  System user module alias, e.g. 'media' or 'admin'
      * @param string|null                                                             $groupName   Group name, e.g. 'media_library'; null uses the owner's primary group
      * @param int                                                                     $mode        Unix permission mode, e.g. 0o660
      * @param string                                                                  $description Human-readable purpose stored in extras

@@ -41,7 +41,7 @@ interface UserInterface
     public Uuid $primaryGroupId {
         get;
     }
-    public bool $isRoot {
+    public bool $isAdmin {
         get;
     }
     public bool $isSystem {
