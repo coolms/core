@@ -28,6 +28,20 @@ same commit as the change it describes.
   second may require what the first provided; sorting the second alone refused
   on a fact. Two of the tests are the case and its control.
 
+- `Identity\ElevationInterface` and `Identity\ElevationGateInterface`, with
+  `Identity\MembershipBypassGate` as the default implementation of the gate.
+  Membership of the administrators' group is who you are; elevation is what
+  state you are in: temporary, self-obtained, expiring on its own. Every privileged gate asks
+  `mayBypass()` instead of reading `$isAdmin` for itself, so the answer can move
+  from membership to elevation in one place and -- the reason it is a port --
+  can be rehearsed: a recording implementation counts EVALUATIONS beside
+  would-refuse HITS per gate, so "no bypass observed" and "the gate never ran"
+  are different outputs. The default is the pre-existing behaviour, membership,
+  uncounted, so hand-built fixtures keep constructing; the container wires the
+  recording one. `Identity\ElevationShadowStoreInterface` is where a recording
+  gate writes and the confirmation report reads: the writer and the reader are
+  different modules, and neither may import the other.
+
 ### Changed
 
 - `Identity\UserInterface::$isRoot` is `$isAdmin`. There is one privilege tier
