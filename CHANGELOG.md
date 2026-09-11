@@ -10,6 +10,36 @@ major number means here.
 history when this file was created. Every entry after that is written in the
 same commit as the change it describes.
 
+## Unreleased
+
+### Added
+
+- `Install\DeclaresPrerequisitesInterface` and `Install\InstallOrder`. An
+  installer declares what it requires and what it provides, as opaque tokens
+  (`system-user:admin`, `vfs-node:/`), and `InstallOrder::sort()` derives the
+  run order from the declarations. It refuses -- `UnorderableInstallersException`,
+  before anything runs -- when a requirement has no provider or the declarations
+  form a cycle, naming every unsatisfied token and every member of the cycle
+  rather than the first. Opt-in per installer: a non-declarer is placed by the
+  class-name tie-break, which is the order it always had.
+- `InstallOrder::sort()` takes a second argument, the tokens an EARLIER phase
+  provided, and `InstallOrder::provisionsOf()` collects them. `coolms:install`
+  sorts its structure and module phases separately, and an installer in the
+  second may require what the first provided; sorting the second alone refused
+  on a fact. Two of the tests are the case and its control.
+
+### Changed
+
+- `Identity\UserInterface::$isRoot` is `$isAdmin`. There is one privilege tier
+  above a signed-in user, `ROLE_ADMIN`, and the property is named for it. The
+  application it was extracted from renamed the system user `root` to `admin`
+  and folded `ROLE_ROOT` into `ROLE_ADMIN` on the same day; a consumer with a
+  `root` account is not affected by this package, only by that application.
+- `Install\VfsInstallerInterface`'s docblock now describes the order an
+  installer actually gets: registration order (alphabetical) unless it
+  declares, and the derived order when it does. It used to promise a
+  dependency order nothing implemented.
+
 ## 2.0.0-alpha3 - 2026-09-09
 ### Added
 

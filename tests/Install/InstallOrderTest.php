@@ -152,6 +152,59 @@ final class InstallOrderTest extends TestCase
     }
 
     /**
+     * !! THE CASE THAT HID BEHIND THE FIRST REFUSAL. Four VFS installers are in
+     * BOTH phases of coolms:install -- structure and module -- and require
+     * `system-user:admin`, which a structure installer provides. Sorting the
+     * module set on its own refused on that token: correct for the set, wrong
+     * for the run, because the structure phase had already provided it. It was
+     * not seen until the structure phase got its providers, because until then
+     * the structure sort refused first and the module sort never ran.
+     *
+     * The control is the same input WITHOUT the earlier phase: it must still
+     * refuse, or this test would pass against a sort that ignores requirements.
+     */
+    public function testARequirementProvidedByAnEarlierPhaseIsSatisfiedWithoutAProviderInThisOne(): void
+    {
+        $earlierPhase = [new OmegaProvides()];
+        $laterPhase = [new AlphaRequiresOmega()];
+
+        $ordered = InstallOrder::sort($laterPhase, InstallOrder::provisionsOf($earlierPhase));
+
+        self::assertSame($laterPhase, $ordered, 'the later phase runs, and the earlier phase is not re-run in it');
+
+        // Control: without the earlier phase's provisions, the same set refuses.
+        $this->expectException(UnorderableInstallersException::class);
+        $this->expectExceptionMessage('nothing provides "thing:omega-made-this"');
+        InstallOrder::sort($laterPhase);
+    }
+
+    /**
+     * A token provided both earlier AND by an installer in this set still
+     * orders the in-set provider first: the earlier provision does not erase
+     * a relation that exists inside the set.
+     */
+    public function testAnInSetProviderStillRunsFirstWhenAnEarlierPhaseProvidedTheSameToken(): void
+    {
+        $alpha = new AlphaRequiresOmega();
+        $omega = new OmegaProvides();
+
+        $ordered = InstallOrder::sort([$alpha, $omega], ['thing:omega-made-this']);
+
+        self::assertSame([$omega, $alpha], $ordered);
+    }
+
+    public function testProvisionsOfCollectsEveryDeclaredTokenOnceAndSkipsNonDeclarers(): void
+    {
+        $tokens = InstallOrder::provisionsOf([
+            new OmegaProvides(),
+            $this->installer([], ['token:x', 'thing:omega-made-this']),
+            new class {},
+        ]);
+
+        self::assertSame(['thing:omega-made-this', 'token:x'], $tokens);
+    }
+
+    /**
      * A three-deep chain, fed in an order that is wrong at every step, so the
      * result cannot be the input by accident.
      */
