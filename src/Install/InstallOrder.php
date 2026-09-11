@@ -28,23 +28,37 @@ namespace CoolMS\Core\Install;
  * Installers that do not implement {@see DeclaresPrerequisitesInterface} require
  * nothing and provide nothing. They still run -- the guard is the default, the
  * same way {@see VfsPathClaims} skips a non-declarer.
+ *
+ * !! PHASES. `coolms:install` runs its structure installers to completion and
+ * THEN its module installers, sorting each set separately. An installer in the
+ * second set may require what the first set provided -- four VFS installers sit
+ * in both sets, and their `system-user:admin` is provided by a structure
+ * installer that has already run by the time the module phase is sorted. So a
+ * later phase is sorted with the earlier phase's provisions passed in as
+ * already satisfied: {@see provisionsOf} collects them. Without that, the
+ * second sort refuses on a prerequisite that is a fact, which is what happened
+ * the first time the structure phase got its providers (2026-09-11).
  */
 final readonly class InstallOrder
 {
     /**
      * @template T of object
      *
-     * @param iterable<T> $installers
+     * @param iterable<T>  $installers
+     * @param list<string> $alreadyProvided tokens an EARLIER phase provided; a
+     *                                      requirement among them is satisfied
+     *                                      and orders nothing in this set
      *
      * @return list<T> the same installers, in an order that satisfies every declaration
      *
      * @throws UnorderableInstallersException when a requirement has no provider, or the
      *                                        declarations form a cycle
      */
-    public static function sort(iterable $installers): array
+    public static function sort(iterable $installers, array $alreadyProvided = []): array
     {
         /** @var list<object> $all */
         $all = [...$installers];
+        $satisfiedBefore = array_fill_keys($alreadyProvided, true);
 
         // token => installers that provide it
         /** @var array<string, list<int>> $providers */
@@ -73,6 +87,11 @@ final readonly class InstallOrder
             }
             foreach ($installer->declaredRequirements() as $token) {
                 if (!isset($providers[$token])) {
+                    // Provided by an earlier phase: satisfied, and there is
+                    // nothing in THIS set to run before this installer for it.
+                    if (isset($satisfiedBefore[$token])) {
+                        continue;
+                    }
                     $unsatisfied[$token][] = $installer::class;
 
                     continue;
@@ -92,7 +111,31 @@ final readonly class InstallOrder
             throw UnorderableInstallersException::unsatisfied($unsatisfied);
         }
 
+        /** @var list<T> */
         return self::topological($all, $dependsOn);
+    }
+
+    /**
+     * Every token the given installers provide -- what a LATER phase may treat
+     * as already satisfied, once these have run.
+     *
+     * @param iterable<object> $installers
+     *
+     * @return list<string>
+     */
+    public static function provisionsOf(iterable $installers): array
+    {
+        $tokens = [];
+        foreach ($installers as $installer) {
+            if (!$installer instanceof DeclaresPrerequisitesInterface) {
+                continue;
+            }
+            foreach ($installer->declaredProvisions() as $token) {
+                $tokens[$token] = true;
+            }
+        }
+
+        return array_keys($tokens);
     }
 
     /**
@@ -132,7 +175,7 @@ final readonly class InstallOrder
                 // Nothing can run, and installers are left: every one of them is
                 // waiting on another that is also waiting. Refuse, naming them.
                 throw UnorderableInstallersException::cycle(
-                    array_values(array_map(static fn (int $i): string => $all[$i]::class, $remaining)),
+                    array_map(static fn (int $i): string => $all[$i]::class, $remaining),
                 );
             }
 

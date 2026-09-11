@@ -26,18 +26,24 @@ namespace CoolMS\Core\Install;
  * alphabetically, which is how the old sentence could look true to anyone who
  * checked it that way.
  *
- * So an implementation must NOT assume a peer has run. Six of the seven require
- * the `root` system user by name and discover its absence at the point of use,
- * mid-install, rather than before anything runs.
+ * So an implementation must NOT assume a peer has run unless it has DECLARED
+ * that it needs it. All seven require the `admin` system user by name and
+ * discovered its absence at the point of use, mid-install, rather than before
+ * anything runs -- until they declared it.
  *
- * A derived dependency order is being DESIGNED -- installers declaring what they
- * require and what they provide, with the order computed from the declarations
- * and a refusal before the first installer executes when a prerequisite is
- * unsatisfiable or the declarations form a cycle. It does not exist yet. Until
- * it does, the paragraph above describes the order you actually get.
+ * The derived order exists since 2026-09-11: {@see InstallOrder} computes it
+ * from {@see DeclaresPrerequisitesInterface} -- what each installer requires
+ * and what it provides -- and refuses before the first installer executes when
+ * a prerequisite is unsatisfiable or the declarations form a cycle. It is
+ * opt-in per installer: one that declares nothing is placed by the tie-break,
+ * which is still the class name. Whether `coolms:install` uses it depends on
+ * the core-bundle version; the paragraph above describes the order an
+ * undeclared installer gets either way.
  *
  * Adds nothing to {@see StructureInstallerInterface}: it exists so the tag has a
- * VFS-named contract to autoconfigure on, while the kernel types against Core's.
+ * VFS-named contract to autoconfigure on, while the kernel types against Core's
+ * -- and a structure installer that creates no directory implements Core's
+ * contract alone.
  *
  * MUST be idempotent -- safe to run multiple times.
  */
