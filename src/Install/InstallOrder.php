@@ -111,8 +111,10 @@ final readonly class InstallOrder
             throw UnorderableInstallersException::unsatisfied($unsatisfied);
         }
 
-        /* @var list<T> */
-        return self::topological($all, $dependsOn);
+        /** @var list<T> $ordered */
+        $ordered = self::topological($all, $dependsOn);
+
+        return $ordered;
     }
 
     /**
