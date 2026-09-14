@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Decision;
 
-use CoolMS\Core\Decision\DecisionDefinitionAst;
+namespace CoolMS\Core\Decision;
 
 /**
  * Contract for a single deploy-time DMN-validation rule.

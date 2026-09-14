@@ -1,10 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Word;
 
-use CoolMS\Core\Word\BlockContainerInterface;
-use CoolMS\Core\Word\Paragraph;
+namespace CoolMS\Core\Word;
 
 use function count;
 

@@ -1,10 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Scheduler;
 
-use CoolMS\Core\Scheduler\TriggerKind;
-use CoolMS\Core\Scheduler\InvalidTriggerSpecException;
 use DateTimeImmutable;
 use DateTimeZone;
 

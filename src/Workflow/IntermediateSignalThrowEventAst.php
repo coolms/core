@@ -1,12 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
-use CoolMS\Core\Workflow\ElementKind;
-use CoolMS\Core\Workflow\SignalDefinition;
-use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
  * BPMN-Lite Intermediate Signal THROW Event -- the fire-and-continue

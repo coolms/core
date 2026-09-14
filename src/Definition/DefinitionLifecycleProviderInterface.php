@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Definition;
 
 /**
  * WRITE-side counterpart to
- * {@see \CoolMS\Core\Definition\DefinitionCatalogProviderInterface},
+ * {@see DefinitionCatalogProviderInterface},
  * implemented by each Definition consumer module (Workflow, Decision,
  * future Form).
  *

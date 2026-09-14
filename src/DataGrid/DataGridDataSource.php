@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\DataGrid;
 
-use CoolMS\Core\DataGrid\DataGridSourceType;
+namespace CoolMS\Core\DataGrid;
 
 final readonly class DataGridDataSource
 {

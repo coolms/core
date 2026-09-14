@@ -1,11 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Decision;
 
-use CoolMS\Core\Decision\HitPolicy;
-use CoolMS\Core\Decision\DecisionTableAst;
-use CoolMS\Core\Decision\DecisionEvaluationException;
+namespace CoolMS\Core\Decision;
 
 /**
  * Strategy seam for the 5 DMN 1.3 hit policies the scope pins

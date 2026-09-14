@@ -1,12 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
-use CoolMS\Core\Workflow\ElementKind;
-use CoolMS\Core\Workflow\GatewayDirection;
-use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
  * BPMN-Lite Inclusive (OR) Gateway -- the third gateway kind, completing

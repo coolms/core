@@ -1,10 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
-use CoolMS\Core\Workflow\ConditionExpression;
 
 /**
  * Immutable AST node for a BPMN sequence flow -- the directed edge
@@ -17,13 +17,13 @@ use CoolMS\Core\Workflow\ConditionExpression;
  *
  * Sequence flows are NOT visited via {@see accept()} -- they are walked
  * by the root AST's traversal (`ProcessDefinitionAst::accept()`),
- * which dispatches to {@see \CoolMS\Core\Workflow\WorkflowAstVisitorInterface::visitSequenceFlow()}
+ * which dispatches to {@see WorkflowAstVisitorInterface::visitSequenceFlow()}
  * directly. This mirrors the BPMN XML convention where `<sequenceFlow>`
  * lives flat under `<process>` rather than nested on its endpoints.
  *
  * `$isDefault` is a back-reference set by the parser when this flow's
  * id appears in some `exclusiveGateway.default` slot. Walkers may
- * reach the default flow either via {@see \CoolMS\Core\Workflow\ExclusiveGatewayAst}
+ * reach the default flow either via {@see ExclusiveGatewayAst}
  * or via this flag (design doc section 3.5 row "Default flow on XOR").
  */
 final readonly class SequenceFlowAst

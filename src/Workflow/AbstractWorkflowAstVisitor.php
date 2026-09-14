@@ -1,25 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Workflow;
 
-use CoolMS\Core\Workflow\CallActivityAst;
-use CoolMS\Core\Workflow\EndEventAst;
-use CoolMS\Core\Workflow\EventBasedGatewayAst;
-use CoolMS\Core\Workflow\ExclusiveGatewayAst;
-use CoolMS\Core\Workflow\InclusiveGatewayAst;
-use CoolMS\Core\Workflow\IntermediateMessageEventAst;
-use CoolMS\Core\Workflow\IntermediateMessageThrowEventAst;
-use CoolMS\Core\Workflow\IntermediateSignalEventAst;
-use CoolMS\Core\Workflow\IntermediateSignalThrowEventAst;
-use CoolMS\Core\Workflow\IntermediateTimerEventAst;
-use CoolMS\Core\Workflow\ParallelGatewayAst;
-use CoolMS\Core\Workflow\ServiceTaskAst;
-use CoolMS\Core\Workflow\StartEventAst;
-use CoolMS\Core\Workflow\SubProcessAst;
-use CoolMS\Core\Workflow\UserTaskAst;
-use CoolMS\Core\Workflow\BoundaryEventAst;
-use CoolMS\Core\Workflow\SequenceFlowAst;
+namespace CoolMS\Core\Workflow;
 
 /**
  * No-op base implementation of {@see WorkflowAstVisitorInterface}.

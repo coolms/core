@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Workflow;
 
-use CoolMS\Core\Workflow\TimerKind;
+namespace CoolMS\Core\Workflow;
 
 /**
  * Timer spec on a timer start event, intermediate timer catch event,

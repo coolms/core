@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Definition;
 
-use CoolMS\Core\Definition\DefinitionSource;
+namespace CoolMS\Core\Definition;
 
 /**
  * Readonly filter VO threaded from the API provider down to each

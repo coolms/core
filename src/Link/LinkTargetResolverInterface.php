@@ -1,10 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Link;
 
-use CoolMS\Core\Link\LinkTarget;
-use CoolMS\Core\Link\ResolvedLink;
+namespace CoolMS\Core\Link;
 
 /**
  * Implemented by any module that resolves a single link target type.

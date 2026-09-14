@@ -1,10 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\Violations;
-use CoolMS\Core\Workflow\ProcessDefinitionAst;
 
 /**
  * Shared scratch space for a single validation run.

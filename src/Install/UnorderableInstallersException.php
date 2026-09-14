@@ -45,7 +45,7 @@ final class UnorderableInstallersException extends RuntimeException
         return new self(
             $unsatisfied,
             [],
-            "Install refused before anything ran -- a prerequisite nothing provides:\n".implode("\n", $lines),
+            "Install refused before anything ran -- a prerequisite nothing provides:\n" . implode("\n", $lines),
         );
     }
 

@@ -1,10 +1,11 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 /**
- * Variant axis for {@see \CoolMS\Core\Workflow\EndEventAst}.
+ * Variant axis for {@see EndEventAst}.
  *
  * - `none`       -- the token simply ends; the instance completes once no
  *                  other Active/Waiting tokens remain.

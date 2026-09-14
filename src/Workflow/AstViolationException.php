@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
@@ -8,7 +9,7 @@ use DomainException;
 use Throwable;
 
 /**
- * Raised when a {@see \CoolMS\Core\Workflow\ProcessDefinitionAst}
+ * Raised when a {@see ProcessDefinitionAst}
  * or one of its child AST value objects is constructed in a shape
  * that violates a parse-time invariant (e.g. empty process id,
  * `element(id)` / `flow(id)` lookups against an unknown id).

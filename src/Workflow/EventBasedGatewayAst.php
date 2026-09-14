@@ -1,11 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
-use CoolMS\Core\Workflow\ElementKind;
-use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
  * BPMN-Lite Event-Based Gateway (Workflow-engine-completeness arc). A

@@ -1,9 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
-use CoolMS\Core\Workflow\ElementInterface;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;

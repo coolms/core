@@ -49,10 +49,10 @@ final readonly class InstallOrder
      *                                      requirement among them is satisfied
      *                                      and orders nothing in this set
      *
-     * @return list<T> the same installers, in an order that satisfies every declaration
-     *
      * @throws UnorderableInstallersException when a requirement has no provider, or the
      *                                        declarations form a cycle
+     *
+     * @return list<T> the same installers, in an order that satisfies every declaration
      */
     public static function sort(iterable $installers, array $alreadyProvided = []): array
     {
@@ -111,7 +111,7 @@ final readonly class InstallOrder
             throw UnorderableInstallersException::unsatisfied($unsatisfied);
         }
 
-        /** @var list<T> */
+        /* @var list<T> */
         return self::topological($all, $dependsOn);
     }
 
@@ -145,9 +145,9 @@ final readonly class InstallOrder
      * @param list<object>                 $all
      * @param array<int, array<int, true>> $dependsOn
      *
-     * @return list<object>
-     *
      * @throws UnorderableInstallersException
+     *
+     * @return list<object>
      */
     private static function topological(array $all, array $dependsOn): array
     {
@@ -174,9 +174,7 @@ final readonly class InstallOrder
             if ([] === $ready) {
                 // Nothing can run, and installers are left: every one of them is
                 // waiting on another that is also waiting. Refuse, naming them.
-                throw UnorderableInstallersException::cycle(
-                    array_map(static fn (int $i): string => $all[$i]::class, $remaining),
-                );
+                throw UnorderableInstallersException::cycle(array_map(static fn (int $i): string => $all[$i]::class, $remaining));
             }
 
             usort($ready, static fn (int $a, int $b): int => $all[$a]::class <=> $all[$b]::class);

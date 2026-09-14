@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Workflow;
 
-use CoolMS\Core\Workflow\ProcessDefinitionAst;
+namespace CoolMS\Core\Workflow;
 
 /**
  * Contract for a single deploy-time validation rule.

@@ -1,12 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
-use CoolMS\Core\Workflow\ElementKind;
-use CoolMS\Core\Workflow\LoopCharacteristics;
-use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
  * BPMN-Lite **embedded subprocess** -- an activity that contains its
@@ -17,8 +15,8 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  * "cross-element references are id strings (not nested children)", the
  * elements inside a subprocess stay in the SAME flat `elements[]` list
  * and declare `"parent": "<subProcessId>"`. The root AST indexes that
- * into {@see \CoolMS\Core\Workflow\ProcessDefinitionAst::childrenOf}
- * / {@see \CoolMS\Core\Workflow\ProcessDefinitionAst::scopeOf}.
+ * into {@see ProcessDefinitionAst::childrenOf}
+ * / {@see ProcessDefinitionAst::scopeOf}.
  *
  * **Why flat rather than nested**: `ProcessDefinitionAst::element()` is
  * an O(1) lookup used by every validator rule, the boundary-event

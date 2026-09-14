@@ -1,12 +1,13 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 /**
  * Error metadata for an ERROR boundary event -- the BPMN
- * `errorEventDefinition` carried by a {@see \CoolMS\Core\Workflow\BoundaryEventAst}
- * whose subtype is {@see \CoolMS\Core\Workflow\BoundarySubtype::Error}.
+ * `errorEventDefinition` carried by a {@see BoundaryEventAst}
+ * whose subtype is {@see BoundarySubtype::Error}.
  *
  * `$code` mirrors BPMN's `errorRef` / error code. It is OPTIONAL: an empty code is
  * a **catch-all** that handles ANY service-task handler failure on the host

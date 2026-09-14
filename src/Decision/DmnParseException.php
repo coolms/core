@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Decision;
 
-use CoolMS\Core\Definition\SourceLocation;
 use CoolMS\Core\Definition\DefinitionValidationException;
 use CoolMS\Core\Definition\Severity;
+use CoolMS\Core\Definition\SourceLocation;
 use CoolMS\Core\Definition\Violation;
 use CoolMS\Core\Definition\Violations;
 use Throwable;
@@ -13,7 +14,7 @@ use Throwable;
 /**
  * Raised by `DmnXmlParser` in the consuming application when
  * the DMN 1.3 XML source cannot be turned into a
- * {@see \CoolMS\Core\Decision\DecisionDefinitionAst}.
+ * {@see DecisionDefinitionAst}.
  *
  * Mirrors `BpmnLiteParseException` in the consuming application
  * for the BPMN-Lite parser. Extends

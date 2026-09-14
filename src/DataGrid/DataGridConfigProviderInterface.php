@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\DataGrid;
 
-use CoolMS\Core\DataGrid\DataGridConfig;
+namespace CoolMS\Core\DataGrid;
 
 interface DataGridConfigProviderInterface
 {

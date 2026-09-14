@@ -1,10 +1,11 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 /**
- * Variant axis for {@see \CoolMS\Core\Workflow\StartEventAst}.
+ * Variant axis for {@see StartEventAst}.
  *
  * Closed enumeration of the start-event flavours the engine supports:
  * `none` (plain process start), `message` (correlation-keyed),

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Definition;
 
 use ArrayIterator;
@@ -19,7 +20,7 @@ use function count;
  * appends via {@see add}, and no removal API is exposed. The
  * instance becomes effectively-frozen the moment the orchestrator
  * stops iterating rules; the
- * {@see \CoolMS\Core\Definition\DefinitionValidationException}
+ * {@see DefinitionValidationException}
  * then captures it on a `readonly` property.
  *
  * Implements `Countable` so callers can `count($violations)` for
@@ -55,7 +56,7 @@ final class Violations implements Countable, IteratorAggregate
     /**
      * True if any contained violation has {@see Severity::Error}.
      * The orchestrator uses this to decide whether to throw
-     * {@see \CoolMS\Core\Definition\DefinitionValidationException}.
+     * {@see DefinitionValidationException}.
      * Warnings alone are not enough to block deploy.
      */
     public function errors(): bool
