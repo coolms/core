@@ -1,10 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Decision;
 
-use CoolMS\Core\Decision\CollectAggregator;
-use CoolMS\Core\Decision\HitPolicy;
+namespace CoolMS\Core\Decision;
 
 /**
  * `<decisionTable>` body of a DMN decision. Immutable.

@@ -1,11 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
-use CoolMS\Core\Workflow\ElementKind;
-use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
  * Shared shape for every BPMN-Lite AST element node -- the immutable,

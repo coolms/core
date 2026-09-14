@@ -1,14 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
-use CoolMS\Core\Workflow\BoundarySubtype;
-use CoolMS\Core\Workflow\ErrorDefinition;
-use CoolMS\Core\Workflow\MessageDefinition;
-use CoolMS\Core\Workflow\SignalDefinition;
-use CoolMS\Core\Workflow\TimerDefinition;
 
 /**
  * Immutable AST node for a BPMN boundary event -- a timer or message
@@ -16,7 +12,7 @@ use CoolMS\Core\Workflow\TimerDefinition;
  * that diverts the token along an alternative path when it fires.
  *
  * Boundary events are NOT elements -- they live in their own VO and
- * are stored flat on {@see \CoolMS\Core\Workflow\ProcessDefinitionAst::$boundaryEvents}
+ * are stored flat on {@see ProcessDefinitionAst::$boundaryEvents}
  * (design doc section 3.5 row "Where do boundary events live?"). The
  * `$attachedToId` carries the host element id; the validator's
  * `BoundaryAttachmentRule` in the consuming application

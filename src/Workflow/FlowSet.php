@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 /**
  * Per-element flow adjacency pair -- the cached value type stored in
- * {@see \CoolMS\Core\Workflow\ProcessDefinitionAst::$flowsByElement}
+ * {@see ProcessDefinitionAst::$flowsByElement}
  * (element id -> FlowSet).
  *
  * Carries the list of sequence-flow ids entering an element
@@ -14,7 +15,7 @@ namespace CoolMS\Core\Workflow;
  * with the rest of the AST's id-string cross-reference convention
  * (design doc section 2.5).
  *
- * Built lazily by {@see \CoolMS\Core\Workflow\ProcessDefinitionAst::indexFlows()}
+ * Built lazily by {@see ProcessDefinitionAst::indexFlows()}
  * on first access; cached for the lifetime of the (immutable) AST.
  * Validators (`FlowEndpointsExistRule`, `GatewayDegreeRule`,
  * `IncomingOutgoingConsistencyRule`, `ReachabilityRule`) read from

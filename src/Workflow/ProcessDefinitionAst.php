@@ -1,17 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
-use CoolMS\Core\Workflow\ElementInterface;
-use CoolMS\Core\Workflow\StartEventAst;
-use CoolMS\Core\Workflow\BoundaryEventAst;
-use CoolMS\Core\Workflow\FlowSet;
-use CoolMS\Core\Workflow\SequenceFlowAst;
-use CoolMS\Core\Workflow\ElementMap;
-use CoolMS\Core\Workflow\VariableMap;
-use CoolMS\Core\Workflow\AstViolationException;
 
 use function array_keys;
 use function array_pop;

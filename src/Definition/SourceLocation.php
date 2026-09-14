@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Definition;
 
 /**
@@ -8,7 +9,7 @@ namespace CoolMS\Core\Definition;
  *
  * All AST nodes accept an optional {@see SourceLocation} so the
  * validator can quote precise positions in
- * {@see \CoolMS\Core\Definition\Violation::$path} /
+ * {@see Violation::$path} /
  * `$message`. The parser stamps these when it can derive line +
  * column from the input; for the JSON parser the stamp is
  * NULL everywhere (the JSON tokeniser sidecar that produces real

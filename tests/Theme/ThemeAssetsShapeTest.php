@@ -39,22 +39,22 @@ final class ThemeAssetsShapeTest extends TestCase
         $css = [['url' => '/themes/x/app.css'], ['url' => '/themes/x/extra.css']];
         $js = [['url' => '/themes/x/app.js']];
 
-        self::assertSame($css, (new ThemeAssets($css, $js))->css);
-        self::assertSame($js, (new ThemeAssets($css, $js))->js);
+        self::assertSame($css, new ThemeAssets($css, $js)->css);
+        self::assertSame($js, new ThemeAssets($css, $js)->js);
 
-        self::assertSame($css, (new ThemeAuthoringAssets('x', $css, $js))->css);
-        self::assertSame($js, (new ThemeAuthoringAssets('x', $css, $js))->js);
+        self::assertSame($css, new ThemeAuthoringAssets('x', $css, $js)->css);
+        self::assertSame($js, new ThemeAuthoringAssets('x', $css, $js)->js);
     }
 
     public function testTheDivergenceIsIntentionalAndStillThere(): void
     {
         self::assertTrue(
-            (new ReflectionClass(ThemeAuthoringAssets::class))->hasProperty('themeSlug'),
+            new ReflectionClass(ThemeAuthoringAssets::class)->hasProperty('themeSlug'),
             'ThemeAuthoringAssets carries the resolved slug -- that is one of the '
             . 'two reasons it is not just ThemeAssets.',
         );
         self::assertFalse(
-            (new ReflectionClass(ThemeAssets::class))->hasProperty('themeSlug'),
+            new ReflectionClass(ThemeAssets::class)->hasProperty('themeSlug'),
             'ThemeAssets is one theme\'s own assets and has no slug of its own. '
             . 'If it grew one, the two types would have converged and the '
             . 'duplication should be revisited rather than maintained.',
@@ -79,7 +79,7 @@ final class ThemeAssetsShapeTest extends TestCase
      */
     private function documentedEntryTypes(string $class): array
     {
-        $ctor = (new ReflectionClass($class))->getConstructor();
+        $ctor = new ReflectionClass($class)->getConstructor();
         self::assertInstanceOf(ReflectionMethod::class, $ctor);
 
         $doc = $ctor->getDocComment();

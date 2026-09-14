@@ -1,9 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\DataGrid;
 
-use CoolMS\Core\DataGrid\DataGridDataSource;
 use CoolMS\Rql\RqlQuery;
 
 interface DataGridSourceInterface

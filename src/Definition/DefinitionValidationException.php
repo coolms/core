@@ -1,9 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Definition;
 
-use CoolMS\Core\Definition\Violations;
 use Throwable;
 
 use function count;

@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Decision;
 
-use CoolMS\Core\Decision\DecisionTableAst;
+namespace CoolMS\Core\Decision;
 
 /**
  * Root AST node for a DMN 1.3 decision. Immutable.

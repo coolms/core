@@ -1,13 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
-use CoolMS\Core\Workflow\ElementKind;
-use CoolMS\Core\Workflow\ConditionExpression;
-use CoolMS\Core\Workflow\LoopCharacteristics;
-use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
  * BPMN-Lite Service Task. {@see $implementation} is a dotted handler
@@ -31,7 +28,7 @@ use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
  *
  * {@see $forCompensation} marks this service task as a
  * COMPENSATION HANDLER -- the undo activity a compensation boundary
- * ({@see \CoolMS\Core\Workflow\BoundarySubtype::Compensation}) points
+ * ({@see BoundarySubtype::Compensation}) points
  * at. A `forCompensation` handler lives OFF the normal sequence flow (no token
  * ever reaches it during normal execution); the engine invokes it directly,
  * in reverse completion order, when a `compensate` end-throw is reached.

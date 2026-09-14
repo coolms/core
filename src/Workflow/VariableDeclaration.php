@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Workflow;
 
-use CoolMS\Core\Workflow\VariableType;
+namespace CoolMS\Core\Workflow;
 
 /**
  * One entry in `process.variables{}`. Variables are process-root scoped

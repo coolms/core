@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Decision;
 
-use CoolMS\Core\Decision\DataType;
+namespace CoolMS\Core\Decision;
 
 /**
  * One `<output>` column on a DMN decision table. Immutable.

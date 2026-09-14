@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 /**
@@ -33,7 +34,7 @@ enum ElementKind: string
     /**
      * Embedded subprocess -- a scope inside the SAME process instance.
      * Its children live in the same flat `elements[]` list and point
-     * back with `"parent": "<subProcessId>"`; see {@see \CoolMS\Core\Workflow\SubProcessAst}
+     * back with `"parent": "<subProcessId>"`; see {@see SubProcessAst}
      * for why the AST stays flat.
      */
     case SubProcess = 'subProcess';

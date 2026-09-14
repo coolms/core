@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Media;
 
-use CoolMS\Core\Media\ThumbnailConfig;
+namespace CoolMS\Core\Media;
 
 interface ImageProcessorInterface
 {

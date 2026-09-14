@@ -1,10 +1,11 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 /**
- * Subtype axis for {@see \CoolMS\Core\Workflow\BoundaryEventAst}
+ * Subtype axis for {@see BoundaryEventAst}
  * per `docs/investigations/m2c-design.md` section 2.3 / section 3.1.
  *
  * Three flavours in scope:

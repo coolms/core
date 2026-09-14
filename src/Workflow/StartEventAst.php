@@ -1,15 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Workflow;
 
 use CoolMS\Core\Definition\SourceLocation;
-use CoolMS\Core\Workflow\ElementKind;
-use CoolMS\Core\Workflow\StartEventVariant;
-use CoolMS\Core\Workflow\MessageDefinition;
-use CoolMS\Core\Workflow\SignalDefinition;
-use CoolMS\Core\Workflow\TimerDefinition;
-use CoolMS\Core\Workflow\WorkflowAstVisitorInterface;
 
 /**
  * BPMN-Lite Start Event. Three variants in scope at this stage: `none`,

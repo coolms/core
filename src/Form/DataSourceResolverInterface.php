@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Form;
 
-use CoolMS\Core\Form\DataSourceDefinition;
+namespace CoolMS\Core\Form;
 
 /**
  * Resolves a raw dataSource config array from YAML into a DataSourceDefinition.

@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-namespace CoolMS\Core\Decision;
 
-use CoolMS\Core\Decision\RuleAst;
+namespace CoolMS\Core\Decision;
 
 /**
  * One {@see RuleAst} that fired during evaluation, paired with its
@@ -13,10 +12,10 @@ use CoolMS\Core\Decision\RuleAst;
  * `outputs` is keyed by output column NAME (falling back to the
  * column id when `OutputClauseAst::$name` is null) so callers and
  * strategies can address columns by their authored handle without
- * threading the {@see \CoolMS\Core\Decision\OutputClauseAst}
+ * threading the {@see OutputClauseAst}
  * list through every consumer.
  *
- * `ruleIndex` is the rule's position in {@see \CoolMS\Core\Decision\DecisionTableAst::$rules}
+ * `ruleIndex` is the rule's position in {@see DecisionTableAst::$rules}
  * (0-based, document order). Strategies that care about document order
  * (FIRST, PRIORITY tie-break, COLLECT) read this rather than reaching
  * back into the AST.

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace CoolMS\Core\Form;
 
 final readonly class ValidatorDefinition
