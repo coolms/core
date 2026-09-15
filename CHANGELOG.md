@@ -42,6 +42,9 @@ same commit as the change it describes.
   gate writes and the confirmation report reads: the writer and the reader are
   different modules, and neither may import the other.
 
+Tests the application had been carrying for this package since the code
+moved here: `ContentSeederTest`, `SeedGuardTest`, `ModuleSpaceSettingsTest`. Nothing under `src/` changes.
+
 ### Changed
 
 - `Identity\UserInterface::$isRoot` is `$isAdmin`. There is one privilege tier
