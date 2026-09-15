@@ -45,6 +45,20 @@ same commit as the change it describes.
 Tests the application had been carrying for this package since the code
 moved here: `ContentSeederTest`, `SeedGuardTest`, `ModuleSpaceSettingsTest`. Nothing under `src/` changes.
 
+**The master key ring, as a contract.** `Secret\MasterKeyRingInterface` is
+the set of at-rest master keys a host holds, in the order a reader tries them:
+the current key, then -- during a rotation window -- the previous one. Writes
+use the current key, always; reads try both, which is what makes a half-finished
+rotation readable in every kind. `Secret\MasterKey` carries the 32 bytes and a
+derived id (16 hex of the SHA-256), so a sealed value can name the key it was
+sealed under and every host computes the same name. `Secret\SealedKindInterface`
+is one kind of sealed value as the rotation sweep sees it -- a name and an
+idempotent sweep -- with `Secret\RotationTally` for what the sweep found:
+under the current key, under the previous key, under neither, not sealed at
+all, re-sealed. `MasterKeyException` and `SealedValueException` name the two
+failures apart: a key that is unusable, and a value that no held key opens.
+The implementations live in `coolms/core-bundle`.
+
 ### Changed
 
 - `Identity\UserInterface::$isRoot` is `$isAdmin`. There is one privilege tier
