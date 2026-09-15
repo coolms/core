@@ -13,7 +13,8 @@ final class RotationTallyTest extends TestCase
     #[Test]
     public function theWindowIsClosedOnlyWhenNothingIsUnderThePreviousKey(): void
     {
-        self::assertTrue(new RotationTally(current: 5, unreadable: 2, plaintext: 1)->closed(), 'unreadable and plaintext do not hold the window');
+        $noOld = new RotationTally(current: 5, unreadable: 2, plaintext: 1);
+        self::assertTrue($noOld->closed(), 'unreadable and plaintext do not hold the window');
         self::assertFalse(new RotationTally(current: 5, previous: 1)->closed());
     }
 
@@ -28,8 +29,12 @@ final class RotationTallyTest extends TestCase
     #[Test]
     public function tallysAdd(): void
     {
-        $sum = new RotationTally(current: 1, previous: 2)->add(new RotationTally(previous: 1, unreadable: 1, resealed: 1));
+        $sum = new RotationTally(current: 1, previous: 2)
+            ->add(new RotationTally(previous: 1, unreadable: 1, resealed: 1));
 
-        self::assertSame([1, 3, 1, 0, 1], [$sum->current, $sum->previous, $sum->unreadable, $sum->plaintext, $sum->resealed]);
+        self::assertSame(
+            [1, 3, 1, 0, 1],
+            [$sum->current, $sum->previous, $sum->unreadable, $sum->plaintext, $sum->resealed],
+        );
     }
 }
