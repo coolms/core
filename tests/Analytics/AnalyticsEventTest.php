@@ -66,6 +66,60 @@ final class AnalyticsEventTest extends TestCase
         self::assertSame([], $event->consent);
         self::assertNull($event->visitorRef);
         self::assertNull($event->subjectRef);
+        self::assertNull($event->recognitionRef);
+        self::assertNull($event->consentRecordId);
+    }
+
+    #[Test]
+    public function requestContextFillsOnlyWhatTheProducerLeftAbsent(): void
+    {
+        $event = new AnalyticsEvent(
+            'lead.submit',
+            new DateTimeImmutable('2026-06-29 10:00:00'),
+            dimensions: ['form' => 'contact'],
+            consent: ['necessary'],
+            subjectRef: 'user-7',
+        );
+
+        $enriched = $event->withRequestContext('day-ref', ['device' => 'mobile', 'form' => 'ambient'], ['necessary', 'analytics'], 'rid-1', 'rec-1');
+
+        self::assertSame('day-ref', $enriched->visitorRef);
+        self::assertSame('rid-1', $enriched->recognitionRef);
+        self::assertSame('rec-1', $enriched->consentRecordId);
+        self::assertSame('user-7', $enriched->subjectRef, 'the producer\'s subject is kept');
+        self::assertSame(['necessary'], $enriched->consent, 'a declared legal basis is never re-labelled');
+        self::assertSame(['device' => 'mobile', 'form' => 'contact'], $enriched->dimensions, 'domain dimensions win');
+
+        $again = $enriched->withRequestContext('other-ref', [], [], 'rid-2', 'rec-2');
+        self::assertSame('day-ref', $again->visitorRef, 'a present ref is not overwritten');
+        self::assertSame('rid-1', $again->recognitionRef);
+        self::assertSame('rec-1', $again->consentRecordId);
+    }
+
+    #[Test]
+    public function withOnlyReferencesKeepsExactlyTheNamedOnes(): void
+    {
+        $event = new AnalyticsEvent(
+            'pageview',
+            new DateTimeImmutable('2026-06-29 10:00:00'),
+            consent: ['necessary', 'analytics'],
+            visitorRef: 'day-ref',
+            subjectRef: 'user-7',
+            recognitionRef: 'rid-1',
+            consentRecordId: 'rec-1',
+        );
+
+        $measured = $event->withOnlyReferences(['visitorRef']);
+        self::assertSame('day-ref', $measured->visitorRef);
+        self::assertNull($measured->subjectRef);
+        self::assertNull($measured->recognitionRef);
+        self::assertSame('rec-1', $measured->consentRecordId, 'the decision a row rests on is not a reference to the visitor');
+
+        $nobody = $event->withOnlyReferences([]);
+        self::assertNull($nobody->visitorRef);
+        self::assertNull($nobody->subjectRef);
+        self::assertNull($nobody->recognitionRef);
+        self::assertSame(['necessary', 'analytics'], $nobody->consent);
     }
 
     #[Test]

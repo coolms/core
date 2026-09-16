@@ -14,6 +14,28 @@ same commit as the change it describes.
 
 ### Added
 
+- `Analytics\ConsentCategory::Recognition` -- a second consent rung beside
+  `analytics`, named for its purpose: `analytics` measures an audience over a
+  reference that rotates daily, `recognition` recognises a browser across
+  visits through a durable identifier issued to it. Two purposes, not two
+  degrees of one. `ConsentCategory::implies()` declares the one entailment --
+  recognising implies measuring -- and `ConsentCategory::closure()` applies
+  it, so a canonical vector cannot say "recognition granted, analytics
+  declined". The relation is declared once, here; the platform's consent
+  ladder applies it where collection happens.
+- `Analytics\CurrentRecognitionInterface` -- the fifth request-edge reader:
+  the durable recognition id a request carries, or null. The edge only reads;
+  the identifier is issued once, elsewhere, only after `recognition` is
+  granted, and never computed from a request.
+- `Analytics\AnalyticsEvent` gains `recognitionRef` (the durable id the row
+  names, alongside the day's `visitorRef` and the signed-in `subjectRef` --
+  three references, three sources, one column each) and `consentRecordId`
+  (the recorded consent decision the row's vector rests on, null when the decision
+  came from a cookie alone). `withRequestContext()` fills both only when
+  absent; `withOnlyReferences()` returns the row with exactly the named
+  references kept, which is how a consent ladder writes "everything except
+  who". `consent` keeps its meaning -- what was in force at capture -- so rows
+  written before decisions were recorded lose nothing and gain a null reference.
 - Declares `support` -- `issues` and `source` -- so a page imported from this
   package, and the catalogue, know where a correction is filed. Packagist filled
   the gap from GitHub when the manifest was silent; the declared field is the
