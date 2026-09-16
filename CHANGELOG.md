@@ -13,6 +13,12 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Outbox\OutboxBacklogInterface` and `Outbox\OutboxBacklog`: a read port for
+  the undelivered half of the outbox -- unpublished rows, unpublished rows older
+  than a threshold (the number that should be zero while a relay runs), and the
+  oldest row's timestamp -- so a relay that stopped is visible to a monitor.
+
+### Added
 
 - `Analytics\ConsentCategory::Recognition` -- a second consent rung beside
   `analytics`, named for its purpose: `analytics` measures an audience over a
