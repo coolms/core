@@ -28,8 +28,8 @@ use Throwable;
  * `getMessage()`. Translation failures never propagate -- an exception
  * thrown while rendering an exception would mask the original.
  *
- * Implementations typically `use TranslatableExceptionTrait` and call
- * `setTranslation()` from a named constructor.
+ * An implementation holds the triple itself and sets it from a named
+ * constructor.
  */
 interface TranslatableExceptionInterface extends Throwable
 {

@@ -20,7 +20,7 @@ namespace CoolMS\Core\Event;
  *
  * Dispatched synchronously through the Symfony event dispatcher, so the process
  * instance (and its first parked user-task) exists by the time the requesting
- * request returns -- modelled on the thin {@see EntityReordered} event.
+ * request returns -- modelled on the thin `EntityReordered` event, now Navi's.
  */
 final readonly class StartWorkflowRequested
 {
