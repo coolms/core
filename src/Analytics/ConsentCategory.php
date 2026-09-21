@@ -57,20 +57,6 @@ enum ConsentCategory: string
     }
 
     /**
-     * The categories granting this one entails. Recognising a person implies
-     * measuring the audience they are part of; nothing else entails anything.
-     *
-     * @return list<self>
-     */
-    public function implies(): array
-    {
-        return match ($this) {
-            self::Recognition => [self::Analytics],
-            default => [],
-        };
-    }
-
-    /**
      * The canonical vector for a set of granted slugs: known categories only,
      * in declaration order, `necessary` always present, and every entailment
      * applied -- so `['recognition']` comes back as
@@ -101,5 +87,19 @@ enum ConsentCategory: string
         }
 
         return $out;
+    }
+
+    /**
+     * The categories granting this one entails. Recognising a person implies
+     * measuring the audience they are part of; nothing else entails anything.
+     *
+     * @return list<self>
+     */
+    public function implies(): array
+    {
+        return match ($this) {
+            self::Recognition => [self::Analytics],
+            default => [],
+        };
     }
 }

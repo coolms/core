@@ -13,6 +13,12 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Outbox\RelayHeartbeat` and `Outbox\RelayHeartbeatInterface`: the record the
+  outbox relay leaves of its own pass -- when, the batch asked for, the rows
+  published, zero included -- and the port a monitor reads it through. Until
+  now a relay that had stopped read exactly like one with nothing to do; an
+  empty queue proves no consumer. The store behind the port has to be one the
+  relay's process and the monitor's both reach.
 - `Health\LivenessProbeInterface` and `Health\DependencyState`: the seam a module
   uses to declare ONE long-running dependency and the question that finds out
   whether it is alive. It sits beside `Retention\RetentionPrunerInterface` and
