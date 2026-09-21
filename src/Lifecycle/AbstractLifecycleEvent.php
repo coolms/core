@@ -17,7 +17,7 @@ use DateTimeInterface;
  * - NEVER dispatched via Symfony Messenger
  *
  * Naming convention: present/past tense describing technical action
- *   PreSaveEvent, PostSaveEvent, OnCreateEvent, OnDeleteEvent
+ *   OnCreateEvent, OnUpdateEvent
  */
 abstract class AbstractLifecycleEvent
 {

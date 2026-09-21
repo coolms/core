@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace CoolMS\Core\Form;
 
 /**
- * A module-owned hook that overrides a built {@see FieldItem}'s presentation
+ * A module-owned hook that overrides a built `FieldItem`'s presentation
  * from deploy/runtime configuration the generic form builder must stay ignorant
  * of.
  *
  * A form field opts in by declaring `options.adapter: <key>` in its config; the
  * builder, after building the FieldItem, looks up the adapter whose {@see key()}
- * matches and applies {@see overrides()} via {@see FieldItem::withOverrides()}.
+ * matches and applies {@see overrides()} via `FieldItem::withOverrides()`.
  * Because this happens at BUILD time (inside
  * `FormConfigRenderBuilder` in the consuming application), the override
  * flows uniformly to every surface -- SSR widget, the `/forms/{id}/render` API,

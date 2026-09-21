@@ -30,7 +30,7 @@ interface SeedTargetInterface
      * and an empty array carries weight: null means nothing is at this path at
      * all, `[]` means something is there and holds no extras. An implementation
      * that returns null for a node it merely failed to read turns
-     * {@see SeedDecision::RefuseOccupied} into a silent overwrite.
+     * the seeder's `SeedDecision::RefuseOccupied` into a silent overwrite.
      *
      * @return array<string, mixed>|null
      */
