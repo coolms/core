@@ -45,6 +45,8 @@ final readonly class DependencyState
         public bool $answered,
         /** Last known activity; null when nothing records it. */
         public ?DateTimeImmutable $lastActivityAt = null,
+        /** It was asked, and the answer could not distinguish alive from dead. */
+        public bool $inconclusive = false,
     ) {
     }
 
@@ -84,18 +86,47 @@ final readonly class DependencyState
         return new self($name, $ask, $detail, $required, false, false);
     }
 
-    /** The number that should be zero counts exactly these. */
-    public function isFailing(): bool
-    {
-        return $this->required && $this->configured && !$this->answered;
+    /**
+     * It was asked, and the answer cannot tell alive from dead.
+     *
+     * The fourth state, and it earns its place: an outbox relay with zero unpublished
+     * rows, or a worker heartbeat nothing has dispatched, produce a question whose
+     * answer is compatible with a healthy dependency AND a dead one. Reporting that as
+     * `ok` is the empty-queue trap -- the exact reasoning that makes queue depth
+     * useless for liveness -- and reporting it as `DOWN` cries wolf at an idle system
+     * until an operator stops reading the rows.
+     *
+     * So it is neither: `unknown`, never counted, and the detail says WHY the question
+     * could not decide. A doctor is allowed to admit that it does not know; what it may
+     * not do is claim health it has not established.
+     */
+    public static function inconclusive(
+        string $name,
+        string $ask,
+        string $detail,
+        bool $required = true,
+        ?DateTimeImmutable $lastActivityAt = null,
+    ): self {
+        return new self($name, $ask, $detail, $required, true, false, $lastActivityAt, true);
     }
 
-    /** `ok` / `DOWN` / `absent` -- the three states an operator scans for. */
+    /**
+     * The number that should be zero counts exactly these: asked, and silent. An
+     * inconclusive answer is not a failure -- an idle system must not hold the number
+     * above zero forever, or the number stops meaning anything.
+     */
+    public function isFailing(): bool
+    {
+        return $this->required && $this->configured && !$this->answered && !$this->inconclusive;
+    }
+
+    /** `ok` / `DOWN` / `unknown` / `absent` -- the four states an operator scans for. */
     public function status(): string
     {
         return match (true) {
             !$this->configured => 'absent',
             $this->answered => 'ok',
+            $this->inconclusive => 'unknown',
             default => 'DOWN',
         };
     }

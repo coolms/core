@@ -31,6 +31,16 @@ same commit as the change it describes.
   every installation. The seam grows through `DependencyState` -- a value object
   can gain an optional parameter without breaking anyone -- not through the
   interface.
+- `Health\DependencyState::inconclusive()`, the fourth state, and the first time
+  the seam grew the way the paragraph above says it would. It is for a question
+  whose answer is compatible with a live dependency AND a dead one: an outbox
+  relay over an empty outbox, a worker heartbeat nothing has dispatched.
+  `status()` reports it as `unknown`; `isFailing()` does not count it. Calling it
+  `ok` is the empty-queue trap -- the reasoning that makes queue depth useless
+  for liveness -- and calling it `DOWN` cries wolf at every idle installation
+  until the number stops being read. A doctor may say it does not know; it may
+  not claim health it has not established. `DependencyStateTest` pins all four
+  states and that the number counts exactly the silent required ones.
 
 ### Added
 - `Outbox\OutboxBacklogInterface` and `Outbox\OutboxBacklog`: a read port for
