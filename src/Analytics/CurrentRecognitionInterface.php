@@ -8,7 +8,7 @@ namespace CoolMS\Core\Analytics;
  * Request-edge reader for the durable recognition identifier this request
  * carries -- the fifth "Current*" reader beside
  * {@see CurrentVisitorReferenceInterface}, {@see CurrentRequestDimensionsInterface},
- * {@see CurrentConsentInterface} and {@see CurrentSubjectSegmentsInterface}.
+ * {@see CurrentConsentInterface} and Analytics' `CurrentSubjectSegmentsInterface`.
  *
  * !! THE EDGE ONLY READS. Where the daily {@see VisitorReferenceGeneratorInterface}
  * reference is COMPUTED per request from what the request carries, a durable
