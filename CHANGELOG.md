@@ -13,6 +13,17 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Ui\` -- the host-contract seam (the platform rule: hosts implement contracts, modules offer entries): `UiEntry` (what a
+  module offers for a host contract: contract, `^MAJOR.MINOR` range,
+  framework, entry file), `ThemeContracts` (what a theme declares it
+  implements, name -> `MAJOR.MINOR`), `UiContractMatcher` (matched / unused /
+  refused, with the sentence an operator reads: module, contract and range
+  against theme and version), and two ports -- `UiEntryCatalogInterface` (the
+  modules' `config/ui.yaml` files, read by the kernel that knows the config
+  roots) and `ActiveThemeContractsInterface` (the active theme's declaration,
+  answered by the Theme module). A module never requires a contract: an entry
+  no theme reads is unused; an entry a theme reads at a version the range does
+  not include is refused by name.
 - `Outbox\RelayHeartbeat` and `Outbox\RelayHeartbeatInterface`: the record the
   outbox relay leaves of its own pass -- when, the batch asked for, the rows
   published, zero included -- and the port a monitor reads it through. Until
