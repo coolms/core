@@ -10,7 +10,7 @@ namespace CoolMS\Core\Space;
  * The half that genuinely differs per module: Documents wants a directory with
  * an owner and a mode, Media wants a collection root, Calendars may want
  * neither. Everything else -- the flag, the query, the "which sites can I still
- * add" list -- is shared in {@see ModuleSpaceSettings}.
+ * add" list -- is shared in the Settings module's `ModuleSpaceSettings`.
  *
  * ## The two actions are one action
  *
@@ -30,7 +30,7 @@ namespace CoolMS\Core\Space;
 interface SpaceProvisionerInterface
 {
     /**
-     * The settings block whose {@see ModuleSpaceSettings::KEY} governs this
+     * The settings block whose `ModuleSpaceSettings::KEY` (Settings module) governs this
      * module's spaces, e.g. `document.spaces`.
      */
     public function settingsKey(): string;
