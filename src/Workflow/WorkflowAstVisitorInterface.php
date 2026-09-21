@@ -25,8 +25,8 @@ namespace CoolMS\Core\Workflow;
  * whole tree, and dispatches by `ElementKind` directly. Mixing the
  * two would force every token-advance to allocate a visitor.
  *
- * Implementors typically subclass {@see AbstractWorkflowAstVisitor}
- * and override only the methods they care about.
+ * An implementor that cares about a few node kinds answers the rest with
+ * no-ops.
  */
 interface WorkflowAstVisitorInterface
 {
