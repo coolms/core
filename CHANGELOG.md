@@ -13,6 +13,36 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Health\LivenessProbeInterface` and `Health\DependencyState`: the seam a module
+  uses to declare ONE long-running dependency and the question that finds out
+  whether it is alive. It sits beside `Retention\RetentionPrunerInterface` and
+  `Outbox\OutboxBacklogInterface` because liveness is the same kind of thing --
+  a declaration a module makes to the platform, which owns the collecting and the
+  reporting while each module owns the question.
+  It exists because a realtime node was dead for nine hours while a container
+  lint, a smoke check, a full unit suite and a commit gate all stayed green: they
+  read what the code says, and nothing asked what is running.
+  `DependencyState` carries `configured` and `answered` as separate facts, so a
+  dependency that is wired and dead cannot read as healthy, and carries the ASK
+  itself beside the answer so a failing row says what was tried. A dependency the
+  installation does not declare reports `absent`, never `ok`.
+  The interface ships with ONE method and no default, deliberately: it is a
+  published contract, so adding a member later would break every implementer in
+  every installation. The seam grows through `DependencyState` -- a value object
+  can gain an optional parameter without breaking anyone -- not through the
+  interface.
+- `Health\DependencyState::inconclusive()`, the fourth state, and the first time
+  the seam grew the way the paragraph above says it would. It is for a question
+  whose answer is compatible with a live dependency AND a dead one: an outbox
+  relay over an empty outbox, a worker heartbeat nothing has dispatched.
+  `status()` reports it as `unknown`; `isFailing()` does not count it. Calling it
+  `ok` is the empty-queue trap -- the reasoning that makes queue depth useless
+  for liveness -- and calling it `DOWN` cries wolf at every idle installation
+  until the number stops being read. A doctor may say it does not know; it may
+  not claim health it has not established. `DependencyStateTest` pins all four
+  states and that the number counts exactly the silent required ones.
+
+### Added
 - `Outbox\OutboxBacklogInterface` and `Outbox\OutboxBacklog`: a read port for
   the undelivered half of the outbox -- unpublished rows, unpublished rows older
   than a threshold (the number that should be zero while a relay runs), and the
