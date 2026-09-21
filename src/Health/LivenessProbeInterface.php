@@ -17,7 +17,7 @@ namespace CoolMS\Core\Health;
  * `coolms.diagnostics.probe` (registered in the Core Extension) into
  * {@see \CoolMS\Core\Application\Health\LivenessRunner}, behind `coolms:doctor`.
  *
- * **Why it exists.** Centrifugo was dead for nine hours in September 2026 while the
+ * **Why it exists.** A realtime node was dead for nine hours in September 2026 while the
  * container lint, the smoke check, the whole unit suite and the commit gate stayed
  * green: every one of them reads what the CODE says, and none asks anything of what
  * is RUNNING. Realtime was dropping every event estate-wide and no gate could have

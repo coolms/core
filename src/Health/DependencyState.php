@@ -10,7 +10,7 @@ use DateTimeImmutable;
  * What one long-running dependency answered when it was ASKED.
  *
  * **"Configured" is never the answer.** A dependency can be declared, wired, compiled
- * and injected while being a corpse -- that is precisely how Centrifugo stayed dead
+ * and injected while being a corpse -- that is precisely how a realtime node stayed dead
  * for nine hours behind green gates. So `configured` and `answered` are carried as
  * two separate facts, deliberately, so that no reader and no future refactor can take
  * one for the other. A state is only {@see answered()} when a probe put a real
@@ -31,7 +31,7 @@ use DateTimeImmutable;
 final readonly class DependencyState
 {
     private function __construct(
-        /** How an operator refers to it ("Centrifugo"). */
+        /** How an operator refers to it ("Search index"). */
         public string $name,
         /** The question put to it, verbatim enough to repeat by hand. */
         public string $ask,

@@ -41,7 +41,7 @@ final class DependencyStateTest extends TestCase
     #[Test]
     public function silentIsDownAndCountsWhenRequired(): void
     {
-        $state = DependencyState::silent('Centrifugo', 'POST /api publish', 'connection refused');
+        $state = DependencyState::silent('Realtime', 'POST /api publish', 'connection refused');
 
         self::assertSame('DOWN', $state->status());
         self::assertTrue($state->configured);
