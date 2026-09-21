@@ -139,6 +139,32 @@ The implementations live in `coolms/core-bundle`.
   declares, and the derived order when it does. It used to promise a
   dependency order nothing implemented.
 
+### Removed
+
+- 78 classes that exactly one module of the application used, moved into
+  that module: the Decision DMN AST, engine results, exceptions and
+  validation contract (20); the Word block model and Tiptap mapping
+  contracts (11); the Form field-item definitions and the YAML, PHP and XML
+  config writers (8); the Theme content seeder, its guard and run (5);
+  Content's block enums and space-provider contracts (4); Media's focal
+  point, thumbnail config and two contracts (4); VFS's mime registries,
+  renderable-engine contract and `ByteFormatter` (4); the Analytics
+  segment-transition event and subject-segments reader (3); the Email OAuth
+  contract, tokens and exception (3); the Scheduler trigger contract, kind
+  and exception (3); and two each for Document, Editor, Mcp, Web and the
+  Workflow validation contract, Navi's reorder event, the mail-composition
+  exception, and Settings' writer contract. A consumer that imported one of them from
+  `CoolMS\Core` imports it from the module's Domain now. The contracts other
+  modules implement stay here: `Seed\SeedTargetInterface`, the mime provider
+  contracts, `Form\ConfigWriterInterface`, `Form\FieldItemAdapterInterface`,
+  `Settings\ModuleSettingsReaderInterface` and its exception.
+- Eight classes nothing called: `Exception\ReadonlyPropertyException`,
+  `Exception\TranslatableExceptionTrait` (an implementation holds the triple
+  itself), the five lifecycle events never dispatched (`PreSaveEvent`,
+  `PostSaveEvent`, `PreDeleteEvent`, `PostDeleteEvent`, `OnDeleteEvent`;
+  `OnCreateEvent` and `OnUpdateEvent` stay), and
+  `Workflow\AbstractWorkflowAstVisitor`.
+
 ## 2.0.0-alpha3 - 2026-09-09
 ### Added
 
