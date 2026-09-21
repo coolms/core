@@ -167,6 +167,18 @@ The implementations live in `coolms/core-bundle`.
   `PostSaveEvent`, `PreDeleteEvent`, `PostDeleteEvent`, `OnDeleteEvent`;
   `OnCreateEvent` and `OnUpdateEvent` stay), and
   `Workflow\AbstractWorkflowAstVisitor`.
+- Nine shared classes placed by the rule "a type in a contract's signature
+  goes with the contract's owner; anything else to the module whose concept
+  it is": the front-end stack enums (`Enum\FeStackType`, `SpaFramework`,
+  `HybridFramework`, `InertiaAdapter`) to the Section module;
+  `Event\NotificationRequested` to Notification; `Event\StartWorkflowRequested`
+  to Workflow; `Space\ModuleSpaceSettings` to Settings;
+  `VFS\FileKindProviderInterface` and `VFS\CreatableFileKind` to VFS, which
+  collects the providers. The shared classes that stay do so by the same
+  rule: the base domain event and `RecordedEventsTrait`, `LocalizedText`,
+  `NaviNodeDefinition`, `ModuleSettingsDefinition`, the timestamp and
+  blameable traits, the installer and API-resource and outbound-channel
+  types, and every type a contract that stays names.
 
 ## 2.0.0-alpha3 - 2026-09-09
 ### Added
