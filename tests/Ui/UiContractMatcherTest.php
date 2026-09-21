@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CoolMS\Core\Tests\Ui;
 
+use CoolMS\Core\Ui\HostContracts;
 use CoolMS\Core\Ui\ThemeContracts;
 use CoolMS\Core\Ui\UiContractMatcher;
 use CoolMS\Core\Ui\UiEntry;
@@ -107,6 +108,32 @@ final class UiContractMatcherTest extends TestCase
             array_map(static fn ($v) => $v->verdict, $verdicts),
         );
         self::assertStringContainsString("theme 'coolms-react' is react -- unused", $verdicts[0]->reason);
+    }
+
+    #[Test]
+    public function theInstalledThemesSelectTheEntriesByContractAndASecondThemeForOneContractIsRefusedByName(): void
+    {
+        $admin = new ThemeContracts('coolms-admin', 'angular', ['console' => '1.0']);
+        $site = new ThemeContracts('coolms-site', 'ssr', ['site' => '1.0']);
+        $hosts = HostContracts::fromThemes([$site, $admin]);
+
+        self::assertSame(['site' => '1.0', 'console' => '1.0'], $hosts->versions());
+        self::assertSame(['site' => 'coolms-site', 'console' => 'coolms-admin'], $hosts->hosts());
+
+        $verdicts = new UiContractMatcher()->matchAll($hosts, self::catalogue());
+        self::assertSame(
+            [UiVerdict::Matched, UiVerdict::Refused, UiVerdict::Unused],
+            array_map(static fn ($v) => $v->verdict, $verdicts),
+        );
+        self::assertStringContainsString('implements console 1.0 -- refused', $verdicts[1]->reason);
+        self::assertStringContainsString('no installed theme implements it -- unused', $verdicts[2]->reason);
+        self::assertSame([], new UiContractMatcher()->refusalsAll(HostContracts::none(), self::catalogue()));
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            "Themes 'coolms-admin' and 'other-admin' both implement console; an installation has one theme per host contract.",
+        );
+        HostContracts::fromThemes([$admin, new ThemeContracts('other-admin', 'angular', ['console' => '1.0'])]);
     }
 
     #[Test]

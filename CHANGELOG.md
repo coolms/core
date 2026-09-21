@@ -20,10 +20,13 @@ same commit as the change it describes.
   refused, with the sentence an operator reads: module, contract and range
   against theme and version), and two ports -- `UiEntryCatalogInterface` (the
   modules' `config/ui.yaml` files, read by the kernel that knows the config
-  roots) and `ActiveThemeContractsInterface` (the active theme's declaration,
-  answered by the Theme module). A module never requires a contract: an entry
-  no theme reads is unused; an entry a theme reads at a version the range does
-  not include is refused by name.
+  roots) and `InstalledThemeContractsInterface` (the installed themes'
+  declarations, answered by the Theme module). `HostContracts` folds those
+  declarations into the contracts in force: one installed theme per contract,
+  a second refused by name -- "active" is the site's notion, and the console
+  is served by the theme that ships it. A module never requires a contract:
+  an entry no theme reads is unused; an entry a theme reads at a version the
+  range does not include is refused by name.
 - `Outbox\RelayHeartbeat` and `Outbox\RelayHeartbeatInterface`: the record the
   outbox relay leaves of its own pass -- when, the batch asked for, the rows
   published, zero included -- and the port a monitor reads it through. Until

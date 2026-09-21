@@ -49,11 +49,43 @@ final class UiContractMatcher
         ));
     }
 
+    /**
+     * Every entry against the installation's host contracts: each entry
+     * meets the one theme that implements its contract, or is unused when
+     * no installed theme does.
+     *
+     * @param iterable<UiEntry> $entries
+     *
+     * @return list<UiEntryVerdict>
+     */
+    public function matchAll(HostContracts $hosts, iterable $entries): array
+    {
+        $verdicts = [];
+        foreach ($entries as $entry) {
+            $verdicts[] = $this->one($hosts->forContract($entry->contract), $entry);
+        }
+
+        return $verdicts;
+    }
+
+    /**
+     * @param iterable<UiEntry> $entries
+     *
+     * @return list<UiEntryVerdict> only the refusals
+     */
+    public function refusalsAll(HostContracts $hosts, iterable $entries): array
+    {
+        return array_values(array_filter(
+            $this->matchAll($hosts, $entries),
+            static fn (UiEntryVerdict $v): bool => UiVerdict::Refused === $v->verdict,
+        ));
+    }
+
     private function one(?ThemeContracts $theme, UiEntry $entry): UiEntryVerdict
     {
         if (null === $theme) {
             return new UiEntryVerdict($entry, UiVerdict::Unused, sprintf(
-                "Module '%s' offers %s %s for %s; no theme is active -- unused.",
+                "Module '%s' offers %s %s for %s; no installed theme implements it -- unused.",
                 $entry->module,
                 $entry->contract,
                 $entry->range,
