@@ -7,12 +7,8 @@ namespace CoolMS\Core\Form;
 /**
  * Strategy interface for persisting form/form_type configuration data.
  *
- * Bundled implementations:
- *   YamlConfigWriter -- writes YAML files (default)
- *   PhpConfigWriter  -- writes `return [...];` PHP files
- *   XmlConfigWriter  -- writes XML files
- *
- * Additional implementations may be registered by other modules.
+ * The Form module ships the file writers (YAML by default, PHP and XML) and
+ * the database-backed and chained ones; other modules may register their own.
  */
 interface ConfigWriterInterface
 {
