@@ -58,7 +58,8 @@ final class UiContractMatcherTest extends TestCase
     {
         // The line that proves the declaration is read: delete the theme's
         // `contracts:` block and the refusal above becomes "unused".
-        $verdicts = new UiContractMatcher()->match(new ThemeContracts('coolms-admin', 'angular', []), self::catalogue());
+        $theme = new ThemeContracts('coolms-admin', 'angular', []);
+        $verdicts = new UiContractMatcher()->match($theme, self::catalogue());
 
         self::assertSame(
             [UiVerdict::Unused, UiVerdict::Unused, UiVerdict::Unused],
@@ -124,7 +125,12 @@ final class UiContractMatcherTest extends TestCase
         new ThemeContracts('coolms-admin', 'angular', ['console' => '1']);
     }
 
-    /** @return list<UiEntry> the catalogue every case reads: one match, one refusal, one that offers nothing the theme reads */
+    /**
+     * The catalogue every case reads: one match, one refusal, one that
+     * offers nothing the theme reads.
+     *
+     * @return list<UiEntry>
+     */
     private static function catalogue(string $callRange = '^2.0'): array
     {
         return [

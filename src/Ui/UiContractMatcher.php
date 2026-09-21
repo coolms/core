@@ -10,9 +10,10 @@ use function sprintf;
 
 /**
  * The platform matches a theme's declared contracts against the modules'
- * entries (the platform rule: hosts implement contracts, modules offer entries). Pure: the callers -- the theme installer and
- * activator, `coolms:install`, the app-config manifest -- read the theme and
- * the catalogue and hand both here, so the three cannot disagree on a verdict.
+ * entries (the platform rule: hosts implement contracts, modules offer
+ * entries). Pure: the callers -- the theme installer and activator,
+ * `coolms:install`, the app-config manifest -- read the theme and the
+ * catalogue and hand both here, so the three cannot disagree on a verdict.
  *
  * A theme that declares nothing leaves every entry unused; that is the
  * control which shows the declaration is what is read. Delete the theme's
