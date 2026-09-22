@@ -13,6 +13,11 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Identity\ElevationWindowInterface`: when this session's elevation expires.
+  `ElevationInterface` answers a gate that decides NOW; work that starts now
+  and finishes later -- a command sent to a worker -- needs to know whether the
+  window will still be open when it gets there, so it can say so before it
+  starts rather than stop half-done.
 - `Rql\ExplainableEntity`: an entity a module offers for RQL inspection, and
   the tag that carries it. The catalogue belongs to whatever READS it -- a
   terminal's explain command, a documentation page -- so the platform declares
