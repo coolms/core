@@ -13,6 +13,20 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Ui\` -- the host-contract seam (the platform rule: hosts implement contracts, modules offer entries): `UiEntry` (what a
+  module offers for a host contract: contract, `^MAJOR.MINOR` range,
+  framework, entry file), `ThemeContracts` (what a theme declares it
+  implements, name -> `MAJOR.MINOR`), `UiContractMatcher` (matched / unused /
+  refused, with the sentence an operator reads: module, contract and range
+  against theme and version), and two ports -- `UiEntryCatalogInterface` (the
+  modules' `config/ui.yaml` files, read by the kernel that knows the config
+  roots) and `InstalledThemeContractsInterface` (the installed themes'
+  declarations, answered by the Theme module). `HostContracts` folds those
+  declarations into the contracts in force: one installed theme per contract,
+  a second refused by name -- "active" is the site's notion, and the console
+  is served by the theme that ships it. A module never requires a contract:
+  an entry no theme reads is unused; an entry a theme reads at a version the
+  range does not include is refused by name.
 - `Form\FormId`, `Form\FormIdRegistryInterface` and, beside `DataGridConfig`,
   `RqlContextFactoryInterface`: the mark an API resource class carries to say
   which form renders it, the registry a manifest reads that mark back from,
