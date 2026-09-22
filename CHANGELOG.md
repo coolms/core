@@ -13,6 +13,12 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Config\ConfigOverrideReaderInterface`: "has anything overridden this
+  config?", which is the platform's whole interest in stored config data. The
+  config chain is consulted on every request, so reading is platform work;
+  what is stored is one deployment's operator configuration, so writing is
+  not. A host with nobody answering reads the files, which is what every host
+  did before the table existed.
 - `Sync\RowsChangedInterface`: what a module says when it writes rows with raw
   SQL, which the object manager cannot see -- the table and the row ids.
   Whatever keeps a change feed subscribes; the module names no feed and no
@@ -190,6 +196,11 @@ The implementations live in `coolms/core-bundle`.
   dependency order nothing implemented.
 
 ### Removed
+- `Config\ConfigOverride` and `Config\ConfigOverrideRepositoryInterface`: the
+  row that holds a saved config and the port it was written through. A table
+  belongs to whatever installs it, and these rows are operator configuration,
+  so both moved to the module that owns them. The platform keeps the read port
+  above.
 - The `ChangeFeed` namespace apart from the two declarations above: the change
   row and its vocabulary, the reader, pruner, recorder and row-source ports,
   and the capture of what a flush committed. A feed is rows in a table, and a
