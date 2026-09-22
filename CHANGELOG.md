@@ -13,6 +13,13 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Messaging\RelayedOutboundInterface`, `Messaging\OutboundRelayed` and
+  `Messaging\ProcessedMessageStoreInterface`: what a module says when an event
+  must survive its own transaction and be relayed afterwards, what the platform
+  dispatches when it has been, and the journal a consumer checks so an
+  at-least-once delivery is safe to process twice. Three declarations; the
+  machinery behind them -- the table, the relay, its heartbeat and the journal's
+  rows -- belongs to whatever installs it, and is no longer here.
 - `Ui\` -- the host-contract seam (the platform rule: hosts implement contracts, modules offer entries): `UiEntry` (what a
   module offers for a host contract: contract, `^MAJOR.MINOR` range,
   framework, entry file), `ThemeContracts` (what a theme declares it
@@ -173,6 +180,11 @@ The implementations live in `coolms/core-bundle`.
   dependency order nothing implemented.
 
 ### Removed
+- The `Outbox` and `Inbox` namespaces: the message value and record, the
+  appender, publisher, backlog and relay-repository ports, the relay
+  heartbeat and the dedupe record. A platform contract says what a module
+  declares; these said how one installation stores and relays it, which is an
+  installation's own affair. What a module needs is in `Messaging` above.
 
 - 77 classes that exactly one module of the application used, moved into
   that module: the Decision DMN AST, engine results, exceptions and

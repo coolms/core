@@ -9,7 +9,7 @@ namespace CoolMS\Core\Health;
  * finds out whether it is alive.
  *
  * It lives here, beside {@see \CoolMS\Core\Retention\RetentionPrunerInterface} and
- * {@see \CoolMS\Core\Outbox\OutboxBacklogInterface}, because liveness is a
+ * {@see \CoolMS\Core\Retention\RetentionPrunerInterface}, because liveness is a
  * declaration a module makes TO the platform, exactly as retention and backup are.
  * The module that owns a dependency writes its probe -- only it knows what a
  * meaningful question is -- and the platform owns the collecting, the reporting and
