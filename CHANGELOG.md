@@ -13,6 +13,16 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Privacy\UserDataFootprint` and `Privacy\UserDataFootprintInterface`: the
+  declaration a module places on the class that handles a person's data at
+  account deletion -- category, label, tables, the action taken (delete,
+  minimise, keep) and whether the category may be held under an obligation --
+  and the marker that gets it collected. The platform's privacy guarantee rests
+  on every module declaring its footprints and the deleting module reading them
+  all, so the declaration is the platform's: a module at any level declares by
+  importing this, and no module implements another's contract to do so. The
+  holds register (the operator's obligations and durations) stays the
+  reader's, named by the reader.
 - `Form\FormId`, `Form\FormIdRegistryInterface` and, beside `DataGridConfig`,
   `RqlContextFactoryInterface`: the mark an API resource class carries to say
   which form renders it, the registry a manifest reads that mark back from,
