@@ -13,6 +13,12 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Console\ConsoleExposure`: the vocabulary a module uses to offer one of its
+  console commands to a web terminal -- a tag name and the keys of its
+  attributes (the verb, the permission, whether an elevated session is
+  required, whether the run belongs in a worker). Constants, not an interface:
+  a module writes an ordinary `#[AsCommand]` class and tags the service in its
+  own compiler pass, and nothing in a core package reads the tag.
 - `Backup\BundleRunnerInterface`, `Backup\BundleArchiverInterface` and
   `Backup\BackupTableSetInterface`: write a bundle or restore one, pack a
   bundle directory into one file and back, and everything the contributors'
