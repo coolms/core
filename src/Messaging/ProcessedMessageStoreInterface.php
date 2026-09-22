@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace CoolMS\Core\Inbox;
+namespace CoolMS\Core\Messaging;
 
 use DateTimeImmutable;
 
 /**
- * Consumer idempotency store (Core L0) -- the necessary partner to
+ * Consumer idempotency store -- the necessary partner to
  * the transactional outbox: it makes at-least-once delivery safe to process twice.
  *
  * **Usage pattern:** at the START of a transactional handler call
