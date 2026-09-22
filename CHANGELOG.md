@@ -27,6 +27,15 @@ same commit as the change it describes.
   is served by the theme that ships it. A module never requires a contract:
   an entry no theme reads is unused; an entry a theme reads at a version the
   range does not include is refused by name.
+- `Form\FormId`, `Form\FormIdRegistryInterface` and, beside `DataGridConfig`,
+  `RqlContextFactoryInterface`: the mark an API resource class carries to say
+  which form renders it, the registry a manifest reads that mark back from,
+  and the factory that turns a data grid declaration into the RQL context a
+  list endpoint accepts. The implementations stay with the modules that own
+  forms and grids; the contracts move here because the modules that mark a
+  resource or serve a list sit at every level of the platform, some below the
+  module that implements the contract -- a declaration to the platform is the
+  platform's to own.
 - `Outbox\RelayHeartbeat` and `Outbox\RelayHeartbeatInterface`: the record the
   outbox relay leaves of its own pass -- when, the batch asked for, the rows
   published, zero included -- and the port a monitor reads it through. Until
