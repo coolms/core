@@ -222,6 +222,14 @@ The implementations live in `coolms/core-bundle`.
   dependency order nothing implemented.
 
 ### Removed
+- The `Terminal` namespace, entirely. A web terminal is an application's
+  surface, not a platform contract: the classes under it were the shell's own
+  input object, its path resolution, its ANSI helpers and a handler interface
+  that nothing has implemented since the shell started running ordinary
+  console commands. Each has moved to the module that uses it -- the path rule
+  to VFS, whose paths it resolves; the rest to the terminal itself -- and the
+  handler interface is gone, with no replacement, because the thing it
+  contracted no longer exists.
 - `Terminal\RqlExplainableEntityRegistry`: a shared registry modules called
   method calls on. Replaced by the tagged value above, which a removed module
   takes with it instead of leaving an entry behind.
