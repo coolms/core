@@ -13,6 +13,16 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Backup\BundleRunnerInterface`, `Backup\BundleArchiverInterface` and
+  `Backup\BackupTableSetInterface`: write a bundle or restore one, pack a
+  bundle directory into one file and back, and everything the contributors'
+  tables say about themselves. A bundle is the platform's data FORMAT and two
+  features produce one -- a backup, and the snapshot an edge pulls -- so the
+  verbs are declared here while the engine that performs them, which writes
+  files and restores rows, belongs to whichever module owns backup.
+- `Backup\BackupManifest`, which was `CoolMS\Core\Application\Backup\BackupManifest`:
+  the manifest is the bundle format, and an edge reads one without owning an
+  engine.
 - `Config\ConfigOverrideReaderInterface`: "has anything overridden this
   config?", which is the platform's whole interest in stored config data. The
   config chain is consulted on every request, so reading is platform work;
