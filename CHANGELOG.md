@@ -13,6 +13,11 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Rql\ExplainableEntity`: an entity a module offers for RQL inspection, and
+  the tag that carries it. The catalogue belongs to whatever READS it -- a
+  terminal's explain command, a documentation page -- so the platform declares
+  the shape and the tag name, each module registers one per entity in its own
+  compiler pass, and the reader collects the tag.
 - `Console\ConsoleExposure`: the vocabulary a module uses to offer one of its
   console commands to a web terminal -- a tag name and the keys of its
   attributes (the verb, the permission, whether an elevated session is
@@ -212,6 +217,9 @@ The implementations live in `coolms/core-bundle`.
   dependency order nothing implemented.
 
 ### Removed
+- `Terminal\RqlExplainableEntityRegistry`: a shared registry modules called
+  method calls on. Replaced by the tagged value above, which a removed module
+  takes with it instead of leaving an entry behind.
 - `Config\ConfigOverride` and `Config\ConfigOverrideRepositoryInterface`: the
   row that holds a saved config and the port it was written through. A table
   belongs to whatever installs it, and these rows are operator configuration,
