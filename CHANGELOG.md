@@ -188,6 +188,20 @@ The implementations live in `coolms/core-bundle`.
   `NaviNodeDefinition`, `ModuleSettingsDefinition`, the timestamp and
   blameable traits, the installer and API-resource and outbound-channel
   types, and every type a contract that stays names.
+- Fifteen more shared classes placed with their owners once the rule that
+  refused a concrete Domain class across the same level was retired (a Domain
+  class is a Domain class; at package level an interface and a class are the
+  same dependency): `Editor\EditorPanel` to Editor; `Identity\MembershipBypassGate`
+  and `Identity\EntityWalkUserGroupResolver` to Identity (their contracts,
+  `ElevationGateInterface` and `UserGroupResolverInterface`, stay); the
+  definition catalog and lifecycle contracts with their types
+  (`DefinitionCatalogProviderInterface`, `DefinitionCatalogFilter`,
+  `DefinitionCatalogRow`, `DefinitionLifecycleProviderInterface`,
+  `DefinitionLifecycleRefused`, `DefinitionNotFound`) to Definition, which
+  collects them; `Form\DataSourceResolverInterface`, `DataSourceDefinition` and
+  `DataSourceOption` to Form; `Link\LinkTargetResolverInterface`, `LinkTarget`
+  and `ResolvedLink` to Link. Each collecting module registers the contract for
+  autoconfiguration itself.
 
 ## 2.0.0-alpha3 - 2026-09-09
 ### Added
