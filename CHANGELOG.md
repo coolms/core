@@ -13,6 +13,16 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+- `Sync\RowsChangedInterface`: what a module says when it writes rows with raw
+  SQL, which the object manager cannot see -- the table and the row ids.
+  Whatever keeps a change feed subscribes; the module names no feed and no
+  recorder.
+- `Sync\SectionPartitionInterface` and `Sync\BlobContributorInterface`, which
+  were `ChangeFeed\SyncSectionPartitionInterface` and
+  `ChangeFeed\SyncBlobContributorInterface`: the two declarations a module
+  makes to whatever serves a change feed -- which partition a row belongs to,
+  and how to hand over a blob. Named for the capability now that the feed
+  itself is not here.
 - `Messaging\RelayedOutboundInterface`, `Messaging\OutboundRelayed` and
   `Messaging\ProcessedMessageStoreInterface`: what a module says when an event
   must survive its own transaction and be relayed afterwards, what the platform
@@ -180,6 +190,10 @@ The implementations live in `coolms/core-bundle`.
   dependency order nothing implemented.
 
 ### Removed
+- The `ChangeFeed` namespace apart from the two declarations above: the change
+  row and its vocabulary, the reader, pruner, recorder and row-source ports,
+  and the capture of what a flush committed. A feed is rows in a table, and a
+  table belongs to whatever installs it.
 - The `Outbox` and `Inbox` namespaces: the message value and record, the
   appender, publisher, backlog and relay-repository ports, the relay
   heartbeat and the dedupe record. A platform contract says what a module

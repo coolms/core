@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace CoolMS\Core\ChangeFeed;
+namespace CoolMS\Core\Sync;
 
 /**
  * The per-SiteSection selective-sync axis -- the seam a module
  * implements when SOME of its synced tables partition by site section, so a
  * sections-scoped edge receives only the `/content/<slug>` subtrees it is scoped
  * to. Collected by tag (`coolms.sync.section_partition`), the
- * {@see SyncBlobContributorInterface} pattern: Core owns the seam, the module
+ * {@see BlobContributorInterface} pattern: Core owns the seam, the module
  * that owns the partition CONVENTION implements it (today: Section, the one
  * place that knows the `/content/` namespace), and the sync surface consults it
  * without importing either.
@@ -26,7 +26,7 @@ namespace CoolMS\Core\ChangeFeed;
  * that legitimately hold it, while delivering it to an edge that never had the
  * row is a harmless no-op delete.
  */
-interface SyncSectionPartitionInterface
+interface SectionPartitionInterface
 {
     /**
      * The synced tables this implementor partitions by section.
