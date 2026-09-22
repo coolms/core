@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CoolMS\Core\ChangeFeed;
+namespace CoolMS\Core\Sync;
 
 /**
  * A module's SIDE-CHANNEL BYTES -- the data its synced rows REFER to but do not contain
@@ -29,7 +29,7 @@ namespace CoolMS\Core\ChangeFeed;
  * -- so the sync module (L2) can move bytes for VFS (L1) without importing it, and a future module
  * with side-channel bytes joins by implementing this and nothing else.
  */
-interface SyncBlobContributorInterface
+interface BlobContributorInterface
 {
     /** Stable key for logs/reports, e.g. `vfs`. Mirrors `backupKey()`. */
     public function blobKey(): string;

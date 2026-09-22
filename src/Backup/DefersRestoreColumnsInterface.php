@@ -13,7 +13,7 @@ namespace CoolMS\Core\Backup;
  * **Why this is DECLARED rather than done privately inside `import()`.** Two engines
  * replay these rows now: the bundle restore (`import()`, via
  * {@see \CoolMS\Core\Application\Backup\BackupReaderInterface::loadTableDeferring()}) and the
- * sync apply path ({@see \CoolMS\Core\Application\ChangeFeed\SyncChangeApplier}),
+ * sync apply path (the sync apply path),
  * which writes straight through {@see TableBackupPortInterface} and never calls a
  * contributor at all. A contributor that keeps its FK knowledge to itself protects the
  * first engine and leaves the second one silently corrupting the same rows --
