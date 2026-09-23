@@ -6,6 +6,8 @@ namespace CoolMS\Core\Health;
 
 use DateTimeImmutable;
 
+use function max;
+
 /**
  * What one long-running dependency answered when it was ASKED.
  *
@@ -47,6 +49,8 @@ final readonly class DependencyState
         public ?DateTimeImmutable $lastActivityAt = null,
         /** It was asked, and the answer could not distinguish alive from dead. */
         public bool $inconclusive = false,
+        /** It answered, and the answer IS the fault: this many of whatever must be zero. */
+        public int $residue = 0,
     ) {
     }
 
@@ -111,13 +115,44 @@ final readonly class DependencyState
     }
 
     /**
-     * The number that should be zero counts exactly these: asked, and silent. An
-     * inconclusive answer is not a failure -- an idle system must not hold the number
-     * above zero forever, or the number stops meaning anything.
+     * The fifth state, and the first one that is a bad ANSWER rather than a missing
+     * one: the dependency is configured, it was asked, it replied, and the reply is
+     * the fault. A key ring that cannot open 5,686 copies of its own ciphertext is
+     * not silent and not idle -- it answered, precisely, with a number.
+     *
+     * **It carries the count, not a verdict.** `residue(5686)` rather than `open()`,
+     * because a state that says "open" is a sentence written over a measurement and
+     * can disagree with the tally it came from, while a state that says 5,686 cannot.
+     * `status()` and {@see isFailing()} are then derived from the number, in one
+     * place, rather than re-decided by each caller.
+     *
+     * A count of zero is not a fault and reads as an ordinary `ok`, so a probe may
+     * hand its number straight through without branching on it first.
+     */
+    public static function residue(
+        string $name,
+        string $ask,
+        string $detail,
+        int $count,
+        bool $required = true,
+        ?DateTimeImmutable $lastActivityAt = null,
+    ): self {
+        return new self($name, $ask, $detail, $required, true, true, $lastActivityAt, false, max(0, $count));
+    }
+
+    /**
+     * The number that should be zero counts exactly these: asked and silent, or asked
+     * and answered with a residue. An inconclusive answer is not a failure -- an idle
+     * system must not hold the number above zero forever, or the number stops meaning
+     * anything.
      */
     public function isFailing(): bool
     {
-        return $this->required && $this->configured && !$this->answered && !$this->inconclusive;
+        if (!$this->required || !$this->configured) {
+            return false;
+        }
+
+        return $this->residue > 0 || (!$this->answered && !$this->inconclusive);
     }
 
     /** `ok` / `DOWN` / `unknown` / `absent` -- the four states an operator scans for. */
@@ -125,6 +160,7 @@ final readonly class DependencyState
     {
         return match (true) {
             !$this->configured => 'absent',
+            $this->residue > 0 => 'DOWN',
             $this->answered => 'ok',
             $this->inconclusive => 'unknown',
             default => 'DOWN',
