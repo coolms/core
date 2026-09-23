@@ -57,6 +57,7 @@ final readonly class UserDataFootprint
     ) {
         if (!in_array($action, self::ACTIONS, true)) {
             $message = sprintf('A footprint action is one of %s, "%s" given.', implode(', ', self::ACTIONS), $action);
+
             throw new InvalidArgumentException($message);
         }
         if ('' === $category || '' === $label || [] === $tables) {
