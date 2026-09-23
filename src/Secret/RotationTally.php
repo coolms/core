@@ -5,13 +5,24 @@ declare(strict_types=1);
 namespace CoolMS\Core\Secret;
 
 /**
- * What one sweep over one kind of sealed value found, counted by READING
- * every value rather than by looking at markers: a marker names the format
- * a value was written in, never the key it was sealed under, so only an
- * attempt to open it can say which key that was -- or that neither does.
+ * What one sweep over one kind of sealed value found, counted by OPENING
+ * every value rather than by reading its marker.
+ *
+ * !! This used to say a marker "names the format a value was written in,
+ * never the key it was sealed under". That stopped being true when the
+ * current form became `enc:v2:<key id>:...`, which does name its key, and
+ * the sentence then hid the actual reason: the id is a HINT and the box is
+ * the PROOF. A sealer that meets a named key which fails tries the others,
+ * so a value whose marker names the current key but opens under the previous
+ * one exists, and it is precisely the value a rotation must not skip. The
+ * two older forms (`enc:v1:` and bare base64) name no key at all. Counting
+ * by opening is therefore not a limitation being worked around; it is the
+ * only count the operator can act on.
  *
  *  - `current`    opened under the current key: nothing to do
- *  - `previous`   opened under the previous key only: re-sealed when applying
+ *  - `previous`   opened under the previous key only: re-sealed when applying,
+ *                 and the number that must reach zero in every kind before the
+ *                 previous key leaves the ring
  *  - `unreadable` opened under neither: left as it is, reported, because a
  *                 rotation cannot repair a value nobody's key opens
  *  - `plaintext`  not sealed at all (a kind that was encrypted opportunistically
