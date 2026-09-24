@@ -13,6 +13,14 @@ same commit as the change it describes.
 ## Unreleased
 
 ### Added
+
+- `Retention\RetentionPopulationInterface`: optional for a retention pruner.
+  A pruner that implements it gives the population its expired rows are drawn
+  from (`countPopulation()`), so a report can say "N of M"; one that does not
+  is reported "N of unknown" -- unevaluable, never zero. Additive:
+  `RetentionPrunerInterface` is unchanged and no implementer breaks.
+
+### Added
 - `Identity\ElevationWindowInterface`: when this session's elevation expires.
   `ElevationInterface` answers a gate that decides NOW; work that starts now
   and finishes later -- a command sent to a worker -- needs to know whether the
