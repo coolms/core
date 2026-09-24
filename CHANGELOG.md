@@ -220,6 +220,16 @@ The implementations live in `coolms/core-bundle`.
   installer actually gets: registration order (alphabetical) unless it
   declares, and the derived order when it does. It used to promise a
   dependency order nothing implemented.
+- `Timestampable\ExpiresAtProviderTrait::$isExpired` asks the global clock,
+  `Symfony\Component\Clock\Clock::get()`, instead of reading the wall with
+  `new DateTimeImmutable()`. What uses the trait is an entity, which nothing
+  wires, so it cannot be handed a clock; the framework's clock service reads
+  the same global clock, so a test that freezes time with the component's
+  `ClockSensitiveTrait` now decides every expiry this trait answers, and the
+  services that inject `ClockInterface` agree with it. Nothing changes where no
+  clock is set: the global clock is then the native one, the wall. No signature
+  changed. `symfony/clock` is now a declared requirement; it was already
+  installed, through `symfony/messenger`, and used by nothing here.
 
 ### Removed
 - The `Terminal` namespace, entirely. A web terminal is an application's
