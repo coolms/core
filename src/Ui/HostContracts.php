@@ -17,12 +17,13 @@ use function sprintf;
  * which is installed and never "activated"; so what selects the modules'
  * entries for a contract is the installed theme that declares it, and there
  * may be only one. Two installed themes declaring the same contract are
- * refused by name, at install and again wherever this is built.
+ * refused by name, at install and again wherever this is built -- under
+ * either of its names, since {@see ThemeContracts} holds them canonical.
  */
 final readonly class HostContracts
 {
     /**
-     * @param array<string, ThemeContracts> $byContract contract name -> the theme implementing it
+     * @param array<string, ThemeContracts> $byContract canonical contract name -> the theme implementing it
      */
     private function __construct(
         public array $byContract,
@@ -57,7 +58,7 @@ final readonly class HostContracts
 
     public function forContract(string $contract): ?ThemeContracts
     {
-        return $this->byContract[$contract] ?? null;
+        return $this->byContract[ContractName::canonical($contract)] ?? null;
     }
 
     /** @return array<string, string> contract name -> MAJOR.MINOR */

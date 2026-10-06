@@ -12,7 +12,31 @@ same commit as the change it describes.
 
 ## Unreleased
 
+### Deprecated
+- The host contract names `console` and `desk`: they are `admin` and
+  `workspace` now (`site` is unchanged). Each old name is read as an alias of
+  its new one wherever a name is read -- a module's `ui.yaml` entry and a
+  theme's `contracts:` -- so a package still on an old name meets one already
+  on the new name, in both directions. Without the alias a module still on
+  `console` would be silently UNUSED under a theme on `admin`, not refused.
+  The aliases are removed in the release after the one in which no package is
+  counted on an old name.
+
+### Changed
+- `Ui\UiEntry::$contract` and the keys of `Ui\ThemeContracts::$versions` are
+  canonical names: an entry or a theme written with `console` holds `admin`.
+  Every comparison -- the matcher, `HostContracts::forContract()`, the
+  one-theme-per-contract refusal -- is therefore made under the new names, and
+  the verdict sentences print them. What was written is kept, for a report on
+  who is still on an old name: `UiEntry::$declaredContract` and
+  `ThemeContracts::$declaredNames`. A theme declaring one contract under both
+  of its names is refused at construction: it would implement it twice.
+  `UiEntry`'s constructor keeps its parameter names and order.
+
 ### Added
+- `Ui\ContractName`: the host contracts' names (`ADMIN`, `WORKSPACE`, `SITE`),
+  the deprecated ones and what each is now (`DEPRECATED`), and the reads every
+  caller shares -- `canonical()`, `isDeprecated()`, `aliasesOf()`.
 - `Identity\ElevationWindowInterface`: when this session's elevation expires.
   `ElevationInterface` answers a gate that decides NOW; work that starts now
   and finishes later -- a command sent to a worker -- needs to know whether the
