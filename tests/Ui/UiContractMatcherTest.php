@@ -32,7 +32,7 @@ final class UiContractMatcherTest extends TestCase
     #[Test]
     public function aThemeAtOneZeroRefusesTheModuleThatNeedsTwoByName(): void
     {
-        $theme = new ThemeContracts('coolms-admin', 'angular', ['console' => '1.0']);
+        $theme = new ThemeContracts('coolms-admin', 'angular', ['admin' => '1.0']);
 
         $verdicts = new UiContractMatcher()->match($theme, self::catalogue());
 
@@ -41,11 +41,11 @@ final class UiContractMatcherTest extends TestCase
             array_map(static fn ($v) => $v->verdict, $verdicts),
         );
         self::assertSame(
-            "Module 'call' offers console ^2.0 for angular; theme 'coolms-admin' implements console 1.0 -- refused.",
+            "Module 'call' offers admin ^2.0 for angular; theme 'coolms-admin' implements admin 1.0 -- refused.",
             $verdicts[1]->reason,
         );
         self::assertSame(
-            "Module 'inbox' offers desk ^1.0 for angular; theme 'coolms-admin' implements no desk -- unused.",
+            "Module 'inbox' offers workspace ^1.0 for angular; theme 'coolms-admin' implements no workspace -- unused.",
             $verdicts[2]->reason,
         );
 
@@ -73,7 +73,7 @@ final class UiContractMatcherTest extends TestCase
     public function theSameCatalogueAgainstAThemeTheRangeAdmitsMatches(): void
     {
         $verdicts = new UiContractMatcher()->match(
-            new ThemeContracts('coolms-admin', 'angular', ['console' => '1.0']),
+            new ThemeContracts('coolms-admin', 'angular', ['admin' => '1.0']),
             self::catalogue('^1.0'),
         );
 
@@ -87,19 +87,19 @@ final class UiContractMatcherTest extends TestCase
     public function aMinorTheEntryNeedsAndTheThemeLacksIsARefusalAndAMajorAheadIsToo(): void
     {
         $matcher = new UiContractMatcher();
-        $entry = [new UiEntry(self::EMAIL, 'console', '^1.2', 'angular', 'ui/angular/entries/console.ts')];
+        $entry = [new UiEntry(self::EMAIL, 'admin', '^1.2', 'angular', 'ui/angular/entries/console.ts')];
 
-        self::assertCount(1, $matcher->refusals(new ThemeContracts('t', 'angular', ['console' => '1.1']), $entry), 'a point added in 1.2 is missing on 1.1');
-        self::assertCount(0, $matcher->refusals(new ThemeContracts('t', 'angular', ['console' => '1.2']), $entry));
-        self::assertCount(0, $matcher->refusals(new ThemeContracts('t', 'angular', ['console' => '1.9']), $entry));
-        self::assertCount(1, $matcher->refusals(new ThemeContracts('t', 'angular', ['console' => '2.0']), $entry), 'a major changes or removes points');
+        self::assertCount(1, $matcher->refusals(new ThemeContracts('t', 'angular', ['admin' => '1.1']), $entry), 'a point added in 1.2 is missing on 1.1');
+        self::assertCount(0, $matcher->refusals(new ThemeContracts('t', 'angular', ['admin' => '1.2']), $entry));
+        self::assertCount(0, $matcher->refusals(new ThemeContracts('t', 'angular', ['admin' => '1.9']), $entry));
+        self::assertCount(1, $matcher->refusals(new ThemeContracts('t', 'angular', ['admin' => '2.0']), $entry), 'a major changes or removes points');
     }
 
     #[Test]
     public function anotherFrameworkIsUnusedNotRefused(): void
     {
         $verdicts = new UiContractMatcher()->match(
-            new ThemeContracts('coolms-react', 'react', ['console' => '1.0']),
+            new ThemeContracts('coolms-react', 'react', ['admin' => '1.0']),
             self::catalogue(),
         );
 
@@ -113,43 +113,43 @@ final class UiContractMatcherTest extends TestCase
     #[Test]
     public function theInstalledThemesSelectTheEntriesByContractAndASecondThemeForOneContractIsRefusedByName(): void
     {
-        $admin = new ThemeContracts('coolms-admin', 'angular', ['console' => '1.0']);
+        $admin = new ThemeContracts('coolms-admin', 'angular', ['admin' => '1.0']);
         $site = new ThemeContracts('coolms-site', 'ssr', ['site' => '1.0']);
         $hosts = HostContracts::fromThemes([$site, $admin]);
 
-        self::assertSame(['site' => '1.0', 'console' => '1.0'], $hosts->versions());
-        self::assertSame(['site' => 'coolms-site', 'console' => 'coolms-admin'], $hosts->hosts());
+        self::assertSame(['site' => '1.0', 'admin' => '1.0'], $hosts->versions());
+        self::assertSame(['site' => 'coolms-site', 'admin' => 'coolms-admin'], $hosts->hosts());
 
         $verdicts = new UiContractMatcher()->matchAll($hosts, self::catalogue());
         self::assertSame(
             [UiVerdict::Matched, UiVerdict::Refused, UiVerdict::Unused],
             array_map(static fn ($v) => $v->verdict, $verdicts),
         );
-        self::assertStringContainsString('implements console 1.0 -- refused', $verdicts[1]->reason);
+        self::assertStringContainsString('implements admin 1.0 -- refused', $verdicts[1]->reason);
         self::assertStringContainsString('no installed theme implements it -- unused', $verdicts[2]->reason);
         self::assertSame([], new UiContractMatcher()->refusalsAll(HostContracts::none(), self::catalogue()));
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            "Themes 'coolms-admin' and 'other-admin' both implement console; an installation has one theme per host contract.",
+            "Themes 'coolms-admin' and 'other-admin' both implement admin; an installation has one theme per host contract.",
         );
-        HostContracts::fromThemes([$admin, new ThemeContracts('other-admin', 'angular', ['console' => '1.0'])]);
+        HostContracts::fromThemes([$admin, new ThemeContracts('other-admin', 'angular', ['admin' => '1.0'])]);
     }
 
     #[Test]
     public function aRangeWithoutACaretAndAVersionThatIsNotMajorMinorAreRefusedAtConstruction(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage("Module 'email' offers console with range '1.0'; a range is '^MAJOR.MINOR'.");
-        new UiEntry(self::EMAIL, 'console', '1.0', 'angular', 'x');
+        $this->expectExceptionMessage("Module 'email' offers admin with range '1.0'; a range is '^MAJOR.MINOR'.");
+        new UiEntry(self::EMAIL, 'admin', '1.0', 'angular', 'x');
     }
 
     #[Test]
     public function aThemeVersionThatIsNotMajorMinorIsRefusedAtConstruction(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage("Theme 'coolms-admin' declares console '1'; a contract version is MAJOR.MINOR.");
-        new ThemeContracts('coolms-admin', 'angular', ['console' => '1']);
+        $this->expectExceptionMessage("Theme 'coolms-admin' declares admin '1'; a contract version is MAJOR.MINOR.");
+        new ThemeContracts('coolms-admin', 'angular', ['admin' => '1']);
     }
 
     /**
@@ -161,9 +161,9 @@ final class UiContractMatcherTest extends TestCase
     private static function catalogue(string $callRange = '^2.0'): array
     {
         return [
-            new UiEntry(self::EMAIL, 'console', '^1.0', 'angular', 'ui/angular/entries/console.ts'),
-            new UiEntry(self::CALL, 'console', $callRange, 'angular', 'ui/angular/entries/console.ts'),
-            new UiEntry(self::INBOX, 'desk', '^1.0', 'angular', 'ui/angular/entries/desk.ts'),
+            new UiEntry(self::EMAIL, 'admin', '^1.0', 'angular', 'ui/angular/entries/console.ts'),
+            new UiEntry(self::CALL, 'admin', $callRange, 'angular', 'ui/angular/entries/console.ts'),
+            new UiEntry(self::INBOX, 'workspace', '^1.0', 'angular', 'ui/angular/entries/desk.ts'),
         ];
     }
 }
