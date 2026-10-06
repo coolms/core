@@ -87,6 +87,39 @@ final class ContractNameTest extends TestCase
     }
 
     #[Test]
+    public function theOtherRenamedContractUnderBothNamesIsRefusedToo(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            "Theme 'app' declares workspace and desk, one contract under two names; declare workspace alone.",
+        );
+        new ThemeContracts('app', 'angular', ['workspace' => '1.0', 'desk' => '1.0']);
+    }
+
+    #[Test]
+    public function anOldNameHasNoAliasesAndNamesAreReadExactly(): void
+    {
+        self::assertSame([], ContractName::aliasesOf('console'), 'aliases are of the new name, not the old');
+        // Names are read as written: `Console` is not `console`, so it is no alias and nothing renames it.
+        self::assertSame('Console', ContractName::canonical('Console'));
+        self::assertFalse(ContractName::isDeprecated('Console'));
+        self::assertSame(['Console' => '1.0'], new ThemeContracts('t', 'angular', ['Console' => '1.0'])->versions);
+    }
+
+    #[Test]
+    public function twoThemesForOneContractAreRefusedWhicheverNameComesFirst(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            "Themes 'new-admin' and 'coolms-admin' both implement admin; an installation has one theme per host contract.",
+        );
+        HostContracts::fromThemes([
+            new ThemeContracts('new-admin', 'angular', ['admin' => '1.0']),
+            new ThemeContracts('coolms-admin', 'angular', ['console' => '1.0']),
+        ]);
+    }
+
+    #[Test]
     public function twoThemesForOneContractAreRefusedUnderEitherName(): void
     {
         $old = new ThemeContracts('coolms-admin', 'angular', ['console' => '1.0']);
