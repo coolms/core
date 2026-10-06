@@ -10,7 +10,7 @@ major number means here.
 history when this file was created. Every entry after that is written in the
 same commit as the change it describes.
 
-## Unreleased
+## 2.0.0-alpha4 - 2026-10-07
 
 ### Deprecated
 - The host contract names `console` and `desk`: they are `admin` and
@@ -132,7 +132,7 @@ same commit as the change it describes.
   a declaration a module makes to the platform, which owns the collecting and the
   reporting while each module owns the question.
   It exists because a realtime node was dead for nine hours while a container
-  lint, a smoke check, a full unit suite and a commit gate all stayed green: they
+  lint, a smoke check and a full unit suite all stayed green: they
   read what the code says, and nothing asked what is running.
   `DependencyState` carries `configured` and `answered` as separate facts, so a
   dependency that is wired and dead cannot read as healthy, and carries the ASK
@@ -203,13 +203,13 @@ same commit as the change it describes.
   on a fact. Two of the tests are the case and its control.
 
 - `Identity\ElevationInterface` and `Identity\ElevationGateInterface`, with
-  `Identity\MembershipBypassGate` as the default implementation of the gate.
+  `Identity\MembershipBypassGate` as the default implementation of the elevation gate.
   Membership of the administrators' group is who you are; elevation is what
   state you are in: temporary, self-obtained, expiring on its own. Every privileged gate asks
   `mayBypass()` instead of reading `$isAdmin` for itself, so the answer can move
   from membership to elevation in one place and -- the reason it is a port --
   can be rehearsed: a recording implementation counts EVALUATIONS beside
-  would-refuse HITS per gate, so "no bypass observed" and "the gate never ran"
+  would-refuse HITS per gate, so "no bypass observed" and "the elevation gate never ran"
   are different outputs. The default is the pre-existing behaviour, membership,
   uncounted, so hand-built fixtures keep constructing; the container wires the
   recording one. `Identity\ElevationShadowStoreInterface` is where a recording
