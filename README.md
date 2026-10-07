@@ -45,7 +45,7 @@ anything you also need an adapter — see [Persistence](#persistence).
 |---|---|
 | `Mapping/` | `Column`, `Id`, `GeneratedValue` — persistence-neutral attributes |
 | `Identifier/`, `Timestampable/`, `Blameable/` | the reusable entity traits and their contracts |
-| `Attribute/` | `ClassMeta`, `FieldMeta` — how a class describes itself to the platform |
+| `Attribute/` | `ClassMeta`, `FieldMeta` — how a class describes itself to the platform; `Sensitive` — a marker on a property that holds a secret, which is never public |
 | `Event/`, `Lifecycle/` | domain events, recorded-event providers, entity lifecycle events |
 | `Outbox/`, `Inbox/`, `ChangeFeed/` | the transactional outbox, consumer idempotency, and sync change-feed rows plus their ports |
 | `Config/`, `Secret/`, `Option/` | configuration loading, the secret-store contract, option sources |
