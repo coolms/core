@@ -10,6 +10,17 @@ major number means here.
 history when this file was created. Every entry after that is written in the
 same commit as the change it describes.
 
+## Unreleased
+
+### Added
+- `CoolMS\Core\Attribute\Sensitive`, a marker for a property that holds a
+  secret or a value derived from one that still grants or proves access: a
+  password hash, a second-factor secret, a token or its hash, a recovery or
+  one-time code, or the ciphertext of any of these. Such a property is never
+  public; an application's check of its entities reads the marker and refuses
+  a public property that carries it, as it refuses one whose name says it holds
+  a secret.
+
 ## 2.0.0-alpha4 - 2026-10-07
 
 ### Deprecated
