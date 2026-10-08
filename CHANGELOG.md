@@ -20,6 +20,10 @@ same commit as the change it describes.
   public; an application's check of its entities reads the marker and refuses
   a public property that carries it, as it refuses one whose name says it holds
   a secret.
+- `symfony/mailer` is suggested, and required for development:
+  `RichMailSenderInterface::send()` throws its `TransportExceptionInterface`
+  when a delivery fails, so an implementation of the interface needs it, and
+  the static analysis of this package reads it.
 
 ### Fixed
 - `UpdatedAtProviderTrait::$updatedAtAsString` asked whether `createdAt` was set
