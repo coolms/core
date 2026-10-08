@@ -11,8 +11,6 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
 use Symfony\Component\Uid\Uuid;
 
 /**
- * @internal
- *
  * Provides a mutable "accessed by" UUID column.
  *
  * Mirrors AccessedAtProviderTrait semantics:

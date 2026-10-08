@@ -12,8 +12,6 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
 use Symfony\Component\Uid\Uuid;
 
 /**
- * @internal
- *
  * Provides an immutable "created by" UUID column.
  *
  * Mirrors CreatedAtProviderTrait semantics:

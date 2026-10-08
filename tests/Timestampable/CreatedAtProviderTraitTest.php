@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CoolMS\Core\Tests\Timestampable;
 
+use CoolMS\Core\Exception\ImmutablePropertyException;
 use CoolMS\Core\Tests\Timestampable\Fixture\CreatedAtRecord;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\Test;
@@ -39,6 +40,42 @@ final class CreatedAtProviderTraitTest extends TestCase
         $record = new CreatedAtRecord(createdAt: $known);
 
         self::assertSame($known, $record->createdAt);
+    }
+
+    #[Test]
+    public function onceSetTheMomentCannotBeReplaced(): void
+    {
+        $known = new DateTimeImmutable('2020-01-02T03:04:05+00:00');
+        $record = new CreatedAtRecord(createdAt: $known);
+
+        try {
+            $record->createdAt = new DateTimeImmutable('2021-01-01T00:00:00+00:00');
+            self::fail('a second moment was accepted');
+        } catch (ImmutablePropertyException $e) {
+            self::assertSame(
+                CreatedAtRecord::class . '::createdAt cannot be set after initialization',
+                $e->getMessage(),
+            );
+        }
+
+        self::assertSame($known, $record->createdAt, 'the refused write must leave the first moment in place');
+    }
+
+    /**
+     * What a persistence layer does: it builds the record without its
+     * constructor and sets the column once.
+     */
+    #[Test]
+    public function aRecordBuiltWithoutItsConstructorTakesItsMomentOnce(): void
+    {
+        $record = new ReflectionClass(CreatedAtRecord::class)->newInstanceWithoutConstructor();
+        $known = new DateTimeImmutable('2020-01-02T03:04:05+00:00');
+
+        $record->createdAt = $known;
+
+        self::assertSame($known, $record->createdAt);
+        $this->expectException(ImmutablePropertyException::class);
+        $record->createdAt = new DateTimeImmutable();
     }
 
     /**
