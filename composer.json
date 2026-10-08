@@ -30,7 +30,11 @@
         "symfony/yaml": "^8.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^12.5"
+        "phpunit/phpunit": "^12.5",
+        "symfony/mailer": "^8.0"
+    },
+    "suggest": {
+        "symfony/mailer": "The transport RichMailSenderInterface::send() is written against: its TransportExceptionInterface is what a delivery failure throws"
     },
     "autoload": {
         "psr-4": {

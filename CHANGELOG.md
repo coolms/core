@@ -20,6 +20,17 @@ same commit as the change it describes.
   public; an application's check of its entities reads the marker and refuses
   a public property that carries it, as it refuses one whose name says it holds
   a secret.
+- `symfony/mailer` is suggested, and required for development:
+  `RichMailSenderInterface::send()` throws its `TransportExceptionInterface`
+  when a delivery fails, so an implementation of the interface needs it, and
+  the static analysis of this package reads it.
+
+### Fixed
+- `UpdatedAtProviderTrait::$updatedAtAsString` asked whether `createdAt` was set
+  before it formatted `updatedAt`. A class that used this trait without
+  `CreatedAtProviderTrait` beside it always read `null`. Used through
+  `TimestampableTrait`, which sets both, it read correctly. It now asks about
+  `updatedAt` itself. Found by the test that now uses the trait on its own.
 
 ## 2.0.0-alpha4 - 2026-10-07
 
