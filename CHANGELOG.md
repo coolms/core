@@ -21,6 +21,13 @@ same commit as the change it describes.
   a public property that carries it, as it refuses one whose name says it holds
   a secret.
 
+### Fixed
+- `UpdatedAtProviderTrait::$updatedAtAsString` asked whether `createdAt` was set
+  before it formatted `updatedAt`. A class that used this trait without
+  `CreatedAtProviderTrait` beside it always read `null`. Used through
+  `TimestampableTrait`, which sets both, it read correctly. It now asks about
+  `updatedAt` itself. Found by the test that now uses the trait on its own.
+
 ## 2.0.0-alpha4 - 2026-10-07
 
 ### Deprecated
