@@ -53,12 +53,14 @@ final class TimestampableTraitTest extends TestCase
 
     /**
      * Three different instants, so a string form reading the wrong stamp
-     * cannot pass for the right one.
+     * cannot pass for the right one. Built without its constructor and each
+     * stamp set once, as a persistence layer does: the created stamp is
+     * write-once, so setting it over the constructor's would be refused.
      */
     #[Test]
     public function eachStringFormFollowsItsOwnStamp(): void
     {
-        $record = new TimestampedRecord();
+        $record = new ReflectionClass(TimestampedRecord::class)->newInstanceWithoutConstructor();
         $record->createdAt = new DateTimeImmutable('2026-01-01T00:00:00+00:00');
         $record->updatedAt = new DateTimeImmutable('2026-02-02T00:00:00+00:00');
         $record->accessedAt = new DateTimeImmutable('2026-03-03T00:00:00+00:00');

@@ -12,6 +12,20 @@ same commit as the change it describes.
 
 ## Unreleased
 
+### Changed
+- `CreatedAtProviderTrait::$createdAt` is write-once, with the semantics
+  `CreatedByProviderTrait::$createdBy` already had: once set, by the
+  constructor or by whatever builds the record, a second write throws
+  `ImmutablePropertyException` and leaves the first value in place. A
+  persistence layer that writes the raw value
+  (`ReflectionProperty::setRawValue()`, PHP 8.4 and later) does not pass
+  through the guard, so loading and refreshing a stored record are
+  unaffected. Code that assigns `createdAt` on a record that already
+  has one now throws; such code writes the raw value instead, as loading does.
+- `BlameableTrait`, `CreatedByProviderTrait`, `UpdatedByProviderTrait` and
+  `AccessedByProviderTrait` are no longer marked `@internal`. Consumers use
+  them, so they are public API and follow its compatibility rules.
+
 ### Added
 - `CoolMS\Core\Attribute\Sensitive`, a marker for a property that holds a
   secret or a value derived from one that still grants or proves access: a
