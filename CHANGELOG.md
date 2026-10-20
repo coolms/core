@@ -14,6 +14,8 @@ same commit as the change it describes.
 
 ### Added
 
+- `Transaction\FailurePathWriterInterface`: `persist()` stores a record that must outlive a refusal on a
+  connection of its own, committed before it returns -- never part of the unit of work around it.
 - `Transaction\UnitOfWorkInterface` (application-facing: `transactional()`, `afterCommit()`) and
   `Transaction\UnitOfWorkOwnerInterface` (owner-facing: `begin()`, `commit()`, `discard()`, `isUsable()`,
   `ownerActive()`), with `UnitOfWorkException`: one commit owner per request, message handler and console command,
