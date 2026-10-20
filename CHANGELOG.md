@@ -12,6 +12,11 @@ same commit as the change it describes.
 
 ## Unreleased
 
+### Security
+
+- `XmlFileLoader` parses with `LIBXML_NONET`: loading an XML configuration file never fetches
+  anything over the network, whatever the file declares.
+
 ### Changed
 - `CreatedAtProviderTrait::$createdAt` is write-once, with the semantics
   `CreatedByProviderTrait::$createdBy` already had: once set, by the
