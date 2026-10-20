@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CoolMS\Core\Config;
 
+use const LIBXML_NONET;
+
 class XmlFileLoader implements FileFormatLoaderInterface
 {
     /**
@@ -11,7 +13,7 @@ class XmlFileLoader implements FileFormatLoaderInterface
      */
     public function load(string $path): array
     {
-        $xml = simplexml_load_file($path);
+        $xml = simplexml_load_file($path, options: LIBXML_NONET);
         if (false === $xml) {
             return [];
         }
