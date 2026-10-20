@@ -12,6 +12,13 @@ same commit as the change it describes.
 
 ## Unreleased
 
+### Added
+
+- `Transaction\UnitOfWorkInterface` (application-facing: `transactional()`, `afterCommit()`) and
+  `Transaction\UnitOfWorkOwnerInterface` (owner-facing: `begin()`, `commit()`, `discard()`, `isUsable()`,
+  `ownerActive()`), with `UnitOfWorkException`: one commit owner per request, message handler and console command,
+  the database transaction begun lazily at the first write or lock.
+
 ### Security
 
 - `XmlFileLoader` parses with `LIBXML_NONET`: loading an XML configuration file never fetches
