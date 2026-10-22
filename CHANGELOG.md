@@ -27,6 +27,10 @@ same commit as the change it describes.
   anything over the network, whatever the file declares.
 
 ### Changed
+- `Navi\DefaultNaviProviderInterface::getDefaultNodes()` no longer has a `template` key in its entries. A menu
+  entry carries no template: where a page lives picks its frame, and what kind of page it is picks how its content is
+  drawn. An implementation that still returns the key fails static analysis against the documented shape. Nothing at
+  run time changes, because nothing reads the key.
 - `CreatedAtProviderTrait::$createdAt` is write-once, with the semantics
   `CreatedByProviderTrait::$createdBy` already had: once set, by the
   constructor or by whatever builds the record, a second write throws

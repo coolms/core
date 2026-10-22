@@ -14,7 +14,7 @@ interface DefaultNaviProviderInterface
     /**
      * Returns NaviNode definitions to create during default setup.
      *
-     * @return list<array{path: string, slug: string, title: string, template: ?string, isVisible: bool, sortOrder: int}>
+     * @return list<array{path: string, slug: string, title: string, isVisible: bool, sortOrder: int}>
      */
     public function getDefaultNodes(): array;
 }
