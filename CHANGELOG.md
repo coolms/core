@@ -14,6 +14,12 @@ same commit as the change it describes.
 
 ### Added
 
+- `Block\FormTexts` and `BlockField::$formTexts`: a block's group field can declare that it holds a form's text
+  overrides -- a label or a help text per field, per locale -- and which choice field of the block picks the form.
+  It is still an ordinary group (items `field`, `locale`, `label`, `help`), so an admin that knows nothing of it
+  edits it as one. The module storing the block checks the overrides against the form when the block is saved; the
+  form renderer applies only a label and a help text, to a field that exists.
+
 - `Transaction\FailurePathWriterInterface`: `persist()` stores a record that must outlive a refusal on a
   connection of its own, committed before it returns -- never part of the unit of work around it.
 - `Transaction\UnitOfWorkInterface` (application-facing: `transactional()`, `afterCommit()`) and

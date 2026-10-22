@@ -98,7 +98,18 @@ final readonly class BlockField
          * @var list<string>
          */
         public array $options = [],
+        /**
+         * When this GROUP holds text overrides for a form ({@see FormTexts}): which field picks the form, and the
+         * forms it may pick. Null for every other field.
+         */
+        public ?FormTexts $formTexts = null,
     ) {
+    }
+
+    /** Whether this group holds a form's text overrides. */
+    public function holdsFormTexts(): bool
+    {
+        return self::KIND_GROUP === $this->kind && null !== $this->formTexts;
     }
 
     public function isGroup(): bool
