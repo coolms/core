@@ -21,12 +21,16 @@ final readonly class FormTexts
 {
     /** The item keys a form-texts group holds, and nothing else. */
     public const string FIELD = 'field';
+
     public const string LOCALE = 'locale';
+
     public const string LABEL = 'label';
+
     public const string HELP = 'help';
 
     /** The longest label and help text an override may carry, in characters. */
     public const int LABEL_MAX = 80;
+
     public const int HELP_MAX = 300;
 
     /**
@@ -40,12 +44,6 @@ final readonly class FormTexts
         if ('' === $choiceField || [] === $forms) {
             throw new InvalidArgumentException(sprintf('Form texts need a choice field and at least one form (got "%s").', $choiceField));
         }
-    }
-
-    /** The form a block names, or null when its choice names none. */
-    public function formFor(mixed $choice): ?string
-    {
-        return is_string($choice) ? ($this->forms[$choice] ?? null) : null;
     }
 
     /**
@@ -62,5 +60,11 @@ final readonly class FormTexts
             new BlockField(self::LABEL),
             new BlockField(self::HELP, BlockField::KIND_TEXTAREA),
         ];
+    }
+
+    /** The form a block names, or null when its choice names none. */
+    public function formFor(mixed $choice): ?string
+    {
+        return is_string($choice) ? ($this->forms[$choice] ?? null) : null;
     }
 }

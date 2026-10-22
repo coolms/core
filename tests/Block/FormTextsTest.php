@@ -44,9 +44,9 @@ final class FormTextsTest extends TestCase
     {
         $texts = new FormTexts('form', self::FORMS);
 
-        self::assertTrue((new BlockField('texts', BlockField::KIND_GROUP, FormTexts::itemFields(), formTexts: $texts))->holdsFormTexts());
-        self::assertFalse((new BlockField('texts', BlockField::KIND_TEXT, formTexts: $texts))->holdsFormTexts());
-        self::assertFalse((new BlockField('texts', BlockField::KIND_GROUP, FormTexts::itemFields()))->holdsFormTexts());
+        self::assertTrue(new BlockField('texts', BlockField::KIND_GROUP, FormTexts::itemFields(), formTexts: $texts)->holdsFormTexts());
+        self::assertFalse(new BlockField('texts', BlockField::KIND_TEXT, formTexts: $texts)->holdsFormTexts());
+        self::assertFalse(new BlockField('texts', BlockField::KIND_GROUP, FormTexts::itemFields())->holdsFormTexts());
     }
 
     #[Test]
