@@ -20,7 +20,7 @@ trait UpdatedAtProviderTrait
     #[Groups(['read', 'list', 'search', 'stat'])]
     #[SerializedName('updatedAt')]
     public ?string $updatedAtAsString {
-        get => isset($this->createdAt) ? $this->updatedAt->format('c') : null;
+        get => isset($this->updatedAt) ? $this->updatedAt->format('c') : null;
     }
 
     public function __construct()

@@ -21,14 +21,24 @@ use function sprintf;
  * points the contract gained by 1.2, so a host at 1.1 is refused rather than
  * silently missing them, and a host at 2.0 is refused because a major
  * changes or removes points.
+ *
+ * The contract is held by its canonical name ({@see ContractName}): an entry
+ * written for `console` is an entry for `admin`, and says so in
+ * {@see $declaredContract}, which only a report on deprecated names reads.
  */
 final readonly class UiEntry
 {
+    /** `admin`, `workspace`, `site`: the canonical name, whatever the entry was written with. */
+    public string $contract;
+
+    /** The name as the module's `ui.yaml` wrote it; differs from {@see $contract} only for a deprecated name. */
+    public string $declaredContract;
+
     public function __construct(
         /** The module id, as `config/modules/<id>`. */
         public string $module,
-        /** `console`, `desk`, `site`. */
-        public string $contract,
+        /* `admin`, `workspace`, `site`; `console` and `desk` are deprecated aliases of the first two. */
+        string $contract,
         /** `^MAJOR.MINOR`. Kept as written; {@see admits()} reads it. */
         public string $range,
         /** `angular`, `react` -- the compatibility fact of the entry file. */
@@ -36,6 +46,8 @@ final readonly class UiEntry
         /** Path of the entry file, relative to the module's root. */
         public string $entry,
     ) {
+        $this->declaredContract = $contract;
+        $this->contract = ContractName::canonical($contract);
         if (1 !== preg_match('/^\^\d+\.\d+$/', $range)) {
             throw new InvalidArgumentException(sprintf("Module '%s' offers %s with range '%s'; a range is '^MAJOR.MINOR'.", $module, $contract, $range));
         }

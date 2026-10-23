@@ -3,8 +3,8 @@
 All notable changes to `coolms/core` are recorded here.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
-Versioning is described in `CONTRIBUTING.md` -- read it before assuming what a
-major number means here.
+Versioning is described in the [CoolMS contributing guide](https://github.com/coolms/.github/blob/develop/CONTRIBUTING.md)
+-- read it before assuming what a major number means here.
 
 !! Entries dated before 2026-09-01 were **reconstructed** from tags and commit
 history when this file was created. Every entry after that is written in the
@@ -20,7 +20,93 @@ same commit as the change it describes.
   is reported "N of unknown" -- unevaluable, never zero. Additive:
   `RetentionPrunerInterface` is unchanged and no implementer breaks.
 
+## 2.0.0-alpha5 - 2026-10-22
+
 ### Added
+
+- `Block\FormTexts` and `BlockField::$formTexts`: a block's group field can declare that it holds a form's text
+  overrides -- a label or a help text per field, per locale -- and which choice field of the block picks the form.
+  It is still an ordinary group (items `field`, `locale`, `label`, `help`), so an admin that knows nothing of it
+  edits it as one. The module storing the block checks the overrides against the form when the block is saved; the
+  form renderer applies only a label and a help text, to a field that exists.
+
+- `Transaction\FailurePathWriterInterface`: `persist()` stores a record that must outlive a refusal on a
+  connection of its own, committed before it returns -- never part of the unit of work around it.
+- `Transaction\UnitOfWorkInterface` (application-facing: `transactional()`, `afterCommit()`) and
+  `Transaction\UnitOfWorkOwnerInterface` (owner-facing: `begin()`, `commit()`, `discard()`, `isUsable()`,
+  `ownerActive()`), with `UnitOfWorkException`: one commit owner per request, message handler and console command,
+  the database transaction begun lazily at the first write or lock.
+
+### Security
+
+- `XmlFileLoader` parses with `LIBXML_NONET`: loading an XML configuration file never fetches
+  anything over the network, whatever the file declares.
+
+### Changed
+- `Navi\DefaultNaviProviderInterface::getDefaultNodes()` no longer has a `template` key in its entries. A menu
+  entry carries no template: where a page lives picks its frame, and what kind of page it is picks how its content is
+  drawn. An implementation that still returns the key fails static analysis against the documented shape. Nothing at
+  run time changes, because nothing reads the key.
+- `CreatedAtProviderTrait::$createdAt` is write-once, with the semantics
+  `CreatedByProviderTrait::$createdBy` already had: once set, by the
+  constructor or by whatever builds the record, a second write throws
+  `ImmutablePropertyException` and leaves the first value in place. A
+  persistence layer that writes the raw value
+  (`ReflectionProperty::setRawValue()`, PHP 8.4 and later) does not pass
+  through the guard, so loading and refreshing a stored record are
+  unaffected. Code that assigns `createdAt` on a record that already
+  has one now throws; such code writes the raw value instead, as loading does.
+- `BlameableTrait`, `CreatedByProviderTrait`, `UpdatedByProviderTrait` and
+  `AccessedByProviderTrait` are no longer marked `@internal`. Consumers use
+  them, so they are public API and follow its compatibility rules.
+
+### Added
+- `CoolMS\Core\Attribute\Sensitive`, a marker for a property that holds a
+  secret or a value derived from one that still grants or proves access: a
+  password hash, a second-factor secret, a token or its hash, a recovery or
+  one-time code, or the ciphertext of any of these. Such a property is never
+  public; an application's check of its entities reads the marker and refuses
+  a public property that carries it, as it refuses one whose name says it holds
+  a secret.
+- `symfony/mailer` is suggested, and required for development:
+  `RichMailSenderInterface::send()` throws its `TransportExceptionInterface`
+  when a delivery fails, so an implementation of the interface needs it, and
+  the static analysis of this package reads it.
+
+### Fixed
+- `UpdatedAtProviderTrait::$updatedAtAsString` asked whether `createdAt` was set
+  before it formatted `updatedAt`. A class that used this trait without
+  `CreatedAtProviderTrait` beside it always read `null`. Used through
+  `TimestampableTrait`, which sets both, it read correctly. It now asks about
+  `updatedAt` itself. Found by the test that now uses the trait on its own.
+
+## 2.0.0-alpha4 - 2026-10-07
+
+### Deprecated
+- The host contract names `console` and `desk`: they are `admin` and
+  `workspace` now (`site` is unchanged). Each old name is read as an alias of
+  its new one wherever a name is read -- a module's `ui.yaml` entry and a
+  theme's `contracts:` -- so a package still on an old name meets one already
+  on the new name, in both directions. Without the alias a module still on
+  `console` would be silently UNUSED under a theme on `admin`, not refused.
+  The aliases are removed in the release after the one in which no package is
+  counted on an old name.
+
+### Changed
+- `Ui\UiEntry::$contract` and the keys of `Ui\ThemeContracts::$versions` are
+  canonical names: an entry or a theme written with `console` holds `admin`.
+  Every comparison -- the matcher, `HostContracts::forContract()`, the
+  one-theme-per-contract refusal -- is therefore made under the new names, and
+  the verdict sentences print them. What was written is kept, for a report on
+  who is still on an old name: `UiEntry::$declaredContract` and
+  `ThemeContracts::$declaredNames`. A theme declaring one contract under both
+  of its names is refused at construction: it would implement it twice.
+  `UiEntry`'s constructor keeps its parameter names and order.
+
+### Added
+- `Ui\ContractName`: the host contracts' names (`ADMIN`, `WORKSPACE`, `SITE`),
+  the deprecated ones and what each is now (`DEPRECATED`), and the reads every
+  caller shares -- `canonical()`, `isDeprecated()`, `aliasesOf()`.
 - `Identity\ElevationWindowInterface`: when this session's elevation expires.
   `ElevationInterface` answers a gate that decides NOW; work that starts now
   and finishes later -- a command sent to a worker -- needs to know whether the
@@ -116,7 +202,7 @@ same commit as the change it describes.
   a declaration a module makes to the platform, which owns the collecting and the
   reporting while each module owns the question.
   It exists because a realtime node was dead for nine hours while a container
-  lint, a smoke check, a full unit suite and a commit gate all stayed green: they
+  lint, a smoke check and a full unit suite all stayed green: they
   read what the code says, and nothing asked what is running.
   `DependencyState` carries `configured` and `answered` as separate facts, so a
   dependency that is wired and dead cannot read as healthy, and carries the ASK
@@ -187,13 +273,13 @@ same commit as the change it describes.
   on a fact. Two of the tests are the case and its control.
 
 - `Identity\ElevationInterface` and `Identity\ElevationGateInterface`, with
-  `Identity\MembershipBypassGate` as the default implementation of the gate.
+  `Identity\MembershipBypassGate` as the default implementation of the elevation gate.
   Membership of the administrators' group is who you are; elevation is what
   state you are in: temporary, self-obtained, expiring on its own. Every privileged gate asks
   `mayBypass()` instead of reading `$isAdmin` for itself, so the answer can move
   from membership to elevation in one place and -- the reason it is a port --
   can be rehearsed: a recording implementation counts EVALUATIONS beside
-  would-refuse HITS per gate, so "no bypass observed" and "the gate never ran"
+  would-refuse HITS per gate, so "no bypass observed" and "the elevation gate never ran"
   are different outputs. The default is the pre-existing behaviour, membership,
   uncounted, so hand-built fixtures keep constructing; the container wires the
   recording one. `Identity\ElevationShadowStoreInterface` is where a recording
@@ -228,6 +314,16 @@ The implementations live in `coolms/core-bundle`.
   installer actually gets: registration order (alphabetical) unless it
   declares, and the derived order when it does. It used to promise a
   dependency order nothing implemented.
+- `Timestampable\ExpiresAtProviderTrait::$isExpired` asks the global clock,
+  `Symfony\Component\Clock\Clock::get()`, instead of reading the wall with
+  `new DateTimeImmutable()`. What uses the trait is an entity, which nothing
+  wires, so it cannot be handed a clock; the framework's clock service reads
+  the same global clock, so a test that freezes time with the component's
+  `ClockSensitiveTrait` now decides every expiry this trait answers, and the
+  services that inject `ClockInterface` agree with it. Nothing changes where no
+  clock is set: the global clock is then the native one, the wall. No signature
+  changed. `symfony/clock` is now a declared requirement; it was already
+  installed, through `symfony/messenger`, and used by nothing here.
 
 ### Removed
 - The `Terminal` namespace, entirely. A web terminal is an application's

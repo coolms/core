@@ -16,31 +16,52 @@ use function sprintf;
  *
  * A declaration nothing reads is a placeholder, which the platform forbids; this
  * object exists so the readers share one parse and one refusal.
+ *
+ * Names are held canonical ({@see ContractName}): a theme declaring `console`
+ * implements `admin`. One that declares a contract under both of its names is
+ * refused -- it would implement one contract twice.
  */
 final readonly class ThemeContracts
 {
+    /** @var array<string, string> canonical contract name -> MAJOR.MINOR */
+    public array $versions;
+
+    /** @var array<string, string> canonical contract name -> the name as the theme wrote it */
+    public array $declaredNames;
+
     /**
-     * @param array<string, string> $versions contract name -> MAJOR.MINOR
+     * @param array<string, string> $versions contract name -> MAJOR.MINOR, a deprecated name read as its new one
      */
     public function __construct(
         public string $themeSlug,
         public string $framework,
-        public array $versions,
+        array $versions,
     ) {
+        $canonical = [];
+        $declared = [];
         foreach ($versions as $name => $version) {
+            $name = (string) $name;
             if (1 !== preg_match('/^\d+\.\d+$/', (string) $version)) {
-                throw new InvalidArgumentException(sprintf("Theme '%s' declares %s '%s'; a contract version is MAJOR.MINOR.", $themeSlug, (string) $name, (string) $version));
+                throw new InvalidArgumentException(sprintf("Theme '%s' declares %s '%s'; a contract version is MAJOR.MINOR.", $themeSlug, $name, (string) $version));
             }
+            $now = ContractName::canonical($name);
+            if (isset($declared[$now])) {
+                throw new InvalidArgumentException(sprintf("Theme '%s' declares %s and %s, one contract under two names; declare %s alone.", $themeSlug, $declared[$now], $name, $now));
+            }
+            $canonical[$now] = (string) $version;
+            $declared[$now] = $name;
         }
+        $this->versions = $canonical;
+        $this->declaredNames = $declared;
     }
 
     public function declares(string $contract): bool
     {
-        return isset($this->versions[$contract]);
+        return isset($this->versions[ContractName::canonical($contract)]);
     }
 
     public function versionOf(string $contract): ?string
     {
-        return $this->versions[$contract] ?? null;
+        return $this->versions[ContractName::canonical($contract)] ?? null;
     }
 }

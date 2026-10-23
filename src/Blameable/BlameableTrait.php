@@ -7,8 +7,6 @@ namespace CoolMS\Core\Blameable;
 use Symfony\Component\Uid\Uuid;
 
 /**
- * @internal
- *
  * Composite UUID-based blameable trait for entities.
  *
  * Mirrors TimestampableTrait in structure -- composes the three provider traits
