@@ -10,6 +10,16 @@ Versioning is described in the [CoolMS contributing guide](https://github.com/co
 history when this file was created. Every entry after that is written in the
 same commit as the change it describes.
 
+## Unreleased
+
+### Added
+
+- `Retention\RetentionPopulationInterface`: optional for a retention pruner.
+  A pruner that implements it gives the population its expired rows are drawn
+  from (`countPopulation()`), so a report can say "N of M"; one that does not
+  is reported "N of unknown" -- unevaluable, never zero. Additive:
+  `RetentionPrunerInterface` is unchanged and no implementer breaks.
+
 ## 2.0.0-alpha5 - 2026-10-22
 
 ### Added
