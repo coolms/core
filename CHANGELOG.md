@@ -14,6 +14,22 @@ same commit as the change it describes.
 
 ### Added
 
+- `Channel\DirectChannelInterface`: a channel that reaches one person (an SMS, a
+  messenger chat), the person-to-person counterpart of
+  `OutboundChannelInterface`. Registered under `coolms.direct_channel`; it
+  declares its key, its address kind and the furthest status it reports, and
+  `send(DirectMessage)` answers with a `SendOutcome` at once. A message is
+  never sent twice: `send()` throws only when nothing reached the provider; a
+  send that may have reached it is answered `Unknown` (possibly sent) and is
+  never resent; a refusal is answered `Failed`. One channel per key.
+- `Channel\DirectMessage` (sender, key, address, text, purpose; the sender and
+  key name the attempt and come back on every later status),
+  `Channel\MessagePurpose` (`otp`, `transactional`, `marketing`, declared by
+  the sender), `Channel\DeliveryStatus` (progress only forward; a failure only
+  before delivery; `unknown` moves nothing), `Channel\SendOutcome`.
+- `Channel\DeliveryReceipt` and the `Channel\DeliveryReceiptReported` event: how
+  a channel reports a status that arrives after the send, keyed by the sender
+  and key, never by the provider's id.
 - `Retention\RetentionPopulationInterface`: optional for a retention pruner.
   A pruner that implements it gives the population its expired rows are drawn
   from (`countPopulation()`), so a report can say "N of M"; one that does not
