@@ -18,9 +18,12 @@ same commit as the change it describes.
   messenger chat), the person-to-person counterpart of
   `OutboundChannelInterface`. Registered under `coolms.direct_channel`; it
   declares its key, its address kind and the furthest status it reports, and
-  `send(DirectMessage)` answers with a `SendOutcome` at once.
+  `send(DirectMessage)` answers with a `SendOutcome` at once. A message is
+  never sent twice: `send()` throws only when nothing reached the provider; a
+  send that may have reached it is answered `Unknown` (possibly sent) and is
+  never resent; a refusal is answered `Failed`. One channel per key.
 - `Channel\DirectMessage` (sender, key, address, text, purpose; the sender and
-  key are the idempotency key and come back on every later status),
+  key name the attempt and come back on every later status),
   `Channel\MessagePurpose` (`otp`, `transactional`, `marketing`, declared by
   the sender), `Channel\DeliveryStatus` (progress only forward; a failure only
   before delivery; `unknown` moves nothing), `Channel\SendOutcome`.

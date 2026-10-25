@@ -19,6 +19,7 @@ use function trim;
 final readonly class DeliveryReceipt
 {
     public function __construct(
+        /** The reporting channel's key: informational, since a sender matches on sender and key alone. */
         public string $channel,
         public string $sender,
         public string $key,

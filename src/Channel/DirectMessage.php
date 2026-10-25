@@ -12,9 +12,11 @@ use function trim;
 /**
  * One message to one person, as a sender hands it to a {@see DirectChannelInterface}.
  *
- * `$sender` names who sends (`reach`, `identity`, `notification`); `$key` identifies this attempt within that sender
- * and is the channel's idempotency key: sending the same sender and key twice is one message, and every later status
- * comes back with both ({@see DeliveryReceipt}). `$address` is in the form the channel's
+ * `$sender` names who sends; `$key` identifies this attempt within that sender. Together they name the attempt: every
+ * later status comes back with both ({@see DeliveryReceipt}), and a channel keeps them beside the provider's id to
+ * match its receipts. They are **not** an idempotency key a provider honours: a sender sends an attempt once, and
+ * resends only after a send that threw, which means nothing reached the provider
+ * ({@see DirectChannelInterface}'s error contract). `$address` is in the form the channel's
  * {@see DirectChannelInterface::addressKind()} names.
  */
 final readonly class DirectMessage
