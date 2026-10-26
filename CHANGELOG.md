@@ -14,6 +14,13 @@ same commit as the change it describes.
 
 ### Added
 
+- `Worker\WorkerHealthRecorderInterface`, `Worker\WorkerStartReporterInterface`,
+  `Worker\WorkerRestartSignalInterface` and `Worker\WorkerExpectationInterface`:
+  a long-running worker says how each unit of its work went and that it
+  started (on which restart generation), learns from one counter-ordered
+  signal that it must leave, and declares when work from it is expected,
+  collected under the `coolms.worker_expectation` tag. Interfaces only: storing
+  what workers report and showing it belong to a module.
 - `Channel\DirectChannelInterface`: a channel that reaches one person (an SMS, a
   messenger chat), the person-to-person counterpart of
   `OutboundChannelInterface`. Registered under `coolms.direct_channel`; it
