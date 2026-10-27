@@ -22,6 +22,12 @@ same commit as the change it describes.
   `rank()` is its place in the release of held mail after a stop: one-time codes, then transactional, then the rest.
   Independent of `Channel\MessagePurpose`: what a message is for and whether the platform sends it as itself are
   separate questions. No new dependency.
+- `Settings\SettingsValueCheckInterface` and `Settings\SettingsValueRefusal`: a module's rule on the values of a
+  settings block that a form cannot state (one value needing something else to be installed or configured). The
+  settings tier asks it with the whole block as it would be in force, refuses a save on any refusal and names each one
+  (field, stable code, the reason the admin reads); a health check asks the same question of what is stored and
+  reports each refusal as a warning. Collected under the `coolms.settings.value_check` tag. Additive: nothing existing
+  changes.
 
 ## 2.0.0-alpha6 - 2026-10-26
 
