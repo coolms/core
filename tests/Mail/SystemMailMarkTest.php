@@ -38,18 +38,17 @@ final class SystemMailMarkTest extends TestCase
     #[Test]
     public function whatAMarkSaysIsReadBackAndAnythingElseIsNoMark(): void
     {
-        $headers = SystemMailMark::headers(SystemMailPurpose::Transactional, new DateTimeImmutable('2026-10-27T13:00:00Z'));
+        $expires = new DateTimeImmutable('2026-10-27T13:00:00Z');
+        $headers = SystemMailMark::headers(SystemMailPurpose::Transactional, $expires);
 
         self::assertTrue(SystemMailMark::isMarked($headers[SystemMailMark::HEADER]));
         self::assertFalse(SystemMailMark::isMarked(null));
         self::assertFalse(SystemMailMark::isMarked('System'));
-        self::assertSame(SystemMailPurpose::Transactional, SystemMailMark::purposeFrom($headers[SystemMailMark::PURPOSE_HEADER]));
+        $purpose = SystemMailMark::purposeFrom($headers[SystemMailMark::PURPOSE_HEADER]);
+        self::assertSame(SystemMailPurpose::Transactional, $purpose);
         self::assertSame(SystemMailPurpose::Other, SystemMailMark::purposeFrom(null), 'unsaid is other');
         self::assertSame(SystemMailPurpose::Other, SystemMailMark::purposeFrom('urgent'), 'unknown is other');
-        self::assertEquals(
-            new DateTimeImmutable('2026-10-27T13:00:00Z'),
-            SystemMailMark::expiresFrom($headers[SystemMailMark::EXPIRES_HEADER]),
-        );
+        self::assertEquals($expires, SystemMailMark::expiresFrom($headers[SystemMailMark::EXPIRES_HEADER]));
         self::assertNull(SystemMailMark::expiresFrom(null));
         self::assertNull(SystemMailMark::expiresFrom('tomorrow'), 'an expiry that does not read is none');
     }

@@ -10,6 +10,19 @@ Versioning is described in the [CoolMS contributing guide](https://github.com/co
 history when this file was created. Every entry after that is written in the
 same commit as the change it describes.
 
+## Unreleased
+
+### Added
+
+- `Mail\SystemMailMark` and `Mail\SystemMailPurpose`: the mark on a message the platform sends as itself, as plain
+  headers any module can add to a message it builds -- `X-CoolMS-Mail: system`, what it is for (`one-time-code`,
+  `transactional` or `other`), and, for one carrying a code or a link, when it stops meaning anything
+  (`X-CoolMS-Mail-Expires`). `SystemMailMark::headers()` gives them, `isMarked()`, `purposeFrom()` and
+  `expiresFrom()` read them back, and `NAMES` lists every one, to be taken off before a message leaves. A purpose's
+  `rank()` is its place in the release of held mail after a stop: one-time codes, then transactional, then the rest.
+  Independent of `Channel\MessagePurpose`: what a message is for and whether the platform sends it as itself are
+  separate questions. No new dependency.
+
 ## 2.0.0-alpha6 - 2026-10-26
 
 ### Added
