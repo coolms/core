@@ -10,6 +10,16 @@ Versioning is described in the [CoolMS contributing guide](https://github.com/co
 history when this file was created. Every entry after that is written in the
 same commit as the change it describes.
 
+## Unreleased
+
+### Added
+
+- `Site\ApplicationBaseUrlInterface`: the installation's application base URL, read-only -- where its admin and
+  workspace answer, and what an absolute link is built from when nothing else names a host (a worker, a console
+  command, a link built with no request). `baseUrl()` answers `https://host` or `scheme://host:port`, no path and no
+  trailing slash, or null while the setting is not made; a consumer that needs it then refuses, never falling back to
+  `localhost` or the router's default URI. Additive: nothing existing changes, and no new dependency.
+
 ## 2.0.0-alpha7 - 2026-10-27
 
 ### Added
