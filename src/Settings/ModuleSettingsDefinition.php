@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace CoolMS\Core\Settings;
 
+use InvalidArgumentException;
+
+use function sprintf;
+
 /**
  * One admin-editable settings block, declared by the module that owns it.
  *
@@ -24,6 +28,9 @@ namespace CoolMS\Core\Settings;
  */
 final class ModuleSettingsDefinition
 {
+    private const string PINNED_DECLARED_PROJECT
+        = 'Settings block "%s": "%s" is pinned by %s, so it is Installation; it cannot be declared Project.';
+
     /**
      * The values in force when nothing has been saved.
      *
@@ -91,6 +98,10 @@ final class ModuleSettingsDefinition
      *                                                              and called at most once. Ignored when
      *                                                              `$defaults` is non-empty, so a contributor
      *                                                              cannot half-declare both
+     * @param SettingsScope                           $defaultScope see {@see $defaultScope}
+     * @param array<string, SettingsScope>            $scopes       see {@see $scopes}
+     *
+     * @throws InvalidArgumentException when a pinned key is declared Project
      */
     public function __construct(
         public string $key,
@@ -197,9 +208,57 @@ final class ModuleSettingsDefinition
          * @var (callable(): array<string, mixed>)|null
          */
         ?callable $lazyDefaults = null,
+        /*
+         * The scope of every key this block does not name in `$scopes`: where its values belong
+         * ({@see SettingsScope}). Project unless stated, which is what every block was before scopes existed.
+         */
+        public SettingsScope $defaultScope = SettingsScope::Project,
+        /*
+         * The keys whose scope differs from `$defaultScope`, as `settings key => scope`. A block is usually one
+         * scope; this is for a mixed one.
+         *
+         * @var array<string, SettingsScope>
+         */
+        public array $scopes = [],
     ) {
         $this->declaredDefaults = $defaults;
         $this->lazyDefaults = $lazyDefaults;
+        foreach ($this->envPins as $pinned => $variable) {
+            if (SettingsScope::Project === ($this->scopes[$pinned] ?? null)) {
+                throw new InvalidArgumentException(sprintf(self::PINNED_DECLARED_PROJECT, $key, $pinned, $variable));
+            }
+        }
+    }
+
+    /**
+     * Where one key's value belongs. A pinned key is Installation whatever the block's default: the environment that
+     * pins it is the installation's.
+     */
+    public function scopeOf(string $settingsKey): SettingsScope
+    {
+        if (isset($this->envPins[$settingsKey])) {
+            return SettingsScope::Installation;
+        }
+
+        return $this->scopes[$settingsKey] ?? $this->defaultScope;
+    }
+
+    /**
+     * Whether every key of this block is Installation: its default is, and no key is named Project. A block kept by
+     * its module rather than by a settings store must be.
+     */
+    public function isInstallationOnly(): bool
+    {
+        if (SettingsScope::Installation !== $this->defaultScope) {
+            return false;
+        }
+        foreach ($this->scopes as $scope) {
+            if (SettingsScope::Project === $scope) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

@@ -10,6 +10,20 @@ Versioning is described in the [CoolMS contributing guide](https://github.com/co
 history when this file was created. Every entry after that is written in the
 same commit as the change it describes.
 
+## Unreleased
+
+### Added
+
+- `Settings\SettingsScope` (`Project`, `Installation`) and a per-key scope on
+  `ModuleSettingsDefinition`: `defaultScope` (Project unless stated) and
+  `scopes` for the keys that differ. `scopeOf(key)` answers where a value
+  belongs; a pinned key (`envPins`) is always Installation, and declaring one
+  Project is refused when the definition is built. `isInstallationOnly()` says
+  whether every key is Installation. Additive: a block that says nothing is
+  Project, as every block was before. What a settings store does with the scope
+  (an Installation value is never written to a file a project commits) is the
+  store's.
+
 ## 2.0.0-alpha8 - 2026-10-28
 
 ### Added
